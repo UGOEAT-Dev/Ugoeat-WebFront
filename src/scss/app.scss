@@ -1,0 +1,20 @@
+
+/* Tailwind CSS */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* End Tailwind CSS */
+
+@font-face {
+  font-family: 'poppins';
+  src: url("../assets/fonts/poppins/Poppins-Regular.ttf") format('truetype');
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: poppins, sans-serif;
+}
