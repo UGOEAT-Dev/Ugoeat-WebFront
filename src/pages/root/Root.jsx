@@ -1,4 +1,6 @@
 import {Outlet} from "react-router-dom";
+import Header from "./components/Header.jsx";
+import './root.scss'
 
 /**
  * Represent The base of the web Application
@@ -6,7 +8,7 @@ import {Outlet} from "react-router-dom";
 export default function Root()
 {
     return <>
-        <h1>UgoEat</h1>
+        <Header/>
         <div><Outlet/></div>
     </>
 }

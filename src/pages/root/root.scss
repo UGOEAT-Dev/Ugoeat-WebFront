@@ -1,0 +1,29 @@
+
+$link-active-color: #f1d020;
+
+nav {
+  color: #000;
+  font-size: 1rem;
+
+  ul {
+    li {
+
+      a {
+        font-weight: bold;
+        text-decoration: none;
+        transition: 150ms;
+        padding-bottom: 5px;
+      }
+
+      a:hover {
+        color: $link-active-color;
+      }
+
+      a.active {
+        color: $link-active-color;
+        font-weight: bold;
+        border-bottom: 4px solid $link-active-color;
+      }
+    }
+  }
+}
