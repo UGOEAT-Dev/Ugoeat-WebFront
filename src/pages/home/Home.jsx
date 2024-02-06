@@ -1,5 +1,10 @@
+import HomeBanner from "./components/HomeBanner.jsx";
 
 export default function Home()
 {
-    return <h2>Home</h2>
+    return (
+        <>
+            <HomeBanner />
+        </>
+    )
 }
