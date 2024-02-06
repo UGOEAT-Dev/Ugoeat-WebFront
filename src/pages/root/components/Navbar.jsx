@@ -14,7 +14,7 @@ export default function Navbar({className = ""})
                 <li><NavLink to='/login'>Connexion</NavLink></li>
                 <li><NavLink to='/register'>Inscription</NavLink></li>
                 <li>
-                    <button className="cart bg-green-400">
+                    <button className="cart bg-green">
                         <span className="cart-text font-bold">2</span>
                         <BsCartDash className="cart-image"/>
                     </button>
