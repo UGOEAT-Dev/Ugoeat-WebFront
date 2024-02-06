@@ -1,5 +1,5 @@
 
-function Input({icon, onChange = null}, props)
+function Input({icon = null, onChange = null}, props)
 {
     return (
         <div className="rounded-full mx-auto flex items-center bg-gray-200 w-[250px] p-1">
