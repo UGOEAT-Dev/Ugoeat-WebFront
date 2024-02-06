@@ -1,8 +1,8 @@
 
 $link-active-color: rgb(87, 232, 26);
+$link-active-color-lg: rgb(241, 208, 32);
 
 nav {
-  color: #000;
   font-size: 1rem;
   ul {
     li {
@@ -12,6 +12,10 @@ nav {
         text-decoration: none;
         transition: 150ms;
         padding-bottom: 5px;
+
+        @media screen and (min-width: 1024px) {
+          color: #fff;
+        }
       }
 
       a:hover {
