@@ -12,7 +12,8 @@ export default function HomeBanner()
 {
     return (
         <div className="flex items-center justify-center text-white font-bold relative h-screen bg-center bg-cover" style={{
-            backgroundImage: `url(${bannerImg})`
+            backgroundImage: `url(${bannerImg})`,
+            backgroundColor: "#474947FF"
         }}>
 
             <div className="md:flex lg:absolute top-20 justify-evenly items-center">
