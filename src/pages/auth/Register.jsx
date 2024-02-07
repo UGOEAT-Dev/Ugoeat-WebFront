@@ -1,7 +1,7 @@
 
 import InputWithLabel from "../../components/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
-import bgRegister from "../../assets/images/bg-register.png"
+import bgRegister from "../../assets/images/bg-register.svg"
 
 export default function Register()
 {
