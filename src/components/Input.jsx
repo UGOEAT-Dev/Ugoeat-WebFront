@@ -1,10 +1,10 @@
 
-function Input({icon = null, onChange = null}, props)
+function Input({id, name, placeholder = "", type = "text", icon = null, className = "", onChange = null})
 {
     return (
-        <div className="rounded-full mx-auto flex items-center bg-gray-200 w-[250px] p-1">
+        <div className={"rounded flex items-center bg-gray-100 w-[250px] p-1 " + className}>
             {icon}
-            <input type="text" placeholder={"search"} className="bg-transparent w-full mx-1 focus:outline-none"  onChange={onChange}/>
+            <input id={id} name={name} type={type} placeholder={placeholder} className="bg-transparent w-full mx-1 focus:outline-none" onChange={onChange} />
         </div>
     )
 }
