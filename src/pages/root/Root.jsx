@@ -11,7 +11,7 @@ export default function Root()
 
     return <>
         <Header/>
-        <main className="min-h-screen"><Outlet/></main>
+        <main className="sm:min-h-screen"><Outlet/></main>
         <Footer />
     </>
 }

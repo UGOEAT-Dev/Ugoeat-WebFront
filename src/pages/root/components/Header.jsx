@@ -5,7 +5,7 @@ import {useState} from "react";
 
 export default function Header({onNavBarBtnClicked = null})
 {
-    const [showNavbar, setShowNavbar] = useState(() => window.innerWidth > 1024)
+    const [showNavbar, setShowNavbar] = useState(() => window.innerWidth >= 1024)
     const toggleNavbar = () => { setShowNavbar((v) => !v)}
 
 

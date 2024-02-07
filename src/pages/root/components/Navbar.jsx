@@ -20,7 +20,7 @@ export default function Navbar({className = ""})
                     </button>
                 </li>
                 <li>
-                    <Input icon={<AiOutlineSearch size={20} className="font-bold" />} />
+                    <Input className="rounded-xl px-2 mx-auto bg-gray-300" icon={<AiOutlineSearch size={20} className="font-bold" />} />
                 </li>
             </ul>
         </nav>
