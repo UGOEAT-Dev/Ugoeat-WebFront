@@ -17,7 +17,7 @@ export default function HomeBanner()
         }}>
             <div className="md:flex lg:pt-20 justify-evenly items-center">
                 <div className="md:w-1/3 text-lg text-center lg:text-left p-2">
-                    <h3 className="text-2xl lg:text-4xl mb-2">Meilleur site de <span className="text-amber-400">Restauration</span> en ligne a Douala et Yaounde</h3>
+                    <h3 className="text-4xl mb-2">Meilleur site de <span className="text-amber-400">Restauration</span> en ligne a Douala et Yaounde</h3>
                     <p>UGOEAT est la plateforme Leader de restauration en ligne au Cameroun</p>
                 </div>
 

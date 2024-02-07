@@ -12,12 +12,14 @@ nav {
         text-decoration: none;
         transition: 150ms;
         padding-bottom: 5px;
-      }
 
+        @media screen and (max-width: 1024px){
+          color: #000;
+        }
+      }
       a:hover {
         color: $link-active-color;
       }
-
       a.active {
         color: $link-active-color;
         font-weight: bold;
