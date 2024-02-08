@@ -9,7 +9,7 @@ export default function Navbar({productOrderedCount = 0, onCartClicked = null, .
     return (
         <nav className={props.className + " lg:block"}>
             <ul className={"lg:flex md:justify-around w-full text-center space-y-3 lg:space-y-0"}>
-                <li><NavLink to='/'>Acceuil</NavLink></li>
+                <li><NavLink to='/'>Accueil</NavLink></li>
                 <li><NavLink to='/about'>A Propos</NavLink></li>
                 <li><NavLink to='/order'>Commandez</NavLink></li>
                 <li><NavLink to='/login'>Connexion</NavLink></li>

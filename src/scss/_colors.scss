@@ -2,6 +2,12 @@
 $primaryColor: rgb(87, 232, 26);
 $secondaryColor: rgb(17, 24, 39);
 
+$errorColor: #ff0000;
+$errorInputBgColor: rgba(252, 220, 220, 0.54);
+
+$successColor: rgb(87, 232, 26);
+$successInputBgColor: rgba(212, 246, 197, 0.54);
+
 .text-green {
   color: $primaryColor;
 }

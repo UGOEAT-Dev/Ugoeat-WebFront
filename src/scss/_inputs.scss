@@ -1,0 +1,16 @@
+
+.input-error {
+  border: 3px solid $errorColor;
+  background-color: $errorInputBgColor;
+}
+
+.input-success {
+  border: 3px solid $successColor;
+  background-color: $successInputBgColor;
+}
+
+.error { color: $errorColor; }
+
+.bg-error { background-color: $errorColor; }
+
+.success { color: $successColor; }
