@@ -1,14 +1,28 @@
 
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import queryString from "query-string"
 
 import { CATEGORIES, PRODUCTS } from "./datas.jsx"
 import ProductsView from "./components/ProductsView.jsx";
 
+
 export default function Order()
 {
     const [categories, setCategories] = useState(CATEGORIES)
-    const [products, setProducts] = useState(PRODUCTS)
+    const [products, setProducts] = useState([])
+    const qStringParsed = queryString.parse(location.search)
+
+    useEffect(()=> {
+        if(qStringParsed.q) {
+            const query = String(qStringParsed.q).toLowerCase()
+            setProducts(PRODUCTS.filter((p) => {
+                return new RegExp(`.*${query}.*`).test(p.name.toLowerCase())
+            }))
+        } else {
+            setProducts(PRODUCTS)
+        }
+    }, [])
 
     const changeCategory = (e) => {
         const newCategory = parseInt(e.target.value)
