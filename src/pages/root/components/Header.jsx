@@ -3,9 +3,9 @@ import {AiOutlineMenu} from "react-icons/ai";
 import logoWhite from "../../../assets/images/logo-white.png"
 import {useState} from "react";
 
-export default function Header({onNavBarBtnClicked = null})
+export default function Header({products = [], onCartBtnClicked = null})
 {
-    const [showNavbar, setShowNavbar] = useState(() => window.innerWidth >= 1024)
+    const [showNavbar, setShowNavbar] = useState(false)
     const toggleNavbar = () => { setShowNavbar((v) => !v)}
 
 
@@ -15,7 +15,7 @@ export default function Header({onNavBarBtnClicked = null})
                 <AiOutlineMenu size={24} className="block sm:text-white lg:hidden"/>
                 <img src={logoWhite} alt="logo-white" width="64"/>
             </div>
-            <Navbar className={(showNavbar? "block h-auto" : "hidden h-0") + " md:h-auto lg:w-5/6 lg:mt-3"} />
+            <Navbar productOrderedCount={products.length} onCartClicked={onCartBtnClicked} className={(showNavbar? "block h-auto" : "hidden h-0") + " md:h-auto lg:w-5/6 lg:mt-3"} />
         </header>
     )
 }
