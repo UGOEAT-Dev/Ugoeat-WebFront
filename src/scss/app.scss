@@ -50,4 +50,12 @@
 
 }
 
-.d-none { display: none; }
+.card {
+
+  .card-show:hover {
+    background-color: $secondaryColor;
+  }
+  .card-get:hover {
+    background-color: $primaryColor;
+  }
+}

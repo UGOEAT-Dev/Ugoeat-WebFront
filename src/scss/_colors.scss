@@ -1,5 +1,6 @@
 
 $primaryColor: rgb(87, 232, 26);
+$secondaryColor: rgb(17, 24, 39);
 
 .text-green {
   color: $primaryColor;
@@ -7,4 +8,12 @@ $primaryColor: rgb(87, 232, 26);
 
 .bg-green {
   background-color: $primaryColor;
+}
+
+.text-secondary {
+  color: $secondaryColor;
+}
+
+.bg-secondary {
+  background-color: $secondaryColor;
 }
