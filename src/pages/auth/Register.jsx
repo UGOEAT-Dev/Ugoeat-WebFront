@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth.jsx";
 export default function Register()
 {
     const [errors, setErrors] = useState({})
-    const { register, token, user } = useAuth({})
+    const { register, token, user } = useAuth("guest", "/dashboard")
     const [role, setRole] = useState('customer')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')

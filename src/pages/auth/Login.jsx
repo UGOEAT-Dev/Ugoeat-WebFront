@@ -9,7 +9,7 @@ export default function Login()
     const [errors, setErrors] = useState({})
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { login, token } = useAuth({})
+    const { login, token } = useAuth('guest', '/dashboard')
 
     useEffect(() => {
         console.log("[App::Login] ", token)
