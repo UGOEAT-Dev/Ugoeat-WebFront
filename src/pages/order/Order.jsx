@@ -1,37 +1,55 @@
 
-
 import {useEffect, useState} from "react";
 import queryString from "query-string"
-
-import { CATEGORIES, PRODUCTS } from "./datas.jsx"
 import ProductsView from "./components/ProductsView.jsx";
+import axios from "../../lib/axios.jsx";
+import {useOutletContext} from "react-router-dom";
 
+let productsBank = []
 
 export default function Order()
 {
-    const [categories, setCategories] = useState(CATEGORIES)
-    const [products, setProducts] = useState([])
+    const [orders, setOrders] = useOutletContext();
+    const [categories, setCategories] = useState([])
+    const [products, setProducts] = useState(productsBank)
+
     const qStringParsed = queryString.parse(location.search)
 
-    useEffect(()=> {
-        if(qStringParsed.q) {
-            const query = String(qStringParsed.q).toLowerCase()
-            setProducts(PRODUCTS.filter((p) => {
-                return new RegExp(`.*${query}.*`).test(p.name.toLowerCase())
-            }))
-        } else {
-            setProducts(PRODUCTS)
-        }
+    useEffect(() => {
+        axios.get('/api/v1/categories')
+            .then(response => setCategories(response.data.data))
+        axios.get('/api/v1/products')
+            .then(response => {
+                productsBank = response.data.data
+                setProducts(productsBank)
+            })
     }, [])
+
 
     const changeCategory = (e) => {
         const newCategory = parseInt(e.target.value)
 
-        if(newCategory !== 0)
-            setProducts(PRODUCTS.filter(
+        if(newCategory !== 1)
+            setProducts(productsBank.filter(
                 product => product.category_id === newCategory))
         else
-            setProducts(PRODUCTS)
+            setProducts(productsBank)
+    }
+
+    const onAddProductBtnClicked = (product) => {
+        const productsOrdered = orders.products
+        let index = -1
+        productsOrdered.forEach((p, i) => {
+            if(p.id === product.id)
+                index = i
+        })
+        if(index !== -1) {
+            productsOrdered[index].quantity += 1
+        } else {
+            productsOrdered.push({quantity:1, ...product})
+            setOrders({products: productsOrdered})
+        }
+
     }
 
     return (
@@ -40,10 +58,10 @@ export default function Order()
             <div>
                 <select id="categoryFilter" onChange={changeCategory} className="block w-full md:w-fit p-2 text-sm text-black border-2 border-black rounded-lg bg-white">
                     {categories.map((category, index) => {
-                        return (<option key={category.name} value={index}>{category.name}</option>)
+                        return (<option key={category.name} value={category.id}>{category.name}</option>)
                     })}
                 </select>
-                <ProductsView products={products} />
+                <ProductsView products={products} onAddBtnClicked={onAddProductBtnClicked} />
             </div>
         </div>
     )
