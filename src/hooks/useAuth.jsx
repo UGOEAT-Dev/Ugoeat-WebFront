@@ -1,8 +1,7 @@
 import useSWR from "swr";
 import axios from "../lib/axios.jsx";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {useLocalStorage} from "./useLocalStorage.jsx";
 import AppContext from "../AppContext.jsx";
 
 function useAuth(middleware = '', redirectIfAuthenticated = '')
@@ -16,7 +15,10 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
                 setUser(response.data)
                 return response.data
             })
-            .catch(error => console.log("[useAuth::account::error] ", error))
+            .catch(error => {
+                console.log("[useAuth::account::error] ", error)
+                if(error.response.status === 401) throw error
+            })
     )
 
     const login = ({setErrors, ...props}) => {
@@ -26,7 +28,10 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
                 setToken(response.data.token)
                 console.log("[Auth::Login::message] " + response.data.message)
             })
-            .catch( error => setErrors([error.response.data.message]) )
+            .catch( error => {
+                if (error.response.status === 401) throw error
+                setErrors([error.response.data.message])
+            } )
     }
 
     const register = ({setErrors, ...props}) => {
@@ -37,8 +42,9 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
                 console.log("[Auth::Register::message] " + response.data.message)
             })
             .catch( error => {
-                if(error.response.status === 422)
-                    setErrors(error.response.data.errors)
+                if(error.response.status === 422) throw error
+
+                setErrors(error.response.data.errors)
             } )
     }
 
@@ -53,9 +59,12 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
     useEffect(()=>{
         if(middleware === 'guest' && redirectIfAuthenticated && user)
             navigate(redirectIfAuthenticated)
-        if(middleware === 'auth' && error)
-            logout()
-    }, [user, error, middleware, navigate, redirectIfAuthenticated])
+        if(middleware === 'auth' && error) {
+            setUser(null)
+            setToken(null)
+            navigate('/login')
+        }
+    }, [user, error])
 
     return {
         user,
