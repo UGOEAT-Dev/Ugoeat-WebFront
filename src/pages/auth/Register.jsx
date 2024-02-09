@@ -4,21 +4,38 @@ import {Link} from "react-router-dom";
 import bgRegister from "../../assets/images/bg-register.svg"
 import SelectBox from "../../components/SelectBox.jsx";
 import {useEffect, useState} from "react";
+import useAuth from "../../hooks/useAuth.jsx";
 
 export default function Register()
 {
     const [errors, setErrors] = useState({})
+    const { register, token, user } = useAuth({})
     const [role, setRole] = useState('customer')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
+    const submitForm = (event) => {
+        event.preventDefault()
+        register({
+            setErrors,
+            email,
+            password,
+            role,
+            password_confirmation: passwordConfirmation,
+            name
+        })
+    }
+    useEffect(() => {
+
+    }, [errors, token, user])
+
     return (
         <div className="bg-center bg-cover sm:min-h-screen flex sm:items-center justify-center py-5 sm:pt-24 sm:pb-10 px-2" style={{
             backgroundImage: `url(${bgRegister})`,
         }}>
-            <form className="rounded-md shadow-xl bg-white w-full md:w-[600px] px-5 py-10 space-y-5" action="#">
+            <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-full md:w-[600px] px-5 py-10 space-y-5" action="#">
                 <h2 className="text-center text-2xl font-bold">Inscrivez-vous</h2>
                 <SelectBox label="Vous Etes ?" name="role" id="role" className="text-md" onChange={(e) => setRole(e.target.value)}>
                     <option value="customer">Un Client</option>

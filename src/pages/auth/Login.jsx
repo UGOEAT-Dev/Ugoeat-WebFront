@@ -1,17 +1,37 @@
+import {useEffect, useState} from "react"
 import InputWithLabel from "../../components/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
 import bgLogin from "../../assets/images/bg-login.png"
+import useAuth from "../../hooks/useAuth.jsx";
 
 export default function Login()
 {
+    const [errors, setErrors] = useState({})
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const { login, token } = useAuth({})
+
+    useEffect(() => {
+        console.log("[App::Login] ", token)
+    }, [token])
+
+    const submitForm = (event) => {
+        event.preventDefault()
+        login({
+            setErrors,
+            email,
+            password
+        })
+    }
+
     return (
         <div className="bg-center bg-cover sm:h-screen flex sm:items-center justify-center py-5 px-2" style={{
             backgroundImage: `url(${bgLogin})`,
         }}>
-            <form className="rounded-md shadow-xl bg-white w-full md:w-[600px] px-5 py-10 space-y-5" action="#">
+            <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-full md:w-[600px] px-5 py-10 space-y-5" action="#">
                 <h2 className="text-center text-2xl font-bold">Connectez-vous</h2>
-                <InputWithLabel id="email" label="Email" type="email" name="email" placeholder="name@company" />
-                <InputWithLabel id="password" label="Mot de passe" type="password" name="password" placeholder="*******" />
+                <InputWithLabel onChange={(e) => setEmail(e.target.value)} id="email" label="Email" type="email" name="email" placeholder="name@company" />
+                <InputWithLabel onChange={(e) => setPassword(e.target.value)} id="password" label="Mot de passe" type="password" name="password" placeholder="*******" />
                 <div className="flex justify-between text-sm">
                     <div>
                         <input type="checkbox" id="keepOnline" name="keepOnline" />
