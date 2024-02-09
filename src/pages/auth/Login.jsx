@@ -3,13 +3,15 @@ import InputWithLabel from "../../components/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
 import bgLogin from "../../assets/images/bg-login.png"
 import useAuth from "../../hooks/useAuth.jsx";
+import queryString from "query-string";
 
 export default function Login()
 {
+    const qParsed = queryString.parseUrl(location.search)
     const [errors, setErrors] = useState({})
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { login, token } = useAuth('guest', '/dashboard')
+    const { login, token } = useAuth('guest', qParsed.query.r ?? '/')
 
     useEffect(() => {
         console.log("[App::Login] ", token)
@@ -23,6 +25,8 @@ export default function Login()
             password
         })
     }
+
+    if(token) return (<div></div>)
 
     return (
         <div className="bg-center bg-cover sm:h-screen flex sm:items-center justify-center py-5 px-2" style={{

@@ -5,11 +5,13 @@ import bgRegister from "../../assets/images/bg-register.svg"
 import SelectBox from "../../components/SelectBox.jsx";
 import {useEffect, useState} from "react";
 import useAuth from "../../hooks/useAuth.jsx";
+import queryString from "query-string";
 
 export default function Register()
 {
+    const qParsed = queryString.parseUrl(location.search)
     const [errors, setErrors] = useState({})
-    const { register, token, user } = useAuth("guest", "/dashboard")
+    const { register, token, user } = useAuth("guest", qParsed.query.r ?? '/')
     const [role, setRole] = useState('customer')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -31,7 +33,7 @@ export default function Register()
 
     }, [errors, token, user])
 
-    return (
+    return !user ?? (
         <div className="bg-center bg-cover sm:min-h-screen flex sm:items-center justify-center py-5 sm:pt-24 sm:pb-10 px-2" style={{
             backgroundImage: `url(${bgRegister})`,
         }}>
