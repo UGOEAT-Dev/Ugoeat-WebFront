@@ -4,7 +4,8 @@ import Footer from "./components/Footer.jsx";
 import './root.scss'
 import BodyHidder from "../../components/BodyHidder.jsx";
 import ModalCart from "./components/ModalCart.jsx";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import AppContext from "../../AppContext.jsx";
 
 /**
  * Represent The base of the web Application
@@ -12,18 +13,19 @@ import {useState} from "react";
 export default function Root()
 {
     const [showCart, setShowCart] = useState(false)
-    const [productsOrdered, setProductsOrdered] = useState(window.order.products)
-
+    const {orders, setOrders} = useContext(AppContext)
 
     return <>
-        <Header products={productsOrdered} onCartBtnClicked={() => setShowCart(true)}/>
+        <Header products={orders.products} onCartBtnClicked={() => setShowCart(true)}/>
         <main className="sm:min-h-screen">
-            <Outlet />
+            <Outlet context={[orders, setOrders]} />
         </main>
         <Footer />
 
         {showCart && <BodyHidder className="flex justify-start items-center">
-                <ModalCart products={productsOrdered} onCloseBtnClicked={() => setShowCart(false)}  className="absolute h-screen pb-10 overflow-hidden w-full sm:w-2/3 md:w-2/5"/>
+                <ModalCart products={orders.products}
+                           onCloseBtnClicked={() => setShowCart(false)}
+                           className="absolute h-screen pb-10 overflow-hidden w-full sm:w-2/3 md:w-2/5"/>
         </BodyHidder>}
     </>
 }
