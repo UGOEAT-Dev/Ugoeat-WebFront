@@ -12,11 +12,11 @@ export default function App()
     const [user, setUser] = useLocalStorage('user', {})
     const [token, setToken] = useLocalStorage('token', '')
 
-    // remove the user from storage when the app is closed
+    /* remove the user from storage when the app is closed
     useEffect(() => {
-        return () => setUser(null)
+        return () => setUser({})
     }, [])
-
+     */
     return (
         <AppContext.Provider value={{
             orders,

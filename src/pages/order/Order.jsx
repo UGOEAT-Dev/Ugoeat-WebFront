@@ -39,17 +39,17 @@ export default function Order()
     const onAddProductBtnClicked = (product) => {
         const productsOrdered = orders.products
         let index = -1
+        let total = 0
         productsOrdered.forEach((p, i) => {
             if(p.id === product.id)
                 index = i
         })
-        if(index !== -1) {
+        if(index !== -1)
             productsOrdered[index].quantity += 1
-        } else {
+        else
             productsOrdered.push({quantity:1, ...product})
-            setOrders({products: productsOrdered})
-        }
-
+        // update orders
+        setOrders({...orders, products: productsOrdered, price: total})
     }
 
     return (

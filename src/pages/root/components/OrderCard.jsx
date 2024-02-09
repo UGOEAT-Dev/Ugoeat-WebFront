@@ -1,13 +1,10 @@
-import {useEffect, useMemo, useState} from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import OrderProductCardList from "./OrderProductCardList.jsx";
+import {calculateTotal} from "../../../lib/helpers.jsx";
 
 function OrderCard({products = [], onConfirmBtnClicked, onCancelBtnClicked, onItemCancelBtnClicked, ...props})
 {
-    const total = useMemo(() => {
-        let sum = 0
-        products.forEach(p => sum += p.price)
-        return sum
-    }, [products])
+    const total = useMemo(() => calculateTotal(products), [products])
 
     return (
         <div className={"flex flex-col gap-2 rounded-md shadow-md p-5 " + props.className}>

@@ -54,7 +54,7 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
 
     useEffect(() => {
         mutate()
-    }, [token, mutate])
+    }, [token])
 
     useEffect(()=>{
         if(middleware === 'guest' && redirectIfAuthenticated && user)
