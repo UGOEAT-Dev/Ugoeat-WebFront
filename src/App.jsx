@@ -4,7 +4,6 @@ import router from "./router.jsx";
 import './scss/app.scss'
 import {useLocalStorage} from "./hooks/useLocalStorage.jsx";
 import AppContext from "./AppContext.jsx";
-import {useEffect} from "react";
 
 export default function App()
 {
