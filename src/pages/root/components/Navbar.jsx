@@ -5,6 +5,7 @@ import {AiOutlineSearch} from "react-icons/ai";
 import {useContext} from "react";
 import AppContext from "../../../AppContext.jsx";
 import {isUserLoggedIn} from "../../../lib/helpers.jsx";
+import {Dropdown, DropdownItem} from "../../../components/dropdown/Dropdown.jsx";
 
 export default function Navbar({productOrderedCount = 0, onCartClicked = null, ...props})
 {
@@ -18,7 +19,12 @@ export default function Navbar({productOrderedCount = 0, onCartClicked = null, .
                 <li><NavLink to='/order'>Commandez</NavLink></li>
                 {isUserLoggedIn(user, token) ?
                     (   <>
-                            <li><NavLink className="font-bold" title="Go to Dashboard" to={'/dashboard'}>{user.name}</NavLink></li>
+                            <li>
+                                <Dropdown text={user.name}>
+                                    <DropdownItem to="/dashboard" text="Dashboard"></DropdownItem>
+                                    <DropdownItem to="javascript:void(0)" text="Se Deconnecter"></DropdownItem>
+                                </Dropdown>
+                            </li>
                         </>
                     )
                     :(  <>
