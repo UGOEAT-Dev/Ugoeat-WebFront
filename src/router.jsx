@@ -7,6 +7,7 @@ import Order from "./pages/order/Order.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
+import DashboardIndex from "./pages/dashboard/index/DashboardIndex.jsx";
 
 const router = createBrowserRouter([
     {
@@ -37,7 +38,13 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard />
+        element: <Dashboard />,
+        children: [
+            {
+                path: '',
+                element: <DashboardIndex />,
+            }
+        ]
     }
 ])
 
