@@ -3,15 +3,16 @@ import InputWithLabel from "../../components/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
 import bgRegister from "../../assets/images/bg-register.svg"
 import SelectBox from "../../components/SelectBox.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import useAuth from "../../hooks/useAuth.jsx";
 import queryString from "query-string";
+import {isUserLoggedIn} from "../../lib/helpers.jsx";
 
 export default function Register()
 {
     const qParsed = queryString.parseUrl(location.search)
     const [errors, setErrors] = useState({})
-    const { register, token, user } = useAuth("guest", qParsed.query.r ?? '/')
+    const { register, token, user } = useAuth("guest", qParsed.query.r ?? '/dashboard')
     const [role, setRole] = useState('customer')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -29,11 +30,11 @@ export default function Register()
             name
         })
     }
-    useEffect(() => {
 
-    }, [errors, token, user])
+    if(isUserLoggedIn(user, token))
+        return (<div></div>)
 
-    return !user ?? (
+    return (
         <div className="bg-center bg-cover sm:min-h-screen flex sm:items-center justify-center py-5 sm:pt-24 sm:pb-10 px-2" style={{
             backgroundImage: `url(${bgRegister})`,
         }}>

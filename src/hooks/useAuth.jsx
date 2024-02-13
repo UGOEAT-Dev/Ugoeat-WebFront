@@ -3,20 +3,21 @@ import axios from "../lib/axios.jsx";
 import {useContext, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import AppContext from "../AppContext.jsx";
+import {isUserLoggedIn} from "../lib/helpers.jsx";
 
 function useAuth(middleware = '', redirectIfAuthenticated = '')
 {
     const navigate = useNavigate()
     const {token, user, setToken, setUser} = useContext(AppContext)
 
-    const { data , error, mutate } = useSWR('/api/v1/account', (url, _) =>
+    const { data , error, mutate } = useSWR('/api/v1/account', () =>
         axios.get('/api/v1/account?__token__=' + token)
             .then(response => {
                 setUser(response.data)
                 return response.data
             })
             .catch(error => {
-                console.log("[useAuth::account::error] ", error)
+                setUser({})
                 if(error.response.status === 401) throw error
             })
     )
@@ -26,7 +27,6 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
             .then( response => {
                 setErrors([])
                 setToken(response.data.token)
-                console.log("[Auth::Login::message] " + response.data.message)
             })
             .catch( error => {
                 if (error.response.status === 401) throw error
@@ -39,17 +39,22 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
             .then( response => {
                 setErrors([])
                 setToken(response.data.token)
-                console.log("[Auth::Register::message] " + response.data.message)
             })
             .catch( error => {
                 if(error.response.status === 422) throw error
-
                 setErrors(error.response.data.errors)
             } )
     }
 
     const logout = () => {
-
+        axios.post('/api/auth/logout?__token__=' + token)
+            .then(response => {
+                if(response.status === 200) {
+                    console.log(response.status)
+                    setToken('')
+                    setUser({})
+                }
+            })
     }
 
     useEffect(() => {
@@ -57,20 +62,24 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
     }, [token])
 
     useEffect(()=>{
-        if(middleware === 'guest' && redirectIfAuthenticated && user)
+
+        if(middleware === 'guest' && redirectIfAuthenticated && isUserLoggedIn(user, token)) {
             navigate(redirectIfAuthenticated)
-        if(middleware === 'auth' && error) {
-            setUser(null)
-            setToken(null)
-            navigate('/login')
         }
-    }, [user, error])
+        if(middleware === 'auth' && !isUserLoggedIn(user, token)) {
+            setUser({})
+            setToken('')
+            navigate(redirectIfAuthenticated)
+        }
+    }, [user, token, error])
 
     return {
         user,
         token,
         login,
-        register
+        register,
+        logout,
+        data
     }
 }
 

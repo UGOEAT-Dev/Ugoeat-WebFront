@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import bgLogin from "../../assets/images/bg-login.png"
 import useAuth from "../../hooks/useAuth.jsx";
 import queryString from "query-string";
+import {isUserLoggedIn} from "../../lib/helpers.jsx";
 
 export default function Login()
 {
@@ -11,11 +12,7 @@ export default function Login()
     const [errors, setErrors] = useState({})
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { login, token } = useAuth('guest', qParsed.query.r ?? '/')
-
-    useEffect(() => {
-        console.log("[App::Login] ", token)
-    }, [token])
+    const { login, token, user } = useAuth('guest',  qParsed.query.r ?? '/dashboard')
 
     const submitForm = (event) => {
         event.preventDefault()
@@ -26,7 +23,7 @@ export default function Login()
         })
     }
 
-    if(token) return (<div></div>)
+    if( isUserLoggedIn(user, token)) return (<div></div>)
 
     return (
         <div className="bg-center bg-cover sm:h-screen flex sm:items-center justify-center py-5 px-2" style={{
