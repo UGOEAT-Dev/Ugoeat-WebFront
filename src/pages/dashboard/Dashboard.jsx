@@ -19,7 +19,7 @@ function Dashboard()
                 toggleSidebar={() => setSidebarMode(v => v === 1? 2 : 1)}
                 logout={logout}
                 unRegister={unregister}/>
-            <main className="flex gap-2 min-h-screen">
+            <main className={`${sidebarMode === 1 ? 'block sm:flex' : 'flex'} pt-16 sm:pt-0 gap-2 min-h-screen`}>
                 <Sidebar mode={sidebarMode}/>
                 <div className="w-full p-3">
                     <Outlet context={{user, token}} />

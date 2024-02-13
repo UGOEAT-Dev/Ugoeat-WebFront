@@ -8,9 +8,9 @@ function SidebarLinkItem({text, link, ...props})
 
     return (
         <li className={"sidebar-item cursor-pointer " + props.className}>
-            <NavLink to={link} className={`rounded-full bg-gray-50 flex items-center gap-3 text-md ${mode === 1 ? 'p-3 pl-5' : 'p-3'}`}>
+            <NavLink to={link} title={text} className={`rounded-full bg-gray-50 flex items-center gap-3 text-sm ${mode === 1 ? 'p-2 pl-5' : 'p-3'}`}>
                 {props.children}
-                <span className={`${mode === 2 ? 'hidden' : 'block'}`}>{text}</span>
+                <span className={`${mode === 2 ? 'hidden' : 'block'} `}>{text}</span>
             </NavLink>
         </li>
     )

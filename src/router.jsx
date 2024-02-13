@@ -7,7 +7,12 @@ import Order from "./pages/order/Order.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
-import DashboardIndex from "./pages/dashboard/index/DashboardIndex.jsx";
+import DashboardHome from "./pages/dashboard/home/DashboardHome.jsx";
+import DashboardOrders from "./pages/dashboard/orders/DashboardOrders.jsx";
+import DashboardPayments from "./pages/dashboard/payments/DashboardPayments.jsx";
+import DashboardAccount from "./pages/dashboard/account/DashboardAccount.jsx";
+import DashboardSettings from "./pages/dashboard/settings/DashboardSetting.jsx";
+import DashboardIndex from "./pages/dashboard/DashboardIndex.jsx";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +47,27 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <DashboardIndex />,
+                element: <DashboardIndex/>
+            },
+            {
+                path: 'home',
+                element: <DashboardHome />,
+            },
+            {
+                path: 'orders',
+                element: <DashboardOrders />
+            },
+            {
+                path: 'payments',
+                element: <DashboardPayments />
+            },
+            {
+                path: 'profile',
+                element: <DashboardAccount />
+            },
+            {
+                path: 'settings',
+                element: <DashboardSettings />
             }
         ]
     }
