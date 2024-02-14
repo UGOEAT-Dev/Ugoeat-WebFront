@@ -8,7 +8,7 @@ import {isUserLoggedIn} from "../lib/helpers.jsx";
 function useAuth(middleware = '', redirectIfAuthenticated = '')
 {
     const navigate = useNavigate()
-    const {token, user, setToken, setUser} = useContext(AppContext)
+    const {token, user, setToken, setUser, setOrders} = useContext(AppContext)
 
     const { data , error, mutate } = useSWR('/api/v1/account', () =>
         axios.get('/api/v1/account?__token__=' + token)
@@ -53,6 +53,7 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
                     console.log(response.status)
                     setToken('')
                     setUser({})
+                    setOrders({products:[]})
                 }
             })
     }
