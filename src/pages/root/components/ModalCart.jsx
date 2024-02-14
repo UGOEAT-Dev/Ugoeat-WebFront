@@ -9,6 +9,12 @@ function ModalCart({onCloseBtnClicked = null, ...props})
 {
     const {orders, setOrders} = useContext(AppContext)
 
+    const clearCart = () => {
+        if(confirm('Voulez vraiment vider votre panier ?')) {
+            setOrders({products:[]})
+        }
+    }
+
     return (
         <div className={"flex flex-col gap-2 bg-gray-50 text-black p-5 " + props.className}>
             <div className="flex justify-between items-center pb-2 ">
@@ -20,7 +26,7 @@ function ModalCart({onCloseBtnClicked = null, ...props})
             </div>
             <div className="overflow-y-scroll">
                 <OrderCard
-                    onCancelBtnClicked={() => setOrders({products:[]})}
+                    onCancelBtnClicked={clearCart}
                     onConfirmBtnClicked={() => console.log("Payment page")}
                     onItemCancelBtnClicked={(product) => {
                         const products = orders.products.filter( p => p.id !== product.id )
