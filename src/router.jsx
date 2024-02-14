@@ -13,6 +13,12 @@ import DashboardPayments from "./pages/dashboard/payments/DashboardPayments.jsx"
 import DashboardAccount from "./pages/dashboard/account/DashboardAccount.jsx";
 import DashboardSettings from "./pages/dashboard/settings/DashboardSetting.jsx";
 import DashboardIndex from "./pages/dashboard/DashboardIndex.jsx";
+import AdminCustomers from "./pages/dashboard/admin/customers/AdminCustomers.jsx";
+import AdminRestaurants from "./pages/dashboard/admin/restaurants/AdminRestaurants.jsx";
+import AdminOrders from "./pages/dashboard/admin/orders/AdminOrders.jsx";
+import AdminCategories from "./pages/dashboard/admin/categories/AdminCategories.jsx";
+import DashboardProducts from "./pages/dashboard/DashboardProducts.jsx";
+import AdminStats from "./pages/dashboard/admin/stats/AdminStats.jsx";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +74,30 @@ const router = createBrowserRouter([
             {
                 path: 'settings',
                 element: <DashboardSettings />
+            },
+            {
+                path: 'customers',
+                element: <AdminCustomers />
+            },
+            {
+                path: 'restaurants',
+                element: <AdminRestaurants />,
+            },
+            {
+                path: 'orders_',
+                element: <AdminOrders />
+            },
+            {
+                path: 'categories',
+                element: <AdminCategories />
+            },
+            {
+                path: 'products',
+                element: <DashboardProducts />
+            },
+            {
+                path: 'stats',
+                element: <AdminStats />
             }
         ]
     }
