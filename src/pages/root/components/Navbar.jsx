@@ -21,7 +21,7 @@ export default function Navbar({productOrderedCount = 0, onCartClicked = null, .
                 {isUserLoggedIn(user, token) ?
                     (   <>
                             <li>
-                                <Dropdown text={user.name}>
+                                <Dropdown text={user.name} className="capitalize">
                                     <DropdownItem to="/dashboard" text="Dashboard"><AiOutlineDashboard/></DropdownItem>
                                     <DropdownItem to="/logout" text="Se Deconnecter"><CiLogout/></DropdownItem>
                                 </Dropdown>

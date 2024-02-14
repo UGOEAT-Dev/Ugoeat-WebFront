@@ -43,7 +43,7 @@ function DashboardHeader({toggleSidebar, logout, ...props})
                             </div>
                         </div>
                     </div>
-                    <Dropdown>
+                    <Dropdown className="z-10">
                         <DropdownItem text="Site Web" to="/"><CgWebsite /></DropdownItem>
                         <DropdownItem text="Profil" to="/dashboard/profile"><FaUserCircle /></DropdownItem>
                         <DropdownItem text="Se Deconnecter" to="/logout" action={logout}><CiLogout/></DropdownItem>
