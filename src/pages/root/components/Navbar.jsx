@@ -1,15 +1,16 @@
 import {NavLink} from "react-router-dom";
 import Input from "../../../components/Input.jsx";
 import cartSvg from "../../../assets/images/icons/cart-vector.svg"
-import {AiOutlineSearch} from "react-icons/ai";
+import {AiOutlineDashboard, AiOutlineSearch} from "react-icons/ai";
 import {useContext} from "react";
 import AppContext from "../../../AppContext.jsx";
 import {isUserLoggedIn} from "../../../lib/helpers.jsx";
 import {Dropdown, DropdownItem} from "../../../components/dropdown/Dropdown.jsx";
+import {CiLogout} from "react-icons/ci";
 
 export default function Navbar({productOrderedCount = 0, onCartClicked = null, ...props})
 {
-    const {user, token} = useContext(AppContext)
+    const {user, token, } = useContext(AppContext)
 
     return (
         <nav className={props.className + " lg:block"}>
@@ -21,8 +22,8 @@ export default function Navbar({productOrderedCount = 0, onCartClicked = null, .
                     (   <>
                             <li>
                                 <Dropdown text={user.name}>
-                                    <DropdownItem to="/dashboard" text="Dashboard"></DropdownItem>
-                                    <DropdownItem to="javascript:void(0)" text="Se Deconnecter"></DropdownItem>
+                                    <DropdownItem to="/dashboard" text="Dashboard"><AiOutlineDashboard/></DropdownItem>
+                                    <DropdownItem to="/logout" text="Se Deconnecter"><CiLogout/></DropdownItem>
                                 </Dropdown>
                             </li>
                         </>
@@ -40,7 +41,10 @@ export default function Navbar({productOrderedCount = 0, onCartClicked = null, .
                     </button>
                 </li>
                 <li>
-                    <Input className="rounded-xl px-2 mx-auto bg-gray-300" icon={<AiOutlineSearch size={20} className="font-bold" />} />
+                    <Input
+                        placeholder="Search"
+                        className="rounded-xl px-2 mx-auto bg-gray-200"
+                        icon={<AiOutlineSearch size={20} className="font-bold" />} />
                 </li>
             </ul>
         </nav>

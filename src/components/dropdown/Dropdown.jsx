@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 function Dropdown({text, icon, ...props})
 {
     const [ isShowned, setShowned ] = useState(false)
-
     const toggleDropdownMenu = () => setShowned( (v) => !v )
 
     return (
@@ -36,12 +35,21 @@ function Dropdown({text, icon, ...props})
     )
 }
 
-function DropdownItem({text, to, action, ...props})
+function DropdownItem({text, to, action = null, ...props})
 {
+    const callback = (event) => {
+        if(action !== null) {
+            event.preventDefault()
+            action()
+        }
+    }
+
     return (
-        <div className={"flex items-center ml-2 justify-between text-left " + props.className }>
-            {props.children}
-            <Link to={to} onClick={action} className="text-gray-700 w-full block px-4 py-2 text-sm" role="menuitem" tabIndex="-1">{text}</Link>
+        <div className={" " + props.className }>
+            <Link to={to} onClick={callback} className="text-left gap-2 flex items-center text-gray-700 w-full px-4 py-2 text-sm" role="menuitem" tabIndex="-1">
+                {props.children}
+                <span>{text}</span>
+            </Link>
         </div>
     )
 }
