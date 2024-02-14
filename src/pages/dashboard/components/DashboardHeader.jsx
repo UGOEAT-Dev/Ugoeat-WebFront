@@ -30,7 +30,7 @@ function DashboardHeader({toggleSidebar, logout, ...props})
                 </div>
                 <div className="flex gap-3">
                     <div className="flex gap-3 ">
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1 capitalize">
                             <img alt="_" src={user.image_url} className="rounded-full border" width="50" />
                             <div>
                                 <h3 className="font-bold text-md">{user.name}</h3>
