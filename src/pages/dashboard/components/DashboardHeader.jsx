@@ -8,6 +8,7 @@ import {Dropdown, DropdownItem} from "../../../components/dropdown/Dropdown.jsx"
 import {CiLogout} from "react-icons/ci";
 import {CgWebsite} from "react-icons/cg";
 import {FaUserCircle} from "react-icons/fa";
+import {IoMdNotificationsOutline} from "react-icons/io";
 
 function DashboardHeader({toggleSidebar, logout, ...props})
 {
@@ -29,6 +30,10 @@ function DashboardHeader({toggleSidebar, logout, ...props})
                     </button>
                 </div>
                 <div className="flex gap-3">
+                    <button className="relative" title="Notifications">
+                        <IoMdNotificationsOutline size={32} />
+                        <span className="absolute top-2 right-0 font-bold bg-red-600 text-white rounded-full w-fit h-fit px-1 text-sm text-center">0</span>
+                    </button>
                     <div className="flex gap-3 ">
                         <div className="flex items-center gap-1 capitalize">
                             <img alt="_" src={user.image_url} className="rounded-full border" width="50" />
