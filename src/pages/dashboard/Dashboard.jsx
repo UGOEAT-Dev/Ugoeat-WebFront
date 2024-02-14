@@ -17,8 +17,7 @@ function Dashboard()
         <div className="bg-gray-50 min-h-screen">
             <DashboardHeader
                 toggleSidebar={() => setSidebarMode(v => v === 1? 2 : 1)}
-                logout={logout}
-                unRegister={unregister}/>
+                logout={logout}/>
             <main className={`${sidebarMode === 1 ? 'block sm:flex' : 'flex'} pt-16 sm:pt-0 gap-2 min-h-screen`}>
                 <Sidebar mode={sidebarMode}/>
                 <div className="w-full p-3">
