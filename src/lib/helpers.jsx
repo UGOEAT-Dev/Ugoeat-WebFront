@@ -60,6 +60,12 @@ function calculcateProfileCompletedPercentage(state, count)
     return state / count
 }
 
+const _getScale = (x, y) => ((x/y) >= 1 ? 1 : x/y)
+
+const getScreenWidthScale = (n) => _getScale(window.innerWidth, n)
+
+const  getScreenHeightScale = (n) => _getScale(window.innerHeight, n)
+
 export {
     calculateTotal,
     isUserLoggedIn,
@@ -71,5 +77,7 @@ export {
     hasName,
     hasTel,
     hasEmail,
-    hasId
+    hasId,
+    getScreenWidthScale,
+    getScreenHeightScale
 }

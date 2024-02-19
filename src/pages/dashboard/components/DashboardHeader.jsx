@@ -36,7 +36,9 @@ function DashboardHeader({toggleSidebar, logout, ...props})
                     </button>
                     <div className="flex gap-3 ">
                         <div className="flex items-center gap-1 capitalize">
-                            <img alt="_" src={user.image_url} className="rounded-full border" width="50" />
+                            <div className="overflow-hidden flex items-center w-[50px] h-[50px] rounded-full border align-middle">
+                                <img alt="_" src={user.image_url} className="h-full" />
+                            </div>
                             <div>
                                 <h3 className="font-bold text-md">{user.name}</h3>
                                 <span className="text-sm text-gray-500">{roleToName(user.role)}</span>
