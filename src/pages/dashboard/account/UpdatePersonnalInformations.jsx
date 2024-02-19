@@ -2,7 +2,7 @@ import InputWithLabel from "../../../components/InputWithLabel.jsx";
 import {useState} from "react";
 import useUpdateAccount from "../../../hooks/useUpdateAccount.jsx";
 
-function UpdatePersonnalInformations({user, setUpdated, errors, setErrors})
+function UpdatePersonnalInformations({user, errors, setErrors})
 {
     const { updateProfile } = useUpdateAccount()
     const [ name, setName ] = useState(user.name)
@@ -13,7 +13,6 @@ function UpdatePersonnalInformations({user, setUpdated, errors, setErrors})
     const onSubmit = (e) => {
         e.preventDefault()
         updateProfile({
-            setUpdated,
             setErrors,
             email,
             name,

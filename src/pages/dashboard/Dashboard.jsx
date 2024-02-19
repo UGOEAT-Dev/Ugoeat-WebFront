@@ -5,6 +5,7 @@ import {isUserLoggedIn} from "../../lib/helpers.jsx";
 import DashboardHeader from "./components/DashboardHeader.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import {useState} from "react";
+import {Toaster} from "react-hot-toast";
 
 function Dashboard()
 {
@@ -28,6 +29,7 @@ function Dashboard()
                     <Outlet context={{user, token}} />
                 </div>
             </main>
+            <Toaster />
         </div>
     )
 }

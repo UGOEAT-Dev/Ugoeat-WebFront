@@ -7,20 +7,13 @@ function DashboardAccount()
 {
     const {user} = useOutletContext()
     const [errors, setErrors] = useState([])
-    const [isProfileUpdated, setUpdated] = useState(false)
-    const hasErrors = errors.length !== 0
 
     return (
         <div>
             <h1 className="text-2xl font-bold">Mon Compte</h1>
-            {(isProfileUpdated) ? (
-                <div> Success </div>
-            ) : ( hasErrors ) ? (
-                <div> Error </div>
-            ) : (<></>)}
             <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 gap-2 mt-2">
-                <UpdateImageProfile setErrors={setErrors} errors={errors} user={user} setUpdated={setUpdated}/>
-                <UpdatePersonnalInformations user={user} setUpdated={setUpdated} setErrors={setErrors} errors={errors} />
+                <UpdateImageProfile setErrors={setErrors} errors={errors} user={user}/>
+                <UpdatePersonnalInformations user={user} setErrors={setErrors} errors={errors} />
             </div>
         </div>
     )

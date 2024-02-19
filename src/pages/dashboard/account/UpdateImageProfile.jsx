@@ -4,8 +4,9 @@ import {useRef, useState} from "react";
 import { getScreenWidthScale } from '../../../lib/helpers.jsx'
 import Dropzone from "react-dropzone";
 import AvatarEditor from "react-avatar-editor";
+import toast from "react-hot-toast";
 
-function UpdateImageProfile({user, setUpdated, errors, setErrors})
+function UpdateImageProfile({user, errors, setErrors})
 {
     const [image, setImage] = useState(user.image_url)
     const [imageToResize, setImageToResize] = useState(image)
@@ -15,8 +16,12 @@ function UpdateImageProfile({user, setUpdated, errors, setErrors})
 
 
     const handleFileChanged = (file) => {
-        setShowResizer(true)
-        setImageToResize(file)
+        if(String(file.type).match('image/.*')) {
+            setShowResizer(true)
+            setImageToResize(file)
+        } else {
+            toast.error("Oupps! Fichier image attendu")
+        }
     }
 
     const onValidBtnClicked = () => {
@@ -39,7 +44,6 @@ function UpdateImageProfile({user, setUpdated, errors, setErrors})
             const blob = await response.blob()
             formData.append('image', blob, `${user.role}-${user.id}-profile.png`)
             updateImage({
-                setUpdated,
                 setErrors,
                 data: formData
             })
