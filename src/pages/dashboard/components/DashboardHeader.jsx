@@ -9,6 +9,7 @@ import {CiLogout} from "react-icons/ci";
 import {CgWebsite} from "react-icons/cg";
 import {FaUserCircle} from "react-icons/fa";
 import {IoMdNotificationsOutline} from "react-icons/io";
+import RoundedImage from "../../../components/RoundedImage.jsx";
 
 function DashboardHeader({toggleSidebar, logout, ...props})
 {
@@ -36,9 +37,7 @@ function DashboardHeader({toggleSidebar, logout, ...props})
                     </button>
                     <div className="flex gap-3 ">
                         <div className="flex items-center gap-1 capitalize">
-                            <div className="overflow-hidden flex items-center w-[50px] h-[50px] rounded-full border align-middle">
-                                <img alt="_" src={user.image_url} className="h-full" />
-                            </div>
+                            <RoundedImage size={50} src={user.image_url}/>
                             <div>
                                 <h3 className="font-bold text-md">{user.name}</h3>
                                 <span className="text-sm text-gray-500">{roleToName(user.role)}</span>
