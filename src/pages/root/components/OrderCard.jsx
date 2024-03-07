@@ -1,6 +1,6 @@
 import {useContext, useEffect, useMemo, useState} from "react";
 import OrderProductCardList from "./OrderProductCardList.jsx";
-import {calculateTotal} from "../../../lib/helpers.jsx";
+import {calculateTotal, formatAmount} from "../../../lib/helpers.jsx";
 
 function OrderCard({products = [], onConfirmBtnClicked, onCancelBtnClicked, onItemCancelBtnClicked, ...props})
 {
@@ -13,7 +13,7 @@ function OrderCard({products = [], onConfirmBtnClicked, onCancelBtnClicked, onIt
             </div>
             <div className="flex justify-between p-2 font-bold">
                 <span>TOTAL</span>
-                <span>{total || 0} XAF</span>
+                <span>{formatAmount(total) || 0} XAF</span>
             </div>
             <button onClick={onConfirmBtnClicked} className="bg-green text-white p-2 font-bold rounded-md hover:bg-green-600">Confirmer</button>
             <button onClick={() => onCancelBtnClicked()} className="bg-gray-100 text-red-600 p-2 hover:bg-gray-200 rounded-md">Vider le panier</button>

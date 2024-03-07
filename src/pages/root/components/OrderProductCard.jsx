@@ -1,5 +1,6 @@
 
 import binPng from "../../../assets/images/icons/bin.png"
+import {formatAmount} from "../../../lib/helpers.jsx";
 
 function OrderProductCard({product, onClick = null, ...props})
 {
@@ -9,7 +10,7 @@ function OrderProductCard({product, onClick = null, ...props})
             <div className="flex flex-col w-full">
                 <div className="flex justify-between w-full font-bold">
                     <span>{product.name}</span>
-                    <span>{product.price} XAF</span>
+                    <span>{formatAmount(product.price)} XAF</span>
                 </div>
                 <div className="flex justify-between items-center w-full">
                     <span className="text-gray-400">Qte : {product.quantity || 1}</span>

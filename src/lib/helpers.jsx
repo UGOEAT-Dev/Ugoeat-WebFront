@@ -6,6 +6,15 @@ function calculateTotal(products = [])
     return total
 }
 
+function formatAmount(amount)
+{
+    const reversed = String(amount).split('').reverse()
+    const formatedArray = reversed.map((e, i) => {
+        return (i>0 && i%3 === 0) ? `${e}, ` : e
+    }).reverse()
+    return formatedArray.join('')
+}
+
 function isUserLoggedIn(user, token = '')
 {
     return isUserObject(user) && token
@@ -79,5 +88,6 @@ export {
     hasEmail,
     hasId,
     getScreenWidthScale,
-    getScreenHeightScale
+    getScreenHeightScale,
+    formatAmount
 }
