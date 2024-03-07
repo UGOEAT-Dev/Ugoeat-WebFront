@@ -16,7 +16,7 @@ function DashboardHeader({toggleSidebar, logout, ...props})
     const {user} = useContext(AppContext)
 
     return (
-        <header className={"fixed w-full sm:relative bg-white mb-1 p-2 shadow-md " + props.className}>
+        <header className={"fixed w-full z-10 sm:relative bg-white mb-1 p-2 shadow-md " + props.className}>
             <div className="container m-auto flex justify-between">
                 <div className="flex justify-between sm:w-[250px] items-center ">
                     <Link to='/' className="hidden sm:flex sm:text-xl md:text-2xl gap-1 items-center font-bold">

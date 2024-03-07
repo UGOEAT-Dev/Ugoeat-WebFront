@@ -26,7 +26,7 @@ function Sidebar({mode, ...props})
                     <SidebarLinkGroup name="General">
                         <SidebarLinkItem text="Accueil" link='/dashboard/home' ><AiOutlineHome /></SidebarLinkItem>
                         <SidebarLinkItem text="Mes Commandes" link='/dashboard/orders'><AiOutlineMenu /></SidebarLinkItem>
-                        <SidebarLinkItem text="Mes Payements" link='/dashboard/payments'><AiOutlineWallet /></SidebarLinkItem>
+                        { /* <SidebarLinkItem text="Mes Payements" link='/dashboard/payments'><AiOutlineWallet /></SidebarLinkItem> */}
                     </SidebarLinkGroup>
                     <hr className="my-5" />
                     { (user.role.toLowerCase() !== 'customer') ? ( <>

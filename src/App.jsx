@@ -4,6 +4,7 @@ import router from "./router.jsx";
 import './scss/app.scss'
 import {useLocalStorage} from "./hooks/useLocalStorage.jsx";
 import AppContext from "./AppContext.jsx";
+import {Toaster} from "react-hot-toast";
 
 export default function App()
 {
@@ -26,6 +27,7 @@ export default function App()
             setToken
         }}>
             <RouterProvider router={router}/>
+            <Toaster />
         </AppContext.Provider>
     )
 

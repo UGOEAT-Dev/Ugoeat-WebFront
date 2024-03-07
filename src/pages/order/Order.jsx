@@ -4,6 +4,8 @@ import queryString from "query-string"
 import ProductsView from "./components/ProductsView.jsx";
 import axios from "../../lib/axios.jsx";
 import {useOutletContext} from "react-router-dom";
+import getProducts from "../../api/products/getProducts.jsx";
+import getCategories from "../../api/categories/getCategories.jsx";
 
 let productsBank = []
 
@@ -16,10 +18,8 @@ export default function Order()
     const qStringParsed = queryString.parse(location.search)
 
     useEffect(() => {
-        axios.get('/api/v1/categories')
-            .then(response => setCategories(response.data.data))
-        axios.get('/api/v1/products')
-            .then(response => {
+        getCategories().then(response => setCategories(response.data.data))
+        getProducts().then(response => {
                 productsBank = response.data.data
                 setProducts(productsBank)
             })
@@ -38,18 +38,14 @@ export default function Order()
 
     const onAddProductBtnClicked = (product) => {
         const productsOrdered = orders.products
-        let index = -1
-        let total = 0
-        productsOrdered.forEach((p, i) => {
-            if(p.id === product.id)
-                index = i
-        })
+        const index = productsOrdered.findIndex(p => p.id === product.id)
         if(index !== -1)
             productsOrdered[index].quantity += 1
         else
             productsOrdered.push({quantity:1, ...product})
         // update orders
-        setOrders({...orders, products: productsOrdered, price: total})
+
+        setOrders({...orders, products: productsOrdered, price: 0})
     }
 
     return (
@@ -57,7 +53,7 @@ export default function Order()
             <h2 className="text-2xl font-bold pb-2 mb-5 border-b-4">Nos produits</h2>
             <div>
                 <select id="categoryFilter" onChange={changeCategory} className="block w-full md:w-fit p-2 text-sm text-black border-2 border-black rounded-lg bg-white">
-                    {categories.map((category, index) => {
+                    {categories.map((category) => {
                         return (<option key={category.name} value={category.id}>{category.name}</option>)
                     })}
                 </select>
