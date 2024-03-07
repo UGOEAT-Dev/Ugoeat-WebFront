@@ -4,10 +4,13 @@ import cartSvg from "../../../assets/images/icons/cart-vector.svg"
 import OrderCard from "./OrderCard.jsx";
 import AppContext from "../../../AppContext.jsx";
 import {useContext} from "react";
+import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 
 function ModalCart({onCloseBtnClicked = null, ...props})
 {
     const {orders, setOrders} = useContext(AppContext)
+    const navigate = useNavigate()
 
     const clearCart = () => {
         if(confirm('Voulez vraiment vider votre panier ?')) {
@@ -27,7 +30,12 @@ function ModalCart({onCloseBtnClicked = null, ...props})
             <div className="overflow-y-scroll">
                 <OrderCard
                     onCancelBtnClicked={clearCart}
-                    onConfirmBtnClicked={() => console.log("Payment page")}
+                    onConfirmBtnClicked={() => {
+                        if(orders.products.length)
+                            return navigate('/dashboard/payments')
+
+                        toast.error('Aucun produit dans le panier')
+                    }}
                     onItemCancelBtnClicked={(product) => {
                         const products = orders.products.filter( p => p.id !== product.id )
                         setOrders({...orders, products: products})
