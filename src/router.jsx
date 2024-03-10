@@ -19,6 +19,8 @@ import AdminOrders from "./pages/dashboard/admin/orders/AdminOrders.jsx";
 import AdminCategories from "./pages/dashboard/admin/categories/AdminCategories.jsx";
 import DashboardProducts from "./pages/dashboard/DashboardProducts.jsx";
 import AdminStats from "./pages/dashboard/admin/stats/AdminStats.jsx";
+import OrderDetails from "./pages/dashboard/orders/OrderDetails.jsx";
+import DashboardOrdersLayout from "./pages/dashboard/orders/DashboardOrderLayout.jsx";
 
 const router = createBrowserRouter([
     {
@@ -61,7 +63,17 @@ const router = createBrowserRouter([
             },
             {
                 path: 'orders',
-                element: <DashboardOrders />
+                element: <DashboardOrdersLayout />,
+                children: [
+                    {
+                        path: '',
+                        element: <DashboardOrders />
+                    },
+                    {
+                        path: ':orderId',
+                        element: <OrderDetails />
+                    }
+                ]
             },
             {
                 path: 'payments',
