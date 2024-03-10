@@ -9,7 +9,6 @@ import {NavLink, useNavigate, useOutletContext, useParams} from "react-router-do
 import RoundedImage from "../../../components/RoundedImage.jsx";
 import {formatAmount} from "../../../lib/helpers.jsx";
 import getOrder from "../../../api/orders/getOrder.jsx";
-import postOrder from "../../../api/orders/postOrder.jsx";
 
 function OrderDetails()
 {

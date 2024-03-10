@@ -1,7 +1,7 @@
 
 import InputWithLabel from "../../components/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
-import bgRegister from "../../assets/images/bg-register.svg"
+import bgRegister from "/assets/images/bg-register.svg"
 import SelectBox from "../../components/SelectBox.jsx";
 import {useState} from "react";
 import useAuth from "../../hooks/useAuth.jsx";

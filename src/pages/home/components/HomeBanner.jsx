@@ -1,12 +1,12 @@
 
-import bannerImg from "../../../assets/images/home-banner.png"
-import homeBannerSec from "../../../assets/images/home-banner-sec.png"
+import bannerImg from "/assets/images/home-banner.png"
+import homeBannerSec from "/assets/images/home-banner-sec.png"
 import BannerCardItem from "./BannerCardItem.jsx";
 // icons
-import grennCoursierIcon from "../../../assets/images/icons/green-coursier.png"
-import grennGroupeIcon from "../../../assets/images/icons/green-group.png"
-import grennLocationIcon from "../../../assets/images/icons/green-location.png"
-import grennVectorIcon from "../../../assets/images/icons/green-vector.png"
+import grennCoursierIcon from "/assets/images/icons/green-coursier.png"
+import grennGroupeIcon from "/assets/images/icons/green-group.png"
+import grennLocationIcon from "/assets/images/icons/green-location.png"
+import grennVectorIcon from "/assets/images/icons/green-vector.png"
 
 export default function HomeBanner()
 {

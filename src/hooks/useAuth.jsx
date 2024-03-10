@@ -4,21 +4,22 @@ import {useContext, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import AppContext from "../AppContext.jsx";
 import {isUserLoggedIn} from "../lib/helpers.jsx";
+import getAccount from "../api/account/getAccount.jsx";
 
-function useAuth(middleware = '', redirectIfAuthenticated = '')
+function useAuth(middleware, redirectIfAuthenticated)
 {
     const navigate = useNavigate()
     const {token, user, setToken, setUser, setOrders} = useContext(AppContext)
 
     const { data , error, mutate } = useSWR('/api/v1/account', () =>
-        axios.get('/api/v1/account?__token__=' + token)
+        getAccount(token)
             .then(response => {
                 setUser(response.data)
                 return response.data
             })
             .catch(error => {
                 setUser({})
-                if(error.response.status === 401) throw error
+                throw error
             })
     )
 
@@ -42,7 +43,7 @@ function useAuth(middleware = '', redirectIfAuthenticated = '')
             })
             .catch( error => {
                 setErrors(error.response.data.errors)
-                if(error.response.status === 422) throw error
+                throw error
             } )
     }
 

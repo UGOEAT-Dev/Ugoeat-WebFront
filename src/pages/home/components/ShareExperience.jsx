@@ -1,5 +1,5 @@
 import {customerPurposes} from "../datas.jsx";
-import bgUserExp from "../../../assets/images/bg-exp.png"
+import bgUserExp from "/assets/images/bg-exp.png"
 
 function ShareExperience()
 {

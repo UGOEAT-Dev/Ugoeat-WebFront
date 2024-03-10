@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import InputWithLabel from "../../components/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
-import bgLogin from "../../assets/images/bg-login.png"
+import bgLogin from "/assets/images/bg-login.png"
 import useAuth from "../../hooks/useAuth.jsx";
 import queryString from "query-string";
 import {isUserLoggedIn} from "../../lib/helpers.jsx";

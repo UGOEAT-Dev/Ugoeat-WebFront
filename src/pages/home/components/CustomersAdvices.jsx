@@ -1,9 +1,9 @@
 
 import CustomerAdviceCard from "./CustomerAdviceCard.jsx";
 import { customersAdvices } from "../datas.jsx"
-import bgCustomerAdviceImage from "../../../assets/images/bg-customers-advices.png"
-import avatar1 from "../../../assets/images/avatars/avatar-1.png"
-import avatar2 from "../../../assets/images/avatars/avatar-2.png"
+import bgCustomerAdviceImage from "/assets/images/bg-customers-advices.png"
+import avatar1 from "/assets/images/avatars/avatar-1.png"
+import avatar2 from "/assets/images/avatars/avatar-2.png"
 
 export default function CustomersAdvices()
 {

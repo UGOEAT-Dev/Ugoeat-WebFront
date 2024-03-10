@@ -10,7 +10,7 @@ function formatAmount(amount)
 {
     const reversed = String(amount).split('').reverse()
     const formatedArray = reversed.map((e, i) => {
-        return (i>0 && i%3 === 0) ? `${e}, ` : e
+        return (i>0 && i%3 === 0) ? `${e},` : e
     }).reverse()
     return formatedArray.join('')
 }

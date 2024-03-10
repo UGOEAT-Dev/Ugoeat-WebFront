@@ -1,7 +1,12 @@
 
+const modes = {
+    local: 'http://localhost:8000',
+    remote: 'https://api.ugoeatonline.com',
+    currentMode: 'remote'
+}
 const config = {
 
-    LARAVEL_BACKEND_URL: 'http://localhost:8000',
+    LARAVEL_BACKEND_URL: modes[modes.currentMode],
     axios: {
         headers: {
             'Accept': 'application/json',
@@ -9,14 +14,14 @@ const config = {
         },
     },
     ugoeat: {
-        tel: '237652888529',
+        tel: '237695889924',
         momo: {
-            tel: '237 652888529',
-            name: 'UGOEAT '
+            tel: '237 695889924',
+            name: 'UgoEat Online'
         },
         om: {
-            name: 'UGOEAT',
-            tel: '237 692026258'
+            name: 'UgoEat Online',
+            tel: '237 695889924'
         }
     }
 }
