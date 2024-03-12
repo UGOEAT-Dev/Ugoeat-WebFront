@@ -21,6 +21,7 @@ import DashboardProducts from "./pages/dashboard/DashboardProducts.jsx";
 import AdminStats from "./pages/dashboard/admin/stats/AdminStats.jsx";
 import OrderDetails from "./pages/dashboard/orders/OrderDetails.jsx";
 import DashboardOrdersLayout from "./pages/dashboard/orders/DashboardOrderLayout.jsx";
+import Logout from "./pages/auth/Logout.jsx";
 
 const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
                 element: <Register />
             }
         ]
+    },
+    {
+        path: '/logout',
+        element: <Logout />
     },
     {
         path: '/dashboard',

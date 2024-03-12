@@ -11,7 +11,7 @@ import {FaUserCircle} from "react-icons/fa";
 import {IoMdNotificationsOutline} from "react-icons/io";
 import RoundedImage from "../../../components/RoundedImage.jsx";
 
-function DashboardHeader({toggleSidebar, logout, ...props})
+function DashboardHeader({toggleSidebar, ...props})
 {
     const {user} = useContext(AppContext)
 
@@ -47,7 +47,7 @@ function DashboardHeader({toggleSidebar, logout, ...props})
                     <Dropdown className="z-10">
                         <DropdownItem text="Site Web" to="/"><CgWebsite /></DropdownItem>
                         <DropdownItem text="Profil" to="/dashboard/profile"><FaUserCircle /></DropdownItem>
-                        <DropdownItem text="Se Deconnecter" to="/logout" action={logout}><CiLogout/></DropdownItem>
+                        <DropdownItem text="Se Deconnecter" to="/logout"><CiLogout/></DropdownItem>
                     </Dropdown>
                 </div>
             </div>

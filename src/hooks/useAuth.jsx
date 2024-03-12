@@ -48,10 +48,10 @@ function useAuth(middleware, redirectIfAuthenticated)
     }
 
     const logout = () => {
-        axios.post('/api/auth/logout?__token__=' + token)
+        axios.post('/api/auth/logout', null,{
+                    headers: { Authorization: `Bearer ${token}` }})
             .then(response => {
                 if(response.status === 200) {
-                    console.log(response.status)
                     setToken('')
                     setUser({})
                     setOrders({products:[]})
