@@ -1,4 +1,4 @@
-import InputWithLabel from "../../../components/InputWithLabel.jsx";
+import InputWithLabel from "../../../components/input/InputWithLabel.jsx";
 import {useState} from "react";
 import useUpdateAccount from "../../../hooks/useUpdateAccount.jsx";
 

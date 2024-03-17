@@ -1,5 +1,5 @@
 
-import InputWithLabel from "../../components/InputWithLabel.jsx";
+import InputWithLabel from "../../components/input/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
 import bgRegister from "/assets/images/bg-register.svg"
 import SelectBox from "../../components/SelectBox.jsx";

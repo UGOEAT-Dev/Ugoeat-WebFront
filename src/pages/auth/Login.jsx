@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import InputWithLabel from "../../components/InputWithLabel.jsx";
+import InputWithLabel from "../../components/input/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
 import bgLogin from "/assets/images/bg-login.png"
 import useAuth from "../../hooks/useAuth.jsx";

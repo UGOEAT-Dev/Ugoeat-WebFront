@@ -1,4 +1,4 @@
-import Input from "../../../components/Input.jsx";
+import Input from "../../../components/input/Input.jsx";
 
 function NewsLetter({className = "", onEmailChanged = null, onSubmit = null})
 {

@@ -2,7 +2,7 @@ import {calculateTotal, formatAmount} from "../../../lib/helpers.jsx";
 import {useContext, useState, useRef} from "react";
 import {Link, useNavigate} from "react-router-dom"
 import AppContext from "../../../AppContext.jsx";
-import InputWithLabel from "../../../components/InputWithLabel.jsx";
+import InputWithLabel from "../../../components/input/InputWithLabel.jsx";
 import postOrder from "../../../api/orders/postOrder.jsx";
 import toast from "react-hot-toast";
 import {Dialog} from "primereact/dialog"
