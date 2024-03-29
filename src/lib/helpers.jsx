@@ -75,6 +75,18 @@ const getScreenWidthScale = (n) => _getScale(window.innerWidth, n)
 
 const  getScreenHeightScale = (n) => _getScale(window.innerHeight, n)
 
+const parseUserRole = (role) => {
+    switch (String(role).toLowerCase())
+    {
+        case 'customer':
+            return 'Client'
+        case 'restaurant' || 'admin':
+            return role
+        default:
+            return 'NULL'
+    }
+}
+
 export {
     calculateTotal,
     isUserLoggedIn,
@@ -89,5 +101,6 @@ export {
     hasId,
     getScreenWidthScale,
     getScreenHeightScale,
-    formatAmount
+    formatAmount,
+    parseUserRole
 }
