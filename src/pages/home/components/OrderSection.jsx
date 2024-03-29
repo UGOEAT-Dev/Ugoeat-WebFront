@@ -1,6 +1,6 @@
 
-import orderMapImage from "/assets/images/home-order-map.png"
-import deliveryImg from "/assets/images/delivery.png"
+import orderMapImage from "/static.ugoeatonline.com/assets/images/home-order-map.png"
+import deliveryImg from "/static.ugoeatonline.com/assets/images/delivery.png"
 import {NavLink} from "react-router-dom";
 
 export default function OrderSection()

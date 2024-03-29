@@ -1,6 +1,6 @@
 import {NavLink} from "react-router-dom";
 import Input from "../../../components/input/Input.jsx";
-import cartSvg from "/assets/images/icons/cart-vector.svg"
+import cartSvg from "/static.ugoeatonline.com/assets/images/icons/cart-vector.svg"
 import {AiOutlineDashboard, AiOutlineSearch} from "react-icons/ai";
 import {useContext} from "react";
 import AppContext from "../../../AppContext.jsx";

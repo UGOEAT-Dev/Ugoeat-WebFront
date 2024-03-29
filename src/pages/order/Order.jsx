@@ -18,6 +18,9 @@ export default function Order()
     const qStringParsed = queryString.parse(location.search)
 
     useEffect(() => {
+
+        document.title = "Commandez | UGOEAT"
+
         getCategories().then(response => setCategories(response.data.data))
         getProducts().then(response => {
                 productsBank = response.data.data

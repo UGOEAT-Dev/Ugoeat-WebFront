@@ -1,9 +1,9 @@
 
 import InputWithLabel from "../../components/input/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
-import bgRegister from "/assets/images/bg-register.svg"
+import bgRegister from "/static.ugoeatonline.com/assets/images/bg-register.svg"
 import SelectBox from "../../components/SelectBox.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useAuth from "../../hooks/useAuth.jsx";
 import queryString from "query-string";
 import {isUserLoggedIn} from "../../lib/helpers.jsx";
@@ -18,6 +18,10 @@ export default function Register()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
+
+    useEffect(() => {
+        document.title = "S'inscrire | UGOEAT";
+    }, [])
 
     const submitForm = (event) => {
         event.preventDefault()

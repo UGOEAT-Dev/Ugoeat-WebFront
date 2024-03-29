@@ -4,7 +4,7 @@ import {Link, Outlet} from "react-router-dom";
 import {isUserLoggedIn} from "../../lib/helpers.jsx";
 import DashboardHeader from "./components/DashboardHeader.jsx";
 import Sidebar from "./components/Sidebar.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function Dashboard()
 {
@@ -13,6 +13,10 @@ function Dashboard()
     const path = pathname2link(window.location.pathname)
 
     if( ! isUserLoggedIn(user, token) ) return ( <div></div>)
+
+    useEffect(() => {
+        document.title = "Dashboard | UGOEAT";
+    }, [])
 
     return (
         <div className="bg-gray-50 min-h-screen">

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import InputWithLabel from "../../components/input/InputWithLabel.jsx";
 import {Link} from "react-router-dom";
-import bgLogin from "/assets/images/bg-login.png"
+import bgLogin from "/static.ugoeatonline.com/assets/images/bg-login.png"
 import useAuth from "../../hooks/useAuth.jsx";
 import queryString from "query-string";
 import {isUserLoggedIn} from "../../lib/helpers.jsx";
@@ -13,6 +13,10 @@ export default function Login()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { login, token, user } = useAuth('guest',  qParsed.query.r ?? '/dashboard')
+
+    useEffect(() => {
+        document.title = "Se Connecter | UGOEAT";
+    }, [])
 
     const submitForm = (event) => {
         event.preventDefault()

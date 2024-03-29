@@ -1,6 +1,6 @@
 
 import {AiOutlineClose} from "react-icons/ai";
-import cartSvg from "/assets/images/icons/cart-vector.svg"
+import cartSvg from "/static.ugoeatonline.com/assets/images/icons/cart-vector.svg"
 import OrderCard from "./OrderCard.jsx";
 import AppContext from "../../../AppContext.jsx";
 import {useContext} from "react";

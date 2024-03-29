@@ -1,6 +1,11 @@
+import {useEffect} from "react";
 
 export default function About()
 {
+    useEffect(() => {
+        document.title = "A propos | UGOEAT";
+    }, [])
+
     return (
         <div className="p-5 sm:mt-16">
             <div id="about" className="pb-10">

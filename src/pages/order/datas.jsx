@@ -36,7 +36,7 @@ const PRODUCTS = [
         name: "Donut",
         description: "Description",
         price: 300,
-        image_url: "/src/assets/images/products/donut.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/donut.jpg",
         category_id: 2
     },
     {
@@ -44,7 +44,7 @@ const PRODUCTS = [
         name: "Tarte",
         description: "Description",
         price: 2000,
-        image_url: "/src/assets/images/products/tarte.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/tarte.jpg",
         category_id: 2
     },
     {
@@ -52,7 +52,7 @@ const PRODUCTS = [
         name: "Omollete",
         description: "Description",
         price: 1000,
-        image_url: "/src/assets/images/products/oeuf.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/oeuf.jpg",
         category_id: 5
     },
     {
@@ -60,7 +60,7 @@ const PRODUCTS = [
         name: "Frites",
         description: "Description",
         price: 500,
-        image_url: "/src/assets/images/products/frite.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/frite.jpg",
         category_id: 5
     },
     {
@@ -68,7 +68,7 @@ const PRODUCTS = [
         name: "Pain",
         description: "Description",
         price: 100,
-        image_url: "/src/assets/images/products/pain-lait.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/pain-lait.jpg",
         category_id: 1
     },
     {
@@ -76,7 +76,7 @@ const PRODUCTS = [
         name: "Salade",
         description: "Description",
         price: 1000,
-        image_url: "/src/assets/images/products/salade.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/salade.jpg",
         category_id: 3
     },
     {
@@ -84,7 +84,7 @@ const PRODUCTS = [
         name: "Bouteille d'eau",
         description: "Description",
         price: 500,
-        image_url: "/src/assets/images/products/eau.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/eau.jpg",
         category_id: 4
     },
     {
@@ -92,7 +92,7 @@ const PRODUCTS = [
         name: "Pain au lait",
         description: "Description",
         price: 100,
-        image_url: "/src/assets/images/products/pain-lait.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/pain-lait.jpg",
         category_id: 2
     },
     {
@@ -100,7 +100,7 @@ const PRODUCTS = [
         name: "Tarte a la creme",
         description: "Description",
         price: 2500,
-        image_url: "/src/assets/images/products/tarte-creme.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/tarte-creme.jpg",
         category_id: 1
     },
     {
@@ -108,7 +108,7 @@ const PRODUCTS = [
         name: "Coca Cola",
         description: "Description",
         price: 1500,
-        image_url: "/src/assets/images/products/coca.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/coca.jpg",
         category_id: 4
     },
     {
@@ -116,7 +116,7 @@ const PRODUCTS = [
         name: "Ketchup",
         description: "Description",
         price: 500,
-        image_url: "/src/assets/images/products/ketchup.jpg",
+        image_url: "/src/static.ugoeatonline.com/assets/images/products/ketchup.jpg",
         category_id: 1
     }
 ]

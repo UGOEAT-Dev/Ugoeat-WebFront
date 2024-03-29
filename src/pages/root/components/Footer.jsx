@@ -1,5 +1,5 @@
 import NewsLetter from "./NewsLetter.jsx";
-import logoImg from "/assets/images/logo-white.png"
+import logoImg from "/static.ugoeatonline.com/assets/images/logo-white.png"
 import {
     AiFillFacebook,
     AiFillInstagram,

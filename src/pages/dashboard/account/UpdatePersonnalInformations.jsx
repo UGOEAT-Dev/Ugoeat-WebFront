@@ -2,7 +2,7 @@ import InputWithLabel from "../../../components/input/InputWithLabel.jsx";
 import {useState} from "react";
 import useUpdateAccount from "../../../hooks/useUpdateAccount.jsx";
 
-function UpdatePersonnalInformations({user, errors, setErrors})
+function UpdatePersonnalInformations({user, errors={}, setErrors})
 {
     const { updateProfile } = useUpdateAccount()
     const [ name, setName ] = useState(user.name)

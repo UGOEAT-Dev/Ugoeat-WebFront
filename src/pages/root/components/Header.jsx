@@ -1,6 +1,6 @@
 import Navbar from "./Navbar.jsx";
 import {AiOutlineMenu} from "react-icons/ai";
-import logoWhite from "/assets/images/logo-white.png"
+import logoWhite from "/static.ugoeatonline.com/assets/images/logo-white.png"
 import {useState} from "react";
 
 export default function Header({products = [], onCartBtnClicked = null})

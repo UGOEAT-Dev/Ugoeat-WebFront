@@ -71,7 +71,7 @@ function UpdateImageProfile({user, errors, setErrors})
                 )}
             </Dropzone>
             <form className="mt-3 w-full items-center flex justify-around" onSubmit={onSubmit} encType='multipart/form-data'>
-                <InputFile onChange={(e) => handleFileChanged(e.target.files[0])} title='Choisir une image' label="Parcourir" id="image_profile" error={errors.image} name="image" />
+                <InputFile onChange={(e) => handleFileChanged(e.target.files[0])} title='Choisir une image' label="Parcourir" error={errors.image} name="image" />
                 <button
                     disabled={image === user.image_url}
                     className="bg-green text-white hover:text-black py-2 px-5 rounded-md" type="submit">Sauvegarder</button>

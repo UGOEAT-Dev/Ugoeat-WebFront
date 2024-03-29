@@ -1,5 +1,5 @@
 
-import binPng from "/assets/images/icons/bin.png"
+import binPng from "/static.ugoeatonline.com/assets/images/icons/bin.png"
 import {formatAmount} from "../../../lib/helpers.jsx";
 
 function OrderProductCard({product, onClick = null, ...props})
