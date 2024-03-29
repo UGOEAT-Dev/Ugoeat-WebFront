@@ -21,6 +21,7 @@ export default function Register()
 
     useEffect(() => {
         document.title = "S'inscrire | UGOEAT";
+        document.querySelector('meta[property="og:title"]').content = "S'inscrire";
     }, [])
 
     const submitForm = (event) => {

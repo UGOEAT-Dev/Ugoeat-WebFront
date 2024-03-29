@@ -16,6 +16,7 @@ export default function Login()
 
     useEffect(() => {
         document.title = "Se Connecter | UGOEAT";
+        document.querySelector('meta[property="og:title"]').content = "Se Connecter";
     }, [])
 
     const submitForm = (event) => {

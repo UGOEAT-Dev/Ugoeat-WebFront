@@ -4,6 +4,7 @@ export default function About()
 {
     useEffect(() => {
         document.title = "A propos | UGOEAT";
+        document.querySelector('meta[property="og:title"]').content = "A Propos";
     }, [])
 
     return (

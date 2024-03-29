@@ -20,6 +20,7 @@ export default function Order()
     useEffect(() => {
 
         document.title = "Commandez | UGOEAT"
+        document.querySelector('meta[property="og:title"]').content = "Commandez";
 
         getCategories().then(response => setCategories(response.data.data))
         getProducts().then(response => {

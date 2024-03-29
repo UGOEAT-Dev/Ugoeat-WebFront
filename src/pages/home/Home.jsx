@@ -9,6 +9,7 @@ export default function Home()
 {
     useEffect(() => {
         document.title = "Accueil | UGOEAT";
+        document.querySelector('meta[property="og:title"]').content = "Accueil";
     }, [])
 
     return (
