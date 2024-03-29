@@ -2,7 +2,33 @@
 import {RouterProvider} from "react-router-dom";
 import router from "./router.jsx";
 import './scss/app.scss'
+import {useLocalStorage} from "./hooks/useLocalStorage.jsx";
+import AppContext from "./AppContext.jsx";
+import {Toaster} from "react-hot-toast";
+
 export default function App()
 {
-    return <RouterProvider router={router}/>
+    const [orders, setOrders] = useLocalStorage('orders',{ products: [] })
+    const [user, setUser] = useLocalStorage('user', {})
+    const [token, setToken] = useLocalStorage('token', '')
+
+    /* remove the user from storage when the app is closed
+    useEffect(() => {
+        return () => setUser({})
+    }, [])
+     */
+    return (
+        <AppContext.Provider value={{
+            orders,
+            user,
+            token,
+            setOrders,
+            setUser,
+            setToken
+        }}>
+            <RouterProvider router={router}/>
+            <Toaster />
+        </AppContext.Provider>
+    )
+
 }

@@ -1,5 +1,5 @@
 
-/* Tailwind CSS */
+/* PrimeReact && Tailwind CSS */
 
 @tailwind base;
 @tailwind components;
@@ -7,14 +7,51 @@
 
 /* End Tailwind CSS */
 
-@font-face {
-  font-family: 'poppins';
-  src: url("../assets/fonts/poppins/Poppins-Regular.ttf") format('truetype');
-  font-style: normal;
-}
+@import "colors";
+@import "inputs";
+@import "sidebar";
 
 * {
   margin: 0;
   padding: 0;
   font-family: poppins, sans-serif;
+}
+
+.cart {
+
+  $cart-text-bgcolor: #f00;
+  $cart-text-color: #fff;
+
+  position: relative;
+  border-radius: 5px;
+  padding: 2px;
+
+  .cart-image {
+    width: 26px;
+    height: 26px;
+  }
+
+  .cart-text {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: $cart-text-bgcolor;
+    color: $cart-text-color;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+  }
+
+}
+
+.card {
+
+  .card-show:hover {
+    background-color: $secondaryColor;
+  }
+  .card-get:hover {
+    background-color: $primaryColor;
+  }
 }
