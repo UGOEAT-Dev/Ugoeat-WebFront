@@ -1,0 +1,9 @@
+
+user-agent: *
+Disallow: /dashboard
+Disallow: /logout
+Disallow: /api.ugoeatonline.com
+Disallow: /old.ugoeatonline.com
+
+sitemap: https://ugoeatonline.com/sitemap.xml
+sitemap: https://www.ugoeatonline.com/sitemap.xml

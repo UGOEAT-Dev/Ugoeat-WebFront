@@ -1,0 +1,28 @@
+
+.sidebar {
+
+  .sidebar-group {
+
+    .sidebar-item {
+
+      transition: 100ms;
+      margin: 2px auto;
+
+      a {
+        color: #000;
+      }
+
+      a:hover {
+        scale: 1.03;
+        background-color: #9ca3af;
+      }
+
+      a.active {
+        border: 0;
+        background-color: $secondaryColor;
+        color: #fff;
+      }
+    }
+
+  }
+}

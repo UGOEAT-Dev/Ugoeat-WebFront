@@ -1,0 +1,30 @@
+
+:root {
+  --primary-color: rgb(87, 232, 26);;
+  --secondary-color: rgb(17, 24, 39);
+}
+
+$primaryColor: var(--primary-color);
+$secondaryColor: var(--secondary-color);
+
+$errorColor: #ff0000;
+$errorInputBgColor: rgba(252, 220, 220, 0.54);
+
+$successColor: rgb(87, 232, 26);
+$successInputBgColor: rgba(212, 246, 197, 0.54);
+
+.text-green {
+  color: $primaryColor;
+}
+
+.bg-green {
+  background-color: $primaryColor;
+}
+
+.text-secondary {
+  color: $secondaryColor;
+}
+
+.bg-secondary {
+  background-color: $secondaryColor;
+}
