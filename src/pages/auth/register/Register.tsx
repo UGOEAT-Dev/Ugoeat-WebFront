@@ -41,10 +41,11 @@ export default function Register()
         return (<div></div>)
 
     return (
-        <main className="bg-center bg-cover min-h-screen flex sm:items-center justify-center py-5 sm:pt-24 sm:pb-10 px-2" style={{
-            backgroundImage: `url(${bgRegister})`,
+        <main className="form-wrapper bg-center bg-cover bg-gray-100 py-3  px-2" style={{
+            // backgroundImage: `url(${bgRegister})`,
         }}>
-            <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-full md:w-[600px] px-5 py-10 space-y-3" action="#">
+            <img src="/favicon.png"/>
+            <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-full md:w-[600px] px-5 py-5 space-y-1.5" action="#">
                 <h2 className="text-center text-2xl font-bold">Inscrivez-vous</h2>
                 <SelectBox label="Vous Etes ?" name="role" id="role" className="text-md" onChange={(e) => setRole(e.target.value.toLowerCase() === 'customer' ? 'customer' : 'restaurant')}>
                     <option value="customer">Un Client</option>

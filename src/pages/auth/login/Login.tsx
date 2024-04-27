@@ -26,10 +26,11 @@ export default function Login()
     if( isUserLoggedIn(user, token)) return (<div></div>)
 
     return (
-        <main className="bg-center bg-cover h-screen flex items-center justify-center py-5 px-2" style={{
-            backgroundImage: `url(${bgLogin})`,
+        <main className="bg-center bg-cover bg-gray-100 min-h-screen flex flex-col items-center justify-center py-5 px-2 gap-5" style={{
+            // backgroundImage: `url(${bgLogin})`,
         }}>
-            <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-full md:w-[600px] px-5 py-10 space-y-5" action="#">
+            <img src="/favicon.png"/>
+            <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-[90%] sm:w-[400px] px-5 py-10 space-y-5" action="#">
                 <h2 className="text-center text-2xl font-bold">Connectez-vous</h2>
                 <InputWithLabel onChange={(e) => setEmail(e.target.value)} id="email" label="Email" type="email" name="email" placeholder="name@company" />
                 <InputWithLabel onChange={(e) => setPassword(e.target.value)} id="password" label="Mot de passe" type="password" name="password" placeholder="*******" />

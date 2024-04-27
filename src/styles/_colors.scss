@@ -21,6 +21,10 @@ $successInputBgColor: rgba(212, 246, 197, 0.54);
   background-color: $primaryColor;
 }
 
+.bg-primary {
+  background-color: $primaryColor;
+}
+
 .text-secondary {
   color: $secondaryColor;
 }
