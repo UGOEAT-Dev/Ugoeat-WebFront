@@ -3,9 +3,11 @@ import CategoryListView from "../../components/category/CategoryListView"
 import getCategories from "../../../../core/services/categories/getCategories"
 import { AxiosResponse } from "axios"
 import Paginate from "../../../../components/pagination/Paginate"
+import { useMiddleware } from "../../../../core/hooks/useMiddleware"
 
 function AdminCategories({})
 {
+    const {isLoading} = useMiddleware('admin')
     const [categories, setCategories] = useState<Category[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Product>>({})
 
@@ -15,6 +17,8 @@ function AdminCategories({})
             setCategories(r.data.data)
         })
     }, [])
+
+    if(isLoading) return <></>
 
     return (
         <div>

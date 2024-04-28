@@ -1,16 +1,18 @@
 import useAuth from "../../core/hooks/useAuth";
 import {useEffect} from "react";
+import { useMiddleware } from "../../core/hooks/useMiddleware";
 
 function Logout()
 {
-    const { logout } = useAuth('auth', '/')
+    useMiddleware('auth')
+    const { logout } = useAuth('', '/')
 
     useEffect(() => {
         logout()
     }, [])
 
     return (
-        <div></div>
+        <></>
     )
 }
 

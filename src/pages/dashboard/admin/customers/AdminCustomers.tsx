@@ -5,13 +5,14 @@ import { useAppContext } from "../../../../core/context/AppContext";
 import { AxiosResponse } from "axios";
 import Paginate from "../../../../components/pagination/Paginate";
 import { Customer } from "../../../../core/types/Customer";
+import { useMiddleware } from "../../../../core/hooks/useMiddleware";
 
 function AdminCustomers({})
 {
+    const {isLoading} = useMiddleware('admin')
     const {token} = useAppContext()
     const [customers, setCustomers] = useState<Customer[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Customer>>({})
-
 
     useEffect(() => {
         getCustomers(token).then((r:AxiosResponse) => {
@@ -19,6 +20,8 @@ function AdminCustomers({})
             setCustomers(r.data.data)
         })
     }, [])
+
+    if(isLoading) return <></>
 
     return (
         <div>

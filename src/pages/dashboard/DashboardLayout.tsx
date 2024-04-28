@@ -1,20 +1,17 @@
 
-import useAuth from "../../core/hooks/useAuth";
 import {Link, Outlet} from "react-router-dom";
-import {isUserLoggedIn} from "../../core/lib/helpers";
 import DashboardHeader from "./components/DashboardHeader";
 import Sidebar from "./components/Sidebar";
 import {useEffect, useState} from "react";
-import { routesConfig } from "../../router.config";
+import { useMiddleware } from "../../core/hooks/useMiddleware";
 
 function DashboardLayout()
 {
-    const {routes} = routesConfig
-    const { user, token } = useAuth('auth', routes.auth.login)
+    const {isAuth} = useMiddleware('auth')
     const [sidebarMode, setSidebarMode] = useState<1|2>(1)
     const path = pathname2link(window.location.pathname)
 
-    if( ! isUserLoggedIn(user, token) ) return ( <div></div>)
+    if( !isAuth ) return ( <div></div>)
 
     useEffect(() => {
         document.title = "Dashboard | UGOEAT";

@@ -22,7 +22,7 @@ function UsersListView({users, header, onSelectionChange}: {users: any[], header
             <div className="bg-white p-2 rounded-md shadow-md">
                 <DataTable
                     value={users} header={header}
-                    showGridlines  tableStyle={{minWidth: '50rem'}}
+                    showGridlines  tableStyle={{}}
                     sortField='id' selectionMode="single"
                     selection={[1,2,3]} onSelectionChange={onSelectionChange ?? defaultOnSelectionChange}>
                     <Column field='image_url' body={(p) => <RoundedImage src={p.image_url} size={50}/>} ></Column>

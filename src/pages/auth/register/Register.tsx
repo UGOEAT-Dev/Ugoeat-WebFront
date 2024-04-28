@@ -1,7 +1,7 @@
 
 import InputWithLabel from "../../../components/input/InputWithLabel.js";
 import {Link} from "react-router-dom";
-import bgRegister from "/static.ugoeatonline.com/assets/images/bg-register.svg"
+// import bgRegister from "/static.ugoeatonline.com/assets/images/bg-register.svg"
 import SelectBox from "../../../components/SelectBox";
 import {FormEventHandler, useEffect, useState} from "react";
 import queryString from "query-string";

@@ -2,9 +2,11 @@ import {useEffect, useState} from "react";
 import getProducts from "../../../../core/services/products/getProducts";
 import ProductListView from "../../components/products/ProductListView";
 import Paginate from "../../../../components/pagination/Paginate";
+import { useMiddleware } from "../../../../core/hooks/useMiddleware";
 
 function AdminProducts({})
 {
+    const {isLoading} = useMiddleware('admin')
     const [products, setProducts] = useState<Product[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Product>>({})
 
@@ -16,6 +18,8 @@ function AdminProducts({})
             }
         )
     }, [])
+
+    if(isLoading) return <></>
 
     // const handleDeleteProduct = (product: Product) => {
 

@@ -5,13 +5,14 @@ import getRestaurants from "../../../../core/services/restaurants/getRestaurants
 import Paginate from "../../../../components/pagination/Paginate";
 import { Restaurant } from "../../../../core/types/Restaurant";
 import { AxiosResponse } from "axios";
+import { useMiddleware } from "../../../../core/hooks/useMiddleware";
 
 function AdminRestaurants({})
 {
+    const {isLoading} = useMiddleware('admin')
     const {token} = useAppContext()
     const [restaurants, setRestaurants] = useState<Restaurant[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Restaurant>>({})
-
 
     useEffect(() => {
         getRestaurants(token).then((r: AxiosResponse) => {
@@ -19,6 +20,8 @@ function AdminRestaurants({})
             setRestaurants(r.data.data)
         })
     }, [])
+
+    if(isLoading) return <></>
 
     return (
         <div>

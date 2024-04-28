@@ -8,9 +8,7 @@ function ErrorBoundary({debug = true}: { debug?: boolean })
     useEffect(() => {
         const backedTitle = document.title
         document.title = error.statusText
-        //
-        console.log(error)
-        //
+
         return () => { 
             document.title = backedTitle
         }
