@@ -1,5 +1,5 @@
 
-import binPng from "/static.ugoeatonline.com/assets/images/icons/bin.png"
+import { Icon } from "../../../components/Icon";
 import {formatAmount} from "../../../core/lib/helpers";
 
 
@@ -15,7 +15,9 @@ function OrderProductCard({product, onClick, ...props}: {product: ProductOrdered
                 </div>
                 <div className="flex justify-between items-center w-full">
                     <span className="text-gray-400">Qte : {product.quantity || 1}</span>
-                    <a href="javascript:void(0)" onClick={() => onClick(product)}><img src={binPng} width={32} alt="bin_image" className="cursor-pointer p-2 hover:bg-gray-100 rounded-md" /></a>
+                    <a href="javascript:void(0)" onClick={() => onClick(product)}>
+                        <Icon icon="pi-trash" color="red" className="text-lg font-semibold cursor-pointer" />
+                    </a>
                 </div>
             </div>
         </div>

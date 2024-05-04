@@ -10,12 +10,13 @@ import getOrder from "../../../core/services/orders/getOrder";
 import { useAppContext } from "../../../core/context/AppContext";
 import { Order } from "../../../core/types/Order";
 import { getSeverityFromOrderState } from "../../../core/lib/utils";
+import { Cart } from "../../../core/types/Cart";
 
 function OrderDetails()
 {
     const { orderId } = useParams()
     const [order, setOrder] = useState<Order>({})
-    const {token, setOrder: setUserOrder} = useAppContext()
+    const {token, updateCart} = useAppContext()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -35,7 +36,7 @@ function OrderDetails()
         if(order.products?.length === 0)
             return;
 
-        setUserOrder({ products: order.products?.map(p => ({...p, quantity: p.quantity })) })
+        updateCart(new Cart(order.products))
         navigate('/dashboard/payments')
     }
 

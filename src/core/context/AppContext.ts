@@ -1,30 +1,30 @@
 import {createContext, useContext} from "react";
 import { Mutator, MutatorFactory } from "../types/mutator/Mutator";
 import { User } from "../types/User";
-import { Order } from "../types/Order";
+import { Cart } from "../types/Cart";
 
 
 interface AppContextItemType
 {
     user: User,
     token: string,
-    order: Order,
-    onlineStatus: boolean, 
+    onlineStatus: boolean,
+    cart: Cart,
     setOnlineStatus: Mutator<boolean>,
     setToken: Mutator<string>,
-    setOrder: Mutator<Order>,
     setUser: Mutator<User>
+    updateCart: Mutator<Cart>
 }
 
 const defaultValue: AppContextItemType = {
     user: {id: 0},
     onlineStatus: true,
     token: '',
-    order: {},
+    cart: new Cart(),
     setOnlineStatus: MutatorFactory.createEmpty<boolean>(),
     setToken: MutatorFactory.createEmpty<string>(),
-    setOrder: MutatorFactory.createEmpty<Order>(),
-    setUser: MutatorFactory.createEmpty<User>()
+    setUser: MutatorFactory.createEmpty<User>(),
+    updateCart: MutatorFactory.createEmpty<Cart>()
 }
 
 const AppContext = createContext<AppContextItemType>(defaultValue)

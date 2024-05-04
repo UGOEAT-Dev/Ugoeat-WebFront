@@ -16,7 +16,7 @@ export function useMiddleware(middleware: AuthMiddleware, redirecTo?: string)
     const navigate = useNavigate()
     const [isAuth, setAuth] = useState(user.id !== 0)
 
-    const { isLoading } = useSWR('middleware:/api/v1/account', () => 
+    const { isLoading } = useSWR('/api/v1/account', () => 
             getAccount(token)
                 .then((r) => {
                     setAuth(true)

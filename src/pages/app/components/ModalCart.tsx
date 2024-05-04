@@ -8,12 +8,12 @@ import { Icon } from "../../../components/Icon.js";
 
 function ModalCart({onCloseBtnClicked, ...props}: {onCloseBtnClicked?: any, className?: string})
 {
-    const {order, setOrder} = useAppContext()
+    const {cart, updateCart} = useAppContext()
     const navigate = useNavigate()
 
     const clearCart = () => {
         if(confirm('Voulez vraiment vider votre panier ?')) {
-            setOrder({products:[]})
+            updateCart(cart.removeAll())
         }
     }
 
@@ -30,16 +30,15 @@ function ModalCart({onCloseBtnClicked, ...props}: {onCloseBtnClicked?: any, clas
                 <OrderCard
                     onCancelBtnClicked={clearCart}
                     onConfirmBtnClicked={() => {
-                        if(order.products?.length)
+                        if(cart.products?.length)
                             return navigate('/dashboard/payments')
 
                         toast.error('Aucun produit dans le panier')
                     }}
                     onItemCancelBtnClicked={(product: Product) => {
-                        const products = order.products?.filter( p => p.id !== product.id )
-                        setOrder({...order, products: products})
+                        updateCart(cart.removeProduct(product))
                     }}
-                    products={order.products}
+                    products={cart.products}
                     className="bg-white h-auto" />
             </div>
         </div>

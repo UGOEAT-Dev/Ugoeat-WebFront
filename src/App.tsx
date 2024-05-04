@@ -6,24 +6,25 @@ import router from "./router"
 import { useLocalStorage } from "./core/hooks/useLocalStorage"
 import { User } from "./core/types/User"
 import { Mutator } from "./core/types/mutator/Mutator"
-import { Order } from "./core/types/Order"
+import { Cart } from "./core/types/Cart"
+import useCart from "./core/hooks/useCart"
 
 
 function App()
 {
   const [user, setUser] = useLocalStorage<User>('user', {id: 0})
-  const [order, setOrder] = useLocalStorage<Order>('order', { products: [] })
   const [token, setToken] = useLocalStorage<string>('token', '')
+  const [cart, setCart] = useCart()
   const [onlineStatus, setOnlineStatus] = useLocalStorage<boolean>('onlineStatus', true)
-
+  
   return (
     <AppContext.Provider value={{
       user: user as User,
       onlineStatus: onlineStatus as boolean,
       token: token as string,
-      order: order as Order,
+      cart: cart as Cart,
+      updateCart: setCart as Mutator<Cart>,
       setOnlineStatus: setOnlineStatus as Mutator<boolean>,
-      setOrder: setOrder as Mutator<Order>,
       setToken: setToken as Mutator<string>,
       setUser: setUser as Mutator<User>
     }}>

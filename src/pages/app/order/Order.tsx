@@ -9,7 +9,7 @@ let productsBank: Product[] = []
 
 export default function Order()
 {
-    const {order, setOrder} = useAppContext();
+    const {cart, updateCart} = useAppContext();
     const [categories, setCategories] = useState<Category[]>([])
     const [products, setProducts] = useState<Product[]>(productsBank)
 
@@ -37,18 +37,7 @@ export default function Order()
     }
 
     const onAddProductBtnClicked = (product: Product) => {
-        const productsOrdered = order?.products
-        const index = productsOrdered?.findIndex(p => p.id === product.id) ?? -1
-        if(index !== -1) {
-            const p = productsOrdered?.at(index)
-            if(p)
-                p.quantity = p.quantity ?? 0 + 1
-        } else {
-            productsOrdered?.push({quantity:1, ...product})
-        }
-            // update orders
-        if(setOrder)
-            setOrder({...order, products: productsOrdered})
+        updateCart(cart.addProduct(product))
     }
 
     return (

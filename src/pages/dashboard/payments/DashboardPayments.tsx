@@ -11,22 +11,23 @@ import {config} from "../../../core/config";
 import { useAppContext } from "../../../core/context/AppContext";
 import { routesConfig } from "../../../router.config";
 import { Order } from "../../../core/types/Order";
+import { Cart } from "../../../core/types/Cart";
 
 function DashboardPayments()
 {
-    const {order, setOrder, user, token} = useAppContext()
+    const {cart, updateCart, user, token} = useAppContext()
     const [visible, setVisible] = useState(false)
     const [loading,setLoading] = useState(false)
     const remoteOrderRef = useRef<Order>()
     const navigate = useNavigate()
     const fees = 500;
-    const orderAmount = calculateTotal(order.products ?? [])
-    const confirmBtnDisabled = order.products?.length === 0
+    const orderAmount = calculateTotal(cart.products ?? [])
+    const confirmBtnDisabled = cart.products?.length === 0
 
     const confirmPayment = () => {
         setLoading(true)
         setVisible(true)
-        const products = order.products?.map((p) => ({id: p.id, quantity: p.quantity}))
+        const products = cart.products?.map(({id, quantity}) => ({id, quantity}))
         postOrder(token, {
             delivery: user.address, products
         }).then(response => {
@@ -116,7 +117,7 @@ function DashboardPayments()
                             return ( <div className="w-full bg-white text-center p-10 rounded-md"><ProgressSpinner /></div> )
                         //
                         setTimeout(() => {
-                            setOrder({products:[]})
+                            updateCart(new Cart())
                         }, 5000)
 
                         return (
