@@ -27,11 +27,12 @@ function PasswordForgot()
 
         setLoading(true)
         await axios.post(
-            '/api/auth/forgot-password',
-            { email },
-            { headers: {'Content-Type': 'application/json'}})
-        setLoading(false)
-        setMailSended(true)
+            '/api/auth/forgot-password', { email },
+            { headers: {'Content-Type': 'application/json'}}
+        ).finally(() => {
+            setLoading(false)
+            setMailSended(true)
+        })
     }
 
     return (

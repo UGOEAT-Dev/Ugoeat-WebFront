@@ -1,5 +1,6 @@
 
-import { User } from "../types/User";
+import { useReducer } from "react";
+import { User, emptyUser } from "../types/User";
 
 export enum UserActionType {
     SET_ID,
@@ -61,3 +62,26 @@ export function userReducer(state: UserState, action: UserAction): UserState
 
     }
 }
+
+function useUserReducer(initialState: UserState = emptyUser)
+{
+    const [state, dispatch] = useReducer(userReducer, initialState)
+
+    return {
+        state,
+
+        setEmail: (email: string) => dispatch({type: UserActionType.SET_EMAIL, data: email}),
+
+        setName: (name: string) => dispatch({type: UserActionType.SET_NAME, data: name}),
+
+        setRole: (role: string) => dispatch({type: UserActionType.SET_ROLE, data: role}),
+
+        setPassword: (password: string) => dispatch({type: UserActionType.SET_PASSWORD, data: password}),
+
+        setPasswordConfirmation: (passwordConfirmation: string) => dispatch({type: UserActionType.SET_PASSWORDCONFIRMATION, data: passwordConfirmation}),
+
+        setId: (id: number) => dispatch({type: UserActionType.SET_ID, data: id})
+    }
+}
+
+export default useUserReducer

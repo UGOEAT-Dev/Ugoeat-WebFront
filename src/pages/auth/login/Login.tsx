@@ -1,9 +1,8 @@
-import {FormEventHandler, useEffect, useReducer} from "react"
+import {FormEventHandler, useEffect} from "react"
 import InputWithLabel from "../../../components/input/InputWithLabel.js";
 import {Link} from "react-router-dom";
 import useAuth from "../../../core/hooks/useAuth";
-import { UserActionType, userReducer } from "../../../core/reducers/userReducer";
-import { emptyUser } from "../../../core/types/User.js";
+import useUserReducer from "../../../core/reducers/useUserReducer.js";
 import toast from "react-hot-toast";
 import { isUserLoggedIn } from "../../../core/lib/helpers.js";
 import { useMiddleware } from "../../../core/hooks/useMiddleware.js";
@@ -11,7 +10,7 @@ import { useMiddleware } from "../../../core/hooks/useMiddleware.js";
 export default function Login()
 {
     useMiddleware('guest')
-    const [state, dispatch] = useReducer(userReducer, emptyUser)
+    const {state, setEmail, setPassword} = useUserReducer()
     const {email, password} = state
     const { login } = useAuth(undefined, 'guest')
 
@@ -36,10 +35,10 @@ export default function Login()
             <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-[90%] sm:w-[400px] px-5 py-10 space-y-5" action="#">
                 <h2 className="text-center text-2xl font-bold">Connectez-vous</h2>
                 <InputWithLabel 
-                    onChange={(e) => dispatch({data: e.target.value, type: UserActionType.SET_EMAIL})} 
+                    onChange={(e) => setEmail(e.target.value)} 
                     id="email" label="Email" type="email" name="email" placeholder="name@company" />
                 <InputWithLabel 
-                    onChange={(e) => dispatch({data: e.target.value, type: UserActionType.SET_PASSWORD})} 
+                    onChange={(e) => setPassword(e.target.value)} 
                     id="password" label="Mot de passe" type="password" name="password" placeholder="*******" />
                 <div className="flex justify-between text-sm">
                     <div>

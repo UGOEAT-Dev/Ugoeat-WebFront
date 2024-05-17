@@ -15,10 +15,10 @@ function useAuth(redirectTo?: string, middleware?: 'guest'|'auth')
 {
     const navigate = useNavigate()
     const {token: _token} = useStoreContext()
-    const {deleteSession, createSession} = useSession()
+    const {deleteSession, createSession, setUser} = useSession()
     const [token, setToken] = useState(_token)
 
-    const {data: user, isLoading, error} = useSWR(token, AccountService.get)
+    const {data: user, isLoading, error, mutate: mutateUser} = useSWR(token, AccountService.get)
 
     const login = async (data: LoginProps) => {
 
@@ -78,10 +78,17 @@ function useAuth(redirectTo?: string, middleware?: 'guest'|'auth')
 
     }, [isLoading, token, user, error])
 
+    useEffect(() => {
+        if(user) {
+            setUser(user)
+        }
+    }, [user])
+
     return {
         login,
         register,
         logout,
+        mutateUser
     }
 }
 

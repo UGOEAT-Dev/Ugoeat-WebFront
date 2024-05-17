@@ -4,10 +4,12 @@ import DashboardHeader from "./components/DashboardHeader";
 import Sidebar from "./components/Sidebar";
 import {useEffect, useState} from "react";
 import { useMiddleware } from "../../core/hooks/useMiddleware";
+import useAuth from "../../core/hooks/useAuth";
 
 function DashboardLayout()
 {
     const {isAuth} = useMiddleware('auth')
+    const { } = useAuth(undefined, 'auth')
     const [sidebarMode, setSidebarMode] = useState<1|2>(1)
     const path = pathname2link(window.location.pathname)
 

@@ -24,8 +24,6 @@ export class SessionService
         if(this.hasSession()) return; 
 
         this.session = new SessionImpl(props)
-        localStorage.setItem('token', props.token)
-        localStorage.setItem('user', JSON.stringify(props.user))
     }
 
     static update(props: SessionProps): void {

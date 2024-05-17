@@ -8,7 +8,7 @@ import { useStoreContext } from "../../../../features/store/store.context"
 import { useNavigate } from "react-router-dom"
 import { routesConfig } from "../../../../router.config"
 
-function AdminOrders({})
+function AdminOrders()
 {
     const {token} = useStoreContext()
     const [orders, setOrders] = useState<Order[]>([])
