@@ -67,3 +67,6 @@ export class UserImpl implements User
 
 }
 
+export const emptyUser: User = {
+    id: 0
+}

@@ -8,14 +8,13 @@ import {Dialog} from "primereact/dialog"
 import {Button} from "primereact/button"
 import {ProgressSpinner} from "primereact/progressspinner"
 import {config} from "../../../core/config";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context";
 import { routesConfig } from "../../../router.config";
 import { Order } from "../../../core/types/Order";
-import { Cart } from "../../../core/types/Cart";
 
 function DashboardPayments()
 {
-    const {cart, updateCart, user, token} = useAppContext()
+    const {cart, setProducts, user, token} = useStoreContext()
     const [visible, setVisible] = useState(false)
     const [loading,setLoading] = useState(false)
     const remoteOrderRef = useRef<Order>()
@@ -117,7 +116,7 @@ function DashboardPayments()
                             return ( <div className="w-full bg-white text-center p-10 rounded-md"><ProgressSpinner /></div> )
                         //
                         setTimeout(() => {
-                            updateCart(new Cart())
+                            setProducts([])
                         }, 5000)
 
                         return (

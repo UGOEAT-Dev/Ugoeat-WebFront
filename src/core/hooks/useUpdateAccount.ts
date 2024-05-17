@@ -1,10 +1,10 @@
-import {useAppContext} from "../context/AppContext";
+import {useStoreContext} from "../../features/store/store.context";
 import axios from "../lib/axios";
 import toast from "react-hot-toast";
 
 function useUpdateAccount()
 {
-    const {setUser, token} = useAppContext()
+    const {setUser, token} = useStoreContext()
 
     const success = () => toast.success('Mise a jour effectue avec Sucess')
 

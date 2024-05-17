@@ -8,11 +8,11 @@ import RestaurantHome from "./components/RestaurantHome";
 import AdminHome from "./components/AdminHome";
 import ProfileCompleteCheckerBox from "./components/ProfileCompleteCheckerBox";
 import {useEffect, useState} from "react";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context";
 
 function DashboardHome()
 {
-    const {user} = useAppContext()
+    const {user} = useStoreContext()
     const {state, count} = checkUserProfileComplete(user)
     const percent = calculcateProfileCompletedPercentage(state, count)
     const [visible, setVisible] = useState(false)
@@ -28,9 +28,9 @@ function DashboardHome()
             <div className="flex flex-col gap-5">
                 <ProfileCompleteCheckerBox percent={percent} visible={visible} onHide={() => setVisible(false)} />
                 {
-                  (user.role === 'customer') ? <CustomerHome />
-                      : (user.role === 'restaurant') ? <RestaurantHome />
-                          : (user.role === 'admin') ? <AdminHome /> : <p>Error Role</p>
+                  (user?.role === 'customer') ? <CustomerHome />
+                      : (user?.role === 'restaurant') ? <RestaurantHome />
+                          : (user?.role === 'admin') ? <AdminHome /> : <p>Error Role</p>
                 }
             </div>
         </div>

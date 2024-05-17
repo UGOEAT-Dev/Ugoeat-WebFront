@@ -5,11 +5,11 @@ import getCategories from "../../../../core/services/categories/getCategories";
 import getOrders from "../../../../core/services/orders/getOrders";
 import getCustomers from "../../../../core/services/customers/getCustomers";
 import getRestaurants from "../../../../core/services/restaurants/getRestaurants";
-import { useAppContext } from "../../../../core/context/AppContext";
+import { useStoreContext } from "../../../../features/store/store.context";
 
 function AdminHome()
 {
-    const {token} = useAppContext()
+    const {token} = useStoreContext()
     const [products, setProducts] = useState([])
     const [orders, setOrders] = useState([])
     const [categories, setCategories] = useState([])

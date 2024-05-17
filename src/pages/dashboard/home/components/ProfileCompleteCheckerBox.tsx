@@ -1,10 +1,10 @@
 import {hasAddress, hasImage, hasTel} from "../../../../core/lib/helpers";
-import { useAppContext } from "../../../../core/context/AppContext";
+import { useStoreContext } from "../../../../features/store/store.context";
 import { Icon } from "../../../../components/Icon";
 
 function ProfileCompleteCheckerBox({percent, visible, onHide}: {percent: number, visible: boolean, onHide: any})
 {
-    const {user} = useAppContext()
+    const {user} = useStoreContext()
 
     return visible && (
         <div className="relative bg-red-400 p-3 rounded-xl text-white text-sm">

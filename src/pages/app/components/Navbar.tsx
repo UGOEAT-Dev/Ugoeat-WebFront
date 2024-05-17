@@ -3,7 +3,7 @@ import {Input} from "../../../components/input/Input.js";
 import cartSvg from "/static.ugoeatonline.com/assets/images/icons/cart-vector.svg"
 import {isUserLoggedIn} from "./../../../core/lib/helpers";
 import {Dropdown, DropdownItem} from "../../../components/dropdown/Dropdown";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context.js";
 import { routesConfig } from "../../../router.config.js";
 
 interface NavbarProps
@@ -14,7 +14,7 @@ interface NavbarProps
 }
 export default function Navbar({productOrderedCount, onCartClicked, ...props}: NavbarProps)
 {
-    const {user, token} = useAppContext()
+    const {user} = useStoreContext()
     const {auth, app, dashboard} = routesConfig.routes
 
     return (
@@ -23,10 +23,10 @@ export default function Navbar({productOrderedCount, onCartClicked, ...props}: N
                 <li><NavLink to={app.home}>Accueil</NavLink></li>
                 <li><NavLink to={app.about}>A Propos</NavLink></li>
                 <li><NavLink to={app.order}>Commandez</NavLink></li>
-                {isUserLoggedIn(user, token) ?
+                {isUserLoggedIn() ?
                     (   <>
                             <li>
-                                <Dropdown text={user?.name ?? ''} className="capitalize">
+                                <Dropdown text={user.name ?? ''} className="capitalize">
                                     <DropdownItem to={dashboard.index} text="Dashboard"><></></DropdownItem>
                                     <DropdownItem to={auth.logout} text="Se Deconnecter"><></></DropdownItem>
                                 </Dropdown>

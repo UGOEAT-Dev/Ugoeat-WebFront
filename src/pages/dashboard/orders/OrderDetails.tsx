@@ -7,16 +7,15 @@ import {NavLink, useNavigate, useParams} from "react-router-dom";
 import RoundedImage from "../../../components/RoundedImage";
 import {formatAmount} from "../../../core/lib/helpers";
 import getOrder from "../../../core/services/orders/getOrder";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context";
 import { Order } from "../../../core/types/Order";
 import { getSeverityFromOrderState } from "../../../core/lib/utils";
-import { Cart } from "../../../core/types/Cart";
 
 function OrderDetails()
 {
     const { orderId } = useParams()
     const [order, setOrder] = useState<Order>({})
-    const {token, updateCart} = useAppContext()
+    const {token, setProducts} = useStoreContext()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -36,8 +35,10 @@ function OrderDetails()
         if(order.products?.length === 0)
             return;
 
-        updateCart(new Cart(order.products))
-        navigate('/dashboard/payments')
+        if(order.products) {
+            setProducts(order.products)
+            navigate('/dashboard/payments')
+        }
     }
 
     const header = () => {

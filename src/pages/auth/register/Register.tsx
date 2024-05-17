@@ -1,25 +1,25 @@
 
 import InputWithLabel from "../../../components/input/InputWithLabel.js";
 import {Link} from "react-router-dom";
-// import bgRegister from "/static.ugoeatonline.com/assets/images/bg-register.svg"
 import SelectBox from "../../../components/SelectBox";
 import {FormEventHandler, useEffect, useState} from "react";
-import queryString from "query-string";
 import {isUserLoggedIn} from "../../../core/lib/helpers";
 import useAuth from "../../../core/hooks/useAuth";
 import { UserRole } from "../../../core/types/User.js";
 import { RegistrationError } from "../../../core/types/error/RegistrationError.js";
+import { useMiddleware } from "../../../core/hooks/useMiddleware.js";
 
 export default function Register()
 {
-    const qParsed = queryString.parseUrl(location.search)
+    useMiddleware('guest')
+    // const qParsed = queryString.parseUrl(location.search)
     const [errors, setErrors] = useState<RegistrationError>({})
-    const { register, token, user } = useAuth("guest", qParsed.query.r?.toString() ?? '/dashboard')
+    const { register } = useAuth(undefined, 'guest')
     const [role, setRole] = useState<UserRole>('customer')
     const [name, setName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState<string>('')
+    const [password_confirmation, setPasswordConfirmation] = useState<string>('')
 
     useEffect(() => {
         document.title = "S'inscrire | UGOEAT";
@@ -28,16 +28,10 @@ export default function Register()
 
     const submitForm: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
-        register(setErrors, {
-            email,
-            password,
-            role,
-            password_confirmation: passwordConfirmation,
-            name
-        })
+        register({email, password, role, password_confirmation, name}, setErrors)
     }
 
-    if(isUserLoggedIn(user, token))
+    if(isUserLoggedIn())
         return (<div></div>)
 
     return (

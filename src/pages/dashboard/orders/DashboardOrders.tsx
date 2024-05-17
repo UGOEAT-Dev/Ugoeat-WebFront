@@ -5,7 +5,7 @@ import {Dropdown, DropdownChangeEvent} from "primereact/dropdown"
 import {Tag} from "primereact/tag"
 import getCustomerOrders from "../../../core/services/orders/getCustomerOrders";
 import {formatAmount} from "../../../core/lib/helpers";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context";
 import { routesConfig } from "../../../router.config";
 import { Order } from "../../../core/types/Order";
 import { getSeverityFromOrderState } from "../../../core/lib/utils";
@@ -16,7 +16,7 @@ function DashboardOrders()
     const [orders, setOrders] = useState([])
     const [sortField, setSortField] = useState('id')
     const [sortOrder, setSortOrder] = useState<-1|0|1>(-1)
-    const {token} = useAppContext()
+    const {token} = useStoreContext()
     const navigate = useNavigate()
     const dropdownOptions = [
         {label: "Plus Recent", value: "created_at"},

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useAppContext} from "../../../../core/context/AppContext";
+import {useStoreContext} from "../../../../features/store/store.context";
 import UsersListView from "../../components/users/UsersListView";
 import getRestaurants from "../../../../core/services/restaurants/getRestaurants";
 import Paginate from "../../../../components/pagination/Paginate";
@@ -9,8 +9,8 @@ import { useMiddleware } from "../../../../core/hooks/useMiddleware";
 
 function AdminRestaurants({})
 {
-    const {isLoading} = useMiddleware('admin')
-    const {token} = useAppContext()
+    useMiddleware('admin')
+    const {token} = useStoreContext()
     const [restaurants, setRestaurants] = useState<Restaurant[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Restaurant>>({})
 
@@ -20,8 +20,6 @@ function AdminRestaurants({})
             setRestaurants(r.data.data)
         })
     }, [])
-
-    if(isLoading) return <></>
 
     return (
         <div>

@@ -1,111 +1,87 @@
-import useSWR from "swr";
-import axios from "../lib/axios";
-import {Dispatch, SetStateAction, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import {isUserLoggedIn} from "../lib/helpers";
-import getAccount from "../services/account/getAccount.js";
-import { useAppContext } from "../context/AppContext.js";
-import toast from "react-hot-toast";
-import { AxiosError } from "axios";
-import { RegistrationError } from "../types/error/RegistrationError.js";
-import { UserRole } from "../types/User.js";
-import { Error } from "../types/error/Error.js";
 
-function useAuth(middleware:string, redirectIfAuthenticated: string)
+
+import {useNavigate} from "react-router-dom";
+import { AuthService, LoginProps, RegisterProps } from "../services/auth/auth.service.js";
+import { AxiosError } from "axios";
+import { useEffect, useState } from "react";
+import { routesConfig } from "../../router.config.js";
+import useSession from "../../features/session/useSession.js";
+import toast from "react-hot-toast";
+import { useStoreContext } from "../../features/store/store.context.js";
+import useSWR from "swr";
+import { AccountService } from "../services/account/account.service.js";
+
+function useAuth(redirectTo?: string, middleware?: 'guest'|'auth')
 {
     const navigate = useNavigate()
-    const {token, user, setOnlineStatus, setToken, setUser, setOrder} = useAppContext()
+    const {token: _token} = useStoreContext()
+    const {deleteSession, createSession} = useSession()
+    const [token, setToken] = useState(_token)
 
-    const { data , error, mutate } = useSWR('/api/v1/account', () =>
-        getAccount(token)
-            .then(response => {
-                setOnlineStatus(true)
-                setUser(response.data.data)
-                return response.data
-            })
-            .catch((error: AxiosError) => {
-                if(error.code === AxiosError.ERR_NETWORK){
-                    setOnlineStatus(false)
-                } else { 
-                    setUser({id: 0})
-                    setOnlineStatus(true)
-                }
-                throw error
-            })
-    )
+    const {data: user, isLoading, error} = useSWR(token, AccountService.get)
 
-    const login = (
-        setErrors: Dispatch<SetStateAction<Error>> | null, 
-        props: {
-            email: string,
-            password: string
-        }) => {
-        axios.post('/api/auth/login', props)
-            .then( response => {
-                if(setErrors) setErrors({})
-                setToken(response.data.token)
-            })
-            .catch( error => {
-                toast.error("Nom d'utilisateur ou mot de passe invalide", { duration: 1000})
-                if (error.response.status === 401) throw error
-            } )
+    const login = async (data: LoginProps) => {
+
+        await AuthService.login(data).then((res) => {
+            setToken(res.data.token as string)
+        }).catch((e: AxiosError) => {
+            toast.error("Nom d'utilisateur ou mot de passe invalide.")
+            throw e
+        })
     }
 
-    const register = (
-        setErrors: Dispatch<SetStateAction<RegistrationError>>, 
-        props : { 
-            role: UserRole,
-            name: string,
-            email: string,
-            password: string,
-            password_confirmation: string
-        }) => {
-        axios.post('/api/auth/register', props)
-            .then( response => {
-                setErrors({})
-                setToken(response.data.token)
-            })
-            .catch( error => {
-                setErrors(error.response.data)
-                throw error
-            } )
+    const register = async (data: RegisterProps, setErrors: any) => {
+        
+        await AuthService.register(data).then((res) => {
+            setToken(res.data.token as string)
+        }).catch((e: AxiosError) => {
+            setErrors(e.response?.data)
+            throw e
+        })
     }
 
-    const logout = () => {
-        axios.post('/api/auth/logout', null,{
-                    headers: { Authorization: `Bearer ${token}` }})
-            .then(response => {
-                if(response.status === 200) {
-                    setToken('')
-                    setUser({id: 0})
-                    setOrder({products:[]})
-                }
-            })
+    const logout = async () => {
+        await AuthService.logout(token??'').then(() => {
+            deleteSession()
+        })
     }
 
     useEffect(() => {
-        mutate()
-    }, [token])
 
-    useEffect(()=>{
+        if(error) {
+            const {code} = error as AxiosError
+            switch(code){
+                case AxiosError.ERR_NETWORK:
+                case AxiosError.ERR_NOT_SUPPORT: 
+                    break;
+                default:
+                    deleteSession()
+                    break;
+            }
+            console.error('[useAuth::AxiosError] code = ', code)
+        }
 
-        if(middleware === 'guest' && redirectIfAuthenticated && isUserLoggedIn(user, token)) {
-            navigate(redirectIfAuthenticated)
+        if(!isLoading) {
+
+            if(middleware === 'auth') {
+                if(!token) {
+                    deleteSession()
+                    navigate(redirectTo ?? routesConfig.routes.app.home)
+                }
+            } else if(middleware === 'guest') {
+                if(user && token) {
+                    createSession({user, token})
+                    navigate(redirectTo ?? routesConfig.routes.dashboard.index)
+                }
+            }
         }
-        if(middleware === 'auth' && !isUserLoggedIn(user, token)) {
-            setUser({id: 0})
-            setToken('')
-            navigate(redirectIfAuthenticated)
-        }
-    }, [user, token, error])
+
+    }, [isLoading, token, user, error])
 
     return {
-        user,
-        token,
         login,
         register,
         logout,
-        data
     }
 }
 

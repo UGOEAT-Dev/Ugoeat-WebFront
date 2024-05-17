@@ -2,12 +2,12 @@ import ModalCart from "../../../app/components/ModalCart";
 import Card from "./Card.js"
 import {useEffect, useState} from "react";
 import getCustomerOrders from "../../../../core/services/orders/getCustomerOrders";
-import { useAppContext } from "../../../../core/context/AppContext";
+import { useStoreContext } from "../../../../features/store/store.context.js";
 import { Order } from "../../../../core/types/Order.js";
 
 function CustomerHome()
 {
-    const {token} = useAppContext()
+    const {token} = useStoreContext()
     const [remoteOrders, setRemoteOrders] = useState<Order[]>([])
 
     useEffect(() => {

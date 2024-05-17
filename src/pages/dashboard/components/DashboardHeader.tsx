@@ -4,14 +4,14 @@ import {Link} from "react-router-dom";
 import {Dropdown, DropdownItem} from "../../../components/dropdown/Dropdown";
 import {Icon} from "../../../components/Icon"
 import RoundedImage from "../../../components/RoundedImage";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context";
 import { UserRole } from "../../../core/types/User";
 import { routesConfig } from "../../../router.config";
 import { Badge } from "primereact/badge";
 
 function DashboardHeader({toggleSidebar, ...props}: {toggleSidebar: any, className?: string})
 {
-    const {user} = useAppContext()
+    const {user} = useStoreContext()
     const {routes} = routesConfig
 
     return (
@@ -37,10 +37,10 @@ function DashboardHeader({toggleSidebar, ...props}: {toggleSidebar: any, classNa
                     </button>
                     <div className="flex gap-3 ">
                         <div className="flex items-center gap-1 capitalize">
-                            <RoundedImage size={50} src={user.image_url}/>
+                            <RoundedImage size={50} src={user?.image_url}/>
                             <div>
-                                <h3 className="font-bold text-md">{user.name}</h3>
-                                <span className="text-sm text-gray-500">{roleToName(user.role)}</span>
+                                <h3 className="font-bold text-md">{user?.name}</h3>
+                                <span className="text-sm text-gray-500">{roleToName(user?.role)}</span>
                             </div>
                         </div>
                     </div>

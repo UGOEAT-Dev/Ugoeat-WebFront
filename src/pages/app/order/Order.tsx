@@ -3,13 +3,13 @@ import {ChangeEvent, useEffect, useState} from "react";
 import ProductsView from "./components/ProductsView.js";
 import getProducts from "../../../core/services/products/getProducts";
 import getCategories from "../../../core/services/categories/getCategories.js";
-import { useAppContext } from "../../../core/context/AppContext.js";
+import { useStoreContext } from "../../../features/store/store.context.js";
 
 let productsBank: Product[] = []
 
 export default function Order()
 {
-    const {cart, updateCart} = useAppContext();
+    const {addProduct} = useStoreContext();
     const [categories, setCategories] = useState<Category[]>([])
     const [products, setProducts] = useState<Product[]>(productsBank)
 
@@ -37,7 +37,7 @@ export default function Order()
     }
 
     const onAddProductBtnClicked = (product: Product) => {
-        updateCart(cart.addProduct(product))
+        addProduct(product)
     }
 
     return (

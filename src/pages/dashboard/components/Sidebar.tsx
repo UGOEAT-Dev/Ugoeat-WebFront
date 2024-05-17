@@ -1,14 +1,14 @@
 import SidebarLinkGroup from "./sidebar/SidebarLinkGroup.js";
 import SidebarLinkItem from "./sidebar/SidebarLinkItem.js";
 import {SidebarContext} from "./sidebar/SidebarContext.js";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context.js";
 import { Icon } from "../../../components/Icon";
 import { routesConfig } from "../../../router.config.js";
 
 
 function Sidebar({mode, className}: {mode: 1| 2, className?: string})
 {
-    const { user } = useAppContext()
+    const { user } = useStoreContext()
     const {dashboard} = routesConfig.routes
 
     return (

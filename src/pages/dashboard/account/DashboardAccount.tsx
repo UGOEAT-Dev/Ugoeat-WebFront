@@ -1,12 +1,12 @@
 import {useState} from "react";
 import UpdateImageProfile from "./UpdateImageProfile";
 import UpdatePersonnalInformations from "./UpdatePersonnalInformations";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context";
 import { RegistrationError } from "../../../core/types/error/RegistrationError";
 
 function DashboardAccount()
 {
-    const {user} = useAppContext()
+    const {user} = useStoreContext()
     const [errors, setErrors] = useState<RegistrationError>({})
 
     return (

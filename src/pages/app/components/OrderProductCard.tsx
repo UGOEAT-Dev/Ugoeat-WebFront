@@ -15,7 +15,7 @@ function OrderProductCard({product, onClick, ...props}: {product: ProductOrdered
                 </div>
                 <div className="flex justify-between items-center w-full">
                     <span className="text-gray-400">Qte : {product.quantity || 1}</span>
-                    <a href="javascript:void(0)" onClick={() => onClick(product)}>
+                    <a href="#" onClick={() => onClick(product)}>
                         <Icon icon="pi-trash" color="red" className="text-lg font-semibold cursor-pointer" />
                     </a>
                 </div>

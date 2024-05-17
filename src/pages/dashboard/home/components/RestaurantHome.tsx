@@ -1,12 +1,12 @@
 import Card from "./Card.js";
 import {useEffect, useState} from "react";
 import getRestaurantProducts from "../../../../core/services/products/getRestaurantProducts.jsx";
-import { useAppContext } from "../../../../core/context/AppContext";
+import { useStoreContext } from "../../../../features/store/store.context.js";
 import { Order } from "../../../../core/types/Order.js";
 
 function RestaurantHome()
 {
-    const {user, token} = useAppContext()
+    const {user, token} = useStoreContext()
     const [orders] = useState<Order[]>([])
     const [products, setProducts] = useState([])
 

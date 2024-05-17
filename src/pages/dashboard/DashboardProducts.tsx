@@ -1,10 +1,10 @@
 import AdminProducts from "./admin/products/AdminProducts.js";
 import RestaurantProducts from "./restaurant/products/RestaurantProducts.js";
-import { useAppContext } from "../../core/context/AppContext.js";
+import { useStoreContext } from "../../features/store/store.context.js";
 
 function DashboardProducts()
 {
-    const {user} = useAppContext()
+    const {user} = useStoreContext()
     if ( user.role === 'admin')
         return ( <AdminProducts /> )
 

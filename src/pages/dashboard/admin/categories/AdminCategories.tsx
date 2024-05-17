@@ -7,7 +7,7 @@ import { useMiddleware } from "../../../../core/hooks/useMiddleware"
 
 function AdminCategories({})
 {
-    const {isLoading} = useMiddleware('admin')
+    useMiddleware('admin')
     const [categories, setCategories] = useState<Category[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Product>>({})
 
@@ -17,8 +17,6 @@ function AdminCategories({})
             setCategories(r.data.data)
         })
     }, [])
-
-    if(isLoading) return <></>
 
     return (
         <div>

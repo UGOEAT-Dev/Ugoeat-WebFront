@@ -3,17 +3,17 @@ import cartSvg from "/static.ugoeatonline.com/assets/images/icons/cart-vector.sv
 import OrderCard from "./OrderCard";
 import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context.js";
 import { Icon } from "../../../components/Icon.js";
 
 function ModalCart({onCloseBtnClicked, ...props}: {onCloseBtnClicked?: any, className?: string})
 {
-    const {cart, updateCart} = useAppContext()
+    const {cart, removeAll, removeProduct} = useStoreContext()
     const navigate = useNavigate()
 
     const clearCart = () => {
         if(confirm('Voulez vraiment vider votre panier ?')) {
-            updateCart(cart.removeAll())
+            removeAll()
         }
     }
 
@@ -36,7 +36,7 @@ function ModalCart({onCloseBtnClicked, ...props}: {onCloseBtnClicked?: any, clas
                         toast.error('Aucun produit dans le panier')
                     }}
                     onItemCancelBtnClicked={(product: Product) => {
-                        updateCart(cart.removeProduct(product))
+                        removeProduct(product)
                     }}
                     products={cart.products}
                     className="bg-white h-auto" />

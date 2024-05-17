@@ -1,7 +1,7 @@
 import UsersListView from "../../components/users/UsersListView";
 import {useEffect, useState} from "react";
 import getCustomers from "../../../../core/services/customers/getCustomers";
-import { useAppContext } from "../../../../core/context/AppContext";
+import { useStoreContext } from "../../../../features/store/store.context";
 import { AxiosResponse } from "axios";
 import Paginate from "../../../../components/pagination/Paginate";
 import { Customer } from "../../../../core/types/Customer";
@@ -9,8 +9,8 @@ import { useMiddleware } from "../../../../core/hooks/useMiddleware";
 
 function AdminCustomers({})
 {
-    const {isLoading} = useMiddleware('admin')
-    const {token} = useAppContext()
+    useMiddleware('admin')
+    const {token} = useStoreContext()
     const [customers, setCustomers] = useState<Customer[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Customer>>({})
 
@@ -20,8 +20,6 @@ function AdminCustomers({})
             setCustomers(r.data.data)
         })
     }, [])
-
-    if(isLoading) return <></>
 
     return (
         <div>

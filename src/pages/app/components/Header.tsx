@@ -1,11 +1,11 @@
-import { useAppContext } from "../../../core/context/AppContext";
+import { useStoreContext } from "../../../features/store/store.context";
 import Navbar from "./Navbar";
 import logoWhite from "/static.ugoeatonline.com/assets/images/logo-white.png"
 import {useState} from "react";
 
 export default function Header({onCartBtnClicked = null}: {onCartBtnClicked: any})
 {
-    const {cart} = useAppContext()
+    const {cart} = useStoreContext()
     const [showNavbar, setShowNavbar] = useState(false)
     const toggleNavbar = () => { setShowNavbar((v) => !v)}
 

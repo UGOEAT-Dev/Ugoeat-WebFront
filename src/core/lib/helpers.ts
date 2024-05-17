@@ -1,3 +1,4 @@
+import { SessionService } from "../services/session.service"
 import { User, UserRole } from "../types/User"
 
 function calculateTotal(products: ProductOrdered[])
@@ -16,9 +17,9 @@ function formatAmount(amount?: number)
     return formatedArray.join('')
 }
 
-function isUserLoggedIn(user:User, token = '')
+function isUserLoggedIn()
 {
-    return isUserObject(user) && token
+    return SessionService.hasSession()
 }
 
 function isUserObject(user:User)
@@ -49,7 +50,7 @@ function hasTel(user: User) { return user.tel && isUserObject(user) }
 
 
 function checkUserProfileComplete(user: User)
-{
+{   
     const callbacks = [
         hasId, hasEmail, hasTel, hasName,
         hasAddress, hasRole, hasImage

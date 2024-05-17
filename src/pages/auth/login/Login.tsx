@@ -1,17 +1,19 @@
-import {FormEventHandler, useEffect, useState} from "react"
+import {FormEventHandler, useEffect, useReducer} from "react"
 import InputWithLabel from "../../../components/input/InputWithLabel.js";
 import {Link} from "react-router-dom";
-import bgLogin from "/static.ugoeatonline.com/assets/images/bg-login.png"
 import useAuth from "../../../core/hooks/useAuth";
-// import queryString from "query-string";
-import {isUserLoggedIn} from "../../../core/lib/helpers";
+import { UserActionType, userReducer } from "../../../core/reducers/userReducer";
+import { emptyUser } from "../../../core/types/User.js";
+import toast from "react-hot-toast";
+import { isUserLoggedIn } from "../../../core/lib/helpers.js";
+import { useMiddleware } from "../../../core/hooks/useMiddleware.js";
 
 export default function Login()
 {
-    // const qParsed = queryString.parseUrl(location.search)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const { login, token, user } = useAuth('guest',  /*qParsed.query.r ??*/ '/dashboard')
+    useMiddleware('guest')
+    const [state, dispatch] = useReducer(userReducer, emptyUser)
+    const {email, password} = state
+    const { login } = useAuth(undefined, 'guest')
 
     useEffect(() => {
         document.title = "Se Connecter | UGOEAT";
@@ -20,20 +22,25 @@ export default function Login()
 
     const submitForm: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
-        login(null, { email, password })
+        if(email && password)
+            login({ email , password})
+        else
+            toast.error("Oups!! Quelque chose c'est mal passe")
     }
 
-    if( isUserLoggedIn(user, token)) return (<div></div>)
+    if( isUserLoggedIn() ) return (<div></div>)
 
     return (
-        <main className="bg-center bg-cover bg-gray-100 min-h-screen flex flex-col items-center justify-center py-5 px-2 gap-5" style={{
-            // backgroundImage: `url(${bgLogin})`,
-        }}>
+        <main className="bg-center bg-cover bg-gray-100 min-h-screen flex flex-col items-center justify-center py-5 px-2 gap-5">
             <img src="/favicon.png"/>
             <form onSubmit={submitForm} className="rounded-md shadow-xl bg-white w-[90%] sm:w-[400px] px-5 py-10 space-y-5" action="#">
                 <h2 className="text-center text-2xl font-bold">Connectez-vous</h2>
-                <InputWithLabel onChange={(e) => setEmail(e.target.value)} id="email" label="Email" type="email" name="email" placeholder="name@company" />
-                <InputWithLabel onChange={(e) => setPassword(e.target.value)} id="password" label="Mot de passe" type="password" name="password" placeholder="*******" />
+                <InputWithLabel 
+                    onChange={(e) => dispatch({data: e.target.value, type: UserActionType.SET_EMAIL})} 
+                    id="email" label="Email" type="email" name="email" placeholder="name@company" />
+                <InputWithLabel 
+                    onChange={(e) => dispatch({data: e.target.value, type: UserActionType.SET_PASSWORD})} 
+                    id="password" label="Mot de passe" type="password" name="password" placeholder="*******" />
                 <div className="flex justify-between text-sm">
                     <div>
                         <input type="checkbox" id="keepOnline" name="keepOnline" />

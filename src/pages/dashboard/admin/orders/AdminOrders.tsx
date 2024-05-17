@@ -4,13 +4,13 @@ import { AxiosResponse } from "axios"
 import { Order } from "../../../../core/types/Order"
 import OrderListView from "../../components/order/OrderListView"
 import getOrders from "../../../../core/services/orders/getOrders"
-import { useAppContext } from "../../../../core/context/AppContext"
+import { useStoreContext } from "../../../../features/store/store.context"
 import { useNavigate } from "react-router-dom"
 import { routesConfig } from "../../../../router.config"
 
 function AdminOrders({})
 {
-    const {token} = useAppContext()
+    const {token} = useStoreContext()
     const [orders, setOrders] = useState<Order[]>([])
     const [paginated, setPaginated] = useState<PaginatedResponse<Product>>({})
     const navigate = useNavigate()
