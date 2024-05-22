@@ -1,9 +1,9 @@
 import {Column} from "primereact/column";
-import RoundedImage from "../../../../components/RoundedImage";
+import RoundedImage from "../../../../features/common/components/elements/RoundedImage";
 import {DataTable} from "primereact/datatable";
 import {useState} from "react";
 import UserDialogView from "./UserDialogView";
-import { User } from "../../../../core/types/User";
+import { User } from "../../../../features/common/types/User";
 
 /**
  * Helps to display a list of Users

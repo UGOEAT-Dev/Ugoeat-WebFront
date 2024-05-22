@@ -1,16 +1,17 @@
-import {calculateTotal, formatAmount} from "../../../core/lib/helpers";
+import {formatAmount} from "@/lib/helpers";
 import {useState, useRef} from "react";
 import {Link, useNavigate} from "react-router-dom"
-import InputWithLabel from "../../../components/input/InputWithLabel";
-import postOrder from "../../../core/services/orders/postOrder";
+import InputWithLabel from "@/features/common/components/elements/input/InputWithLabel";
 import toast from "react-hot-toast";
 import {Dialog} from "primereact/dialog"
 import {Button} from "primereact/button"
 import {ProgressSpinner} from "primereact/progressspinner"
-import {config} from "../../../core/config";
-import { useStoreContext } from "../../../features/store/store.context";
-import { routesConfig } from "../../../router.config";
-import { Order } from "../../../core/types/Order";
+import {config} from "@/config";
+import { useStoreContext } from "@/features/store/hooks/useStoreContext";
+import { routesConfig } from "@/router/router.config";
+import { Order } from "@/features/common/types/Order";
+import { Cart } from "@/features/cart/types/Cart";
+import { OrderService } from "@/features/admin/services/order.service";
 
 function DashboardPayments()
 {
@@ -20,18 +21,16 @@ function DashboardPayments()
     const remoteOrderRef = useRef<Order>()
     const navigate = useNavigate()
     const fees = 500;
-    const orderAmount = calculateTotal(cart.products ?? [])
+    const orderAmount = new Cart(cart.products ?? []).calculateTotalAmount()
     const confirmBtnDisabled = cart.products?.length === 0
 
     const confirmPayment = () => {
         setLoading(true)
         setVisible(true)
         const products = cart.products?.map(({id, quantity}) => ({id, quantity}))
-        postOrder(token, {
-            delivery: user.address, products
-        }).then(response => {
+        OrderService.store({delivery: user.address, products }, token).then(order => {
             toast.success("Commande envoye avec success", {duration:2000})
-            remoteOrderRef.current = response.data.data
+            remoteOrderRef.current = order
         }).catch(() => {
             toast.error("Oupps! Quelque chose c'est mal passe")
             setVisible(false)

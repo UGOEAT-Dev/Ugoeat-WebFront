@@ -1,6 +1,6 @@
 
-import { Icon } from "../../../components/Icon";
-import {formatAmount} from "../../../core/lib/helpers";
+import { Icon } from "../../../features/common/components/elements/Icon";
+import {formatAmount} from "../../../lib/helpers";
 
 
 function OrderProductCard({product, onClick, ...props}: {product: ProductOrdered, onClick?:any, className?: string})

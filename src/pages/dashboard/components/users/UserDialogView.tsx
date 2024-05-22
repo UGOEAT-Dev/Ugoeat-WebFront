@@ -3,9 +3,9 @@ import {Dialog} from "primereact/dialog"
 import {Button} from "primereact/button"
 import {DataTable} from "primereact/datatable"
 import {Column} from "primereact/column"
-import RoundedImage from "../../../../components/RoundedImage";
-import {parseUserRole} from "../../../../core/lib/helpers";
-import { User } from "../../../../core/types/User";
+import RoundedImage from "../../../../features/common/components/elements/RoundedImage";
+import {parseUserRole} from "../../../../lib/helpers";
+import { User } from "../../../../features/common/types/User";
 
 /**
  * It's a dialog that display a user

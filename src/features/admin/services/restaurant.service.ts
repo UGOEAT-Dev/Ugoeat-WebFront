@@ -1,0 +1,19 @@
+import { PaginationOptions } from "@/features/common/types/options/PaginationOption";
+import axios from "@/lib/axios/axios";
+import { globalAxiosHeader as headers } from "@/lib/axios/headers.global"
+import { UserService } from "./users.service";
+import { Restaurant } from "@/features/common/types/Restaurant";
+
+export class RestaurantService extends UserService
+{
+    static async fetch(options?: PaginationOptions) {
+        return super.getUsers<Restaurant>("restaurant", options)
+    }
+
+    static async getProducts(id: number, options?: PaginationOptions) {
+        return await axios.get(
+            `/api/v1/restaurants/${id}/products?limit=${options?.limit ?? 10}&page=${options?.page ?? 1}`,
+            { headers }
+        ).then( response => response.data as PaginatedResponse<Product>);
+    }
+}

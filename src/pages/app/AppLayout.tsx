@@ -3,7 +3,7 @@ import Header from './components/Header'
 import { Outlet } from 'react-router-dom'
 import Footer from './components/Footer'
 import { useState } from 'react'
-import BodyHidder from '../../components/BodyHidder'
+import BodyHidder from '../../features/common/components/elements/BodyHidder'
 import ModalCart from './components/ModalCart'
 
 function AppLayout(): React.ReactElement

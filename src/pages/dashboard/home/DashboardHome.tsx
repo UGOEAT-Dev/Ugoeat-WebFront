@@ -2,13 +2,13 @@
 import {
     calculcateProfileCompletedPercentage,
     checkUserProfileComplete
-} from "../../../core/lib/helpers";
+} from "../../../lib/helpers";
 import CustomerHome from "./components/CustomerHome";
 import RestaurantHome from "./components/RestaurantHome";
 import AdminHome from "./components/AdminHome";
 import ProfileCompleteCheckerBox from "./components/ProfileCompleteCheckerBox";
 import {useEffect, useState} from "react";
-import { useStoreContext } from "../../../features/store/store.context";
+import { useStoreContext } from "../../../features/store/hooks/useStoreContext";
 
 function DashboardHome()
 {

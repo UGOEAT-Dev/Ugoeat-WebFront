@@ -1,8 +1,8 @@
 import {useState} from "react";
 import UpdateImageProfile from "./UpdateImageProfile";
 import UpdatePersonnalInformations from "./UpdatePersonnalInformations";
-import { useStoreContext } from "../../../features/store/store.context";
-import { RegistrationError } from "../../../core/types/error/RegistrationError";
+import { useStoreContext } from "../../../features/store/hooks/useStoreContext";
+import { RegistrationError } from "../../../features/common/types/error/RegistrationError";
 
 function DashboardAccount()
 {

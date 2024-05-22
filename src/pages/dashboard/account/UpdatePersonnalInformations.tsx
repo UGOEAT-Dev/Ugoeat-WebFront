@@ -1,9 +1,9 @@
-import InputWithLabel from "../../../components/input/InputWithLabel";
+import InputWithLabel from "../../../features/common/components/elements/input/InputWithLabel";
 import {FormEventHandler, useState} from "react";
-import useUpdateAccount from "../../../core/hooks/useUpdateAccount";
-import { User } from "../../../core/types/User";
-import { RegistrationError } from "../../../core/types/error/RegistrationError";
-import { Mutator } from "../../../core/types/mutator/Mutator";
+import useUpdateAccount from "../../../features/account/hooks/useUpdateAccount";
+import { User } from "../../../features/common/types/User";
+import { RegistrationError } from "../../../features/common/types/error/RegistrationError";
+import { Mutator } from "../../../features/common/types/mutator/Mutator";
 
 function UpdatePersonnalInformations({user, errors, setErrors}: {user: User, errors: RegistrationError, setErrors: Mutator<RegistrationError>})
 {

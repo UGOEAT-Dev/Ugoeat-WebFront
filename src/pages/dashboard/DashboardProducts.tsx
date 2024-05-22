@@ -1,6 +1,6 @@
 import AdminProducts from "./admin/products/AdminProducts.js";
 import RestaurantProducts from "./restaurant/products/RestaurantProducts.js";
-import { useStoreContext } from "../../features/store/store.context.js";
+import { useStoreContext } from "../../features/store/hooks/useStoreContext.js";
 
 function DashboardProducts()
 {

@@ -2,25 +2,24 @@ import {DataTable} from "primereact/datatable"
 import {Column} from "primereact/column"
 import {Button} from "primereact/button"
 import {Tag} from "primereact/tag"
-import {useEffect, useState} from "react";
 import {NavLink, useNavigate, useParams} from "react-router-dom";
-import RoundedImage from "../../../components/RoundedImage";
-import {formatAmount} from "../../../core/lib/helpers";
-import getOrder from "../../../core/services/orders/getOrder";
-import { useStoreContext } from "../../../features/store/store.context";
-import { Order } from "../../../core/types/Order";
-import { getSeverityFromOrderState } from "../../../core/lib/utils";
+import RoundedImage from "@/features/common/components/elements/RoundedImage";
+import {formatAmount} from "@/lib/helpers";
+import { useStoreContext } from "@/features/store/hooks/useStoreContext";
+import { getSeverityFromOrderState } from "@/lib/utils";
+import useSWR from "swr";
+import { OrderService } from "@/features/admin/services/order.service";
+import { routesConfig } from "@/router/router.config";
 
 function OrderDetails()
 {
     const { orderId } = useParams()
-    const [order, setOrder] = useState<Order>({})
-    const {token, setProducts} = useStoreContext()
+    const {data: order, isLoading} = useSWR(orderId, (id:string) => OrderService.get(parseInt(id))) 
+    const {setProducts} = useStoreContext()
     const navigate = useNavigate()
 
-    useEffect(() => {
-        getOrder(token, orderId ?? 0).then(r => setOrder(r.data.data))
-    }, [])
+    if(isLoading)
+        return <p>Loading ...</p>
 
     const priceTemplate = (p: ProductOrdered) => {
         return <span>{formatAmount(p.price)} XAF</span>
@@ -32,12 +31,12 @@ function OrderDetails()
         return <span>{p.quantity}</span>
     }
     const reproduire = () => {
-        if(order.products?.length === 0)
+        if(order?.products?.length === 0)
             return;
 
-        if(order.products) {
-            setProducts(order.products)
-            navigate('/dashboard/payments')
+        if(order?.products) {
+            setProducts(order?.products)
+            navigate(routesConfig.routes.dashboard.payments)
         }
     }
 
@@ -64,12 +63,12 @@ function OrderDetails()
                 className="pi pi-arrow-left mt-2 text-lg"> Retour</NavLink>
             <div>
                 <ul>
-                    <li>Commande du <span className="font-bold">{new Date(order.created_at ?? 0).toLocaleDateString()}</span></li>
-                    <li>Statut de la commande <Tag className="py-1 px-2" severity={getSeverityFromOrderState(order.state)} value={order.state?.toUpperCase()}></Tag></li>
-                    <li>Montant Total <span className="font-bold">{formatAmount(order.amount)} XAF</span></li>
+                    <li>Commande du <span className="font-bold">{new Date(order?.created_at ?? 0).toLocaleDateString()}</span></li>
+                    <li>Statut de la commande <Tag className="py-1 px-2" severity={getSeverityFromOrderState(order?.state)} value={order?.state?.toUpperCase()}></Tag></li>
+                    <li>Montant Total <span className="font-bold">{formatAmount(order?.amount)} XAF</span></li>
                 </ul>
                 <div>
-                    <DataTable header={header} value={order.products} sortMode="multiple" emptyMessage="Aucun Produit pour cette commade">
+                    <DataTable header={header} value={order?.products} sortMode="multiple" emptyMessage="Aucun Produit pour cette commade">
                         <Column header="Image" body={imageTemplate}></Column>
                         <Column header="Nom" field="name" sortable></Column>
                         <Column header="Prix" body={priceTemplate} sortable></Column>

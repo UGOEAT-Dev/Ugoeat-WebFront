@@ -1,11 +1,11 @@
 import { FormEventHandler, useEffect, useState } from "react"
-import InputWithLabel from "../../components/input/InputWithLabel"
+import InputWithLabel from "@/features/common/components/elements/input/InputWithLabel"
 import { Button } from "primereact/button"
-import axios from "../../core/lib/axios"
+import axios from "@/lib/axios/axios"
 import { ProgressSpinner } from "primereact/progressspinner"
 import toast from "react-hot-toast"
 import { Link } from "react-router-dom"
-import { routesConfig } from "../../router.config"
+import { routesConfig } from "@/router/router.config"
 
 function PasswordForgot()
 {

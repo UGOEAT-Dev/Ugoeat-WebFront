@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 const assetDir = 'assets'
 const mainJsFile = 'app-ugoeatonline.js'
@@ -44,6 +45,11 @@ export default defineConfig({
           primereact: ['primereact'],
         }
       }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src/')
     }
   }
 })

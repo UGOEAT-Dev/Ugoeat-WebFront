@@ -3,8 +3,8 @@ import cartSvg from "/static.ugoeatonline.com/assets/images/icons/cart-vector.sv
 import OrderCard from "./OrderCard";
 import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
-import { useStoreContext } from "../../../features/store/store.context.js";
-import { Icon } from "../../../components/Icon.js";
+import { useStoreContext } from "../../../features/store/hooks/useStoreContext.js";
+import { Icon } from "../../../features/common/components/elements/Icon.js";
 
 function ModalCart({onCloseBtnClicked, ...props}: {onCloseBtnClicked?: any, className?: string})
 {

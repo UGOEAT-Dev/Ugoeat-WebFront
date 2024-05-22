@@ -1,6 +1,6 @@
-import {hasAddress, hasImage, hasTel} from "../../../../core/lib/helpers";
-import { useStoreContext } from "../../../../features/store/store.context";
-import { Icon } from "../../../../components/Icon";
+import {hasAddress, hasImage, hasTel} from "../../../../lib/helpers";
+import { useStoreContext } from "../../../../features/store/hooks/useStoreContext";
+import { Icon } from "../../../../features/common/components/elements/Icon";
 
 function ProfileCompleteCheckerBox({percent, visible, onHide}: {percent: number, visible: boolean, onHide: any})
 {

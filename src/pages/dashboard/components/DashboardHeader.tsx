@@ -1,12 +1,12 @@
 
 import logoWhite from "/static.ugoeatonline.com/assets/images/logo-white.png"
 import {Link} from "react-router-dom";
-import {Dropdown, DropdownItem} from "../../../components/dropdown/Dropdown";
-import {Icon} from "../../../components/Icon"
-import RoundedImage from "../../../components/RoundedImage";
-import { useStoreContext } from "../../../features/store/store.context";
-import { UserRole } from "../../../core/types/User";
-import { routesConfig } from "../../../router.config";
+import {Dropdown, DropdownItem} from "../../../features/common/components/elements/dropdown/Dropdown";
+import {Icon} from "../../../features/common/components/elements/Icon"
+import RoundedImage from "../../../features/common/components/elements/RoundedImage";
+import { useStoreContext } from "../../../features/store/hooks/useStoreContext";
+import { UserRole } from "../../../features/common/types/User";
+import { routesConfig } from "../../../router/router.config";
 import { Badge } from "primereact/badge";
 
 function DashboardHeader({toggleSidebar, ...props}: {toggleSidebar: any, className?: string})

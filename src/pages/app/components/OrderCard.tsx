@@ -1,6 +1,7 @@
 import {useMemo} from "react";
 import OrderProductCardList from "./OrderProductCardList.js";
-import {calculateTotal, formatAmount} from "../../../core/lib/helpers"
+import {formatAmount} from "@/lib/helpers.js"
+import { Cart } from "@/features/cart/types/Cart.js";
 
 interface OrderCardProps
 {
@@ -12,7 +13,7 @@ interface OrderCardProps
 }
 function OrderCard({products = [], onConfirmBtnClicked, onCancelBtnClicked, onItemCancelBtnClicked, ...props}: OrderCardProps)
 {
-    const total = useMemo(() => calculateTotal(products), [products])
+    const total = useMemo(() => new Cart(products).calculateTotalAmount(), [products])
 
     return (
         <div className={"flex flex-col gap-2 rounded-md shadow-md p-5 " + props.className}>

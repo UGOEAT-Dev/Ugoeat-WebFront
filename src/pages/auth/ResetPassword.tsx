@@ -1,18 +1,16 @@
 import { Button } from "primereact/button"
 import { FormEventHandler, useEffect, useState } from "react"
-import InputWithLabel from "../../components/input/InputWithLabel"
-import queryString from "query-string"
-import axios from "../../core/lib/axios"
+import InputWithLabel from "@/features/common/components/elements/input/InputWithLabel"
+import axios from "@/lib/axios/axios"
 import toast from "react-hot-toast"
-import { RegistrationError } from "../../core/types/error/RegistrationError"
+import { RegistrationError } from "@/features/common/types/error/RegistrationError"
 import { Link } from "react-router-dom"
-import { routesConfig } from "../../router.config"
+import { routesConfig } from "@/router/router.config"
+import useQueryUrl from "@/features/common/hooks/useQueryUrl"
 
 function ResetPassword()
 {
-    const parsed = queryString.parseUrl(window.location.href)
-    const token = parsed.query.token as string ?? ''
-    const email = parsed.query.email as string ?? ''
+    const { token, email } = useQueryUrl()
     const [password, setPassword] = useState('')
     const [password_confirmation, setPasswordConfirmation] = useState('')
     const [error, setError] = useState<RegistrationError>({})
@@ -64,8 +62,8 @@ function ResetPassword()
                                     onChange={(e) => setPasswordConfirmation(e.target.value)}
                                     placeholder="Confirmer Mot de passe"
                                     className="mb-3" required />
-                                <input type="hidden" name="email" value={email} required/>
-                                <input type="hidden" name="token" value={token} required/>
+                                <input type="hidden" name="email" value={email as string} required/>
+                                <input type="hidden" name="token" value={token as string} required/>
                             </div>
                             <Button 
                                 type="submit"

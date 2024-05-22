@@ -1,4 +1,4 @@
-import { useStoreContext } from "../../../features/store/store.context";
+import { useStoreContext } from "../../../features/store/hooks/useStoreContext";
 import Navbar from "./Navbar";
 import logoWhite from "/static.ugoeatonline.com/assets/images/logo-white.png"
 import {useState} from "react";

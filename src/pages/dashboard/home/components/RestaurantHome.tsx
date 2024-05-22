@@ -1,18 +1,17 @@
 import Card from "./Card.js";
-import {useEffect, useState} from "react";
-import getRestaurantProducts from "../../../../core/services/products/getRestaurantProducts.jsx";
-import { useStoreContext } from "../../../../features/store/store.context.js";
-import { routesConfig } from "../../../../router.config.js";
+import { useStoreContext } from "../../../../features/store/hooks/useStoreContext.js";
+import { routesConfig } from "../../../../router/router.config.js";
+import useSWR from "swr";
+import { RestaurantService } from "@/features/admin/services/restaurant.service.js";
 
 function RestaurantHome()
 {
-    const {user, token} = useStoreContext()
+    const {user} = useStoreContext()
     const {routes} = routesConfig
-    const [products, setProducts] = useState([])
+    const {data: productsPaginated, isLoading} = useSWR('/api/v1/restaurant/{id}/products', () => RestaurantService.getProducts(user.id, {limit:1, page: 1}))
 
-    useEffect(() => {
-        getRestaurantProducts(token, user.id).then(r => setProducts(r.data.data))
-    }, [])
+    if(isLoading)
+        return <p>Loading ...</p>
 
     return (
         <div>
@@ -20,7 +19,7 @@ function RestaurantHome()
                 <Card
                     className="w-full"
                     title="Mes Produits" icon="pi pi-shopping-bag"
-                    number={products.length} text="voir plus" link={routes.dashboard.products}/>
+                    number={productsPaginated?.meta?.total} text="voir plus" link={routes.dashboard.products}/>
                 {/* <Card
                     className="w-full"
                     title="Mes Commandes" icon="pi pi-shopping-cart"

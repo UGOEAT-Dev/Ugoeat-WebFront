@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import { routesConfig } from "../../../../router.config";
+import { routesConfig } from "../../../../router/router.config";
 
 export default function ExploreMenu()
 {
@@ -12,7 +12,7 @@ export default function ExploreMenu()
                 pour réinventer la réservation et la commande en ligne en Afrique dans le secteur <br className="hidden md:block" />
                 de restauration, notamment à DOUALA et YAOUNDE.
             </p>
-            <NavLink to={routesConfig.routes.app.order} className="inline-block cursor-pointer bg-green hover:bg-green-700 text-base text-white p-3 rounded-md md:text-2xl">Explorez le menu</NavLink>
+            <NavLink to={routesConfig.routes.app.products} className="inline-block cursor-pointer bg-green hover:bg-green-700 text-base text-white p-3 rounded-md md:text-2xl">Explorez le menu</NavLink>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { useMiddleware } from "../../core/hooks/useMiddleware"
+import { useMiddleware } from "@/features/common/hooks"
 
 function AuthLayout()
 {

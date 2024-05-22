@@ -1,8 +1,8 @@
 import {DataTable, DataTableProps} from "primereact/datatable";
 import {Column} from "primereact/column";
-import RoundedImage from "../../../../components/RoundedImage";
+import RoundedImage from "../../../../features/common/components/elements/RoundedImage";
 // import { Icon } from "../../../../components/Icon";
-import { Order } from "../../../../core/types/Order";
+import { Order } from "../../../../features/common/types/Order";
 import { Tag } from "primereact/tag";
 
 interface ProductListViewProps

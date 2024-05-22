@@ -1,25 +1,24 @@
 import {useEffect, useState} from "react";
-import {useStoreContext} from "../../../../features/store/store.context";
 import UsersListView from "../../components/users/UsersListView";
-import getRestaurants from "../../../../core/services/restaurants/getRestaurants";
-import Paginate from "../../../../components/pagination/Paginate";
-import { Restaurant } from "../../../../core/types/Restaurant";
-import { AxiosResponse } from "axios";
-import { useMiddleware } from "../../../../core/hooks/useMiddleware";
+import Paginate from "../../../../features/common/components/elements/pagination/Paginate";
+import { Restaurant } from "../../../../features/common/types/Restaurant";
+import { useMiddleware } from "@/features/common/hooks";
+import { RestaurantService } from "@/features/admin/services/restaurant.service";
+import useSWR from "swr";
 
-function AdminRestaurants({})
+function AdminRestaurants()
 {
     useMiddleware('admin')
-    const {token} = useStoreContext()
     const [restaurants, setRestaurants] = useState<Restaurant[]>([])
-    const [paginated, setPaginated] = useState<PaginatedResponse<Restaurant>>({})
+    const {data: paginated, isLoading} = useSWR('/api/v1/restaurants', () => RestaurantService.fetch())
 
     useEffect(() => {
-        getRestaurants(token).then((r: AxiosResponse) => {
-            setPaginated(r.data)
-            setRestaurants(r.data.data)
-        })
-    }, [])
+        if(paginated)
+            setRestaurants(paginated.data ?? [])
+    }, [paginated])
+
+    if(isLoading)
+        return <p>Loading ...</p>
 
     return (
         <div>
@@ -27,9 +26,9 @@ function AdminRestaurants({})
             <UsersListView users={restaurants}/>
             <div className="w-full border-t-2">
                 <Paginate 
-                    pageCount={(paginated.meta?.links.length ?? 0) -2}
+                    pageCount={(paginated?.meta?.links.length ?? 0) -2}
                     onPageChange={({selected}) => {
-                        getRestaurants(token, {page: selected+1}).then((r: AxiosResponse) => setRestaurants(r.data.data))
+                        RestaurantService.fetch({page: selected+1}).then(r => setRestaurants(r.data ?? []))
                     }}/>
             </div>
         </div>

@@ -1,25 +1,24 @@
 import UsersListView from "../../components/users/UsersListView";
 import {useEffect, useState} from "react";
-import getCustomers from "../../../../core/services/customers/getCustomers";
-import { useStoreContext } from "../../../../features/store/store.context";
-import { AxiosResponse } from "axios";
-import Paginate from "../../../../components/pagination/Paginate";
-import { Customer } from "../../../../core/types/Customer";
-import { useMiddleware } from "../../../../core/hooks/useMiddleware";
+import Paginate from "@/features/common/components/elements/pagination/Paginate";
+import { useMiddleware } from "@/features/common/hooks";
+import { Customer } from "@/features/common/types/Customer";
+import useSWR from "swr";
+import { CustomerService } from "@/features/admin/services/customer.service";
 
 function AdminCustomers({})
 {
     useMiddleware('admin')
-    const {token} = useStoreContext()
     const [customers, setCustomers] = useState<Customer[]>([])
-    const [paginated, setPaginated] = useState<PaginatedResponse<Customer>>({})
+    const {data: paginated, isLoading} = useSWR('/api/v1/customers', () => CustomerService.fetch()) 
 
     useEffect(() => {
-        getCustomers(token).then((r:AxiosResponse) => {
-            setPaginated(r.data) 
-            setCustomers(r.data.data)
-        })
-    }, [])
+        if(paginated)
+            setCustomers(paginated.data ?? [])
+    }, [paginated])
+
+    if(isLoading)
+        return <p>Loading ...</p>
 
     return (
         <div>
@@ -27,9 +26,9 @@ function AdminCustomers({})
             <UsersListView users={customers}/>
             <div className="w-full border-t-2">
                 <Paginate 
-                    pageCount={(paginated.meta?.links.length ?? 0) -2}
+                    pageCount={(paginated?.meta?.links.length ?? 0) -2}
                     onPageChange={({selected}) => {
-                        getCustomers(token, {page: selected+1}).then((r: AxiosResponse) => setCustomers(r.data.data))
+                        CustomerService.fetch({page: selected+1}).then(response => setCustomers(response.data ?? []))
                     }}/>
             </div>
         </div>

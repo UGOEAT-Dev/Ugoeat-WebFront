@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import { routesConfig } from "../../router.config";
+import { routesConfig } from "../../router/router.config";
 
 function DashboardIndex()
 {

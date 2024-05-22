@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react"
-import Paginate from "../../../../components/pagination/Paginate"
-import { AxiosResponse } from "axios"
-import { Order } from "../../../../core/types/Order"
+import Paginate from "@/features/common/components/elements/pagination/Paginate"
+import { Order } from "@/features/common/types/Order"
 import OrderListView from "../../components/order/OrderListView"
-import getOrders from "../../../../core/services/orders/getOrders"
-import { useStoreContext } from "../../../../features/store/store.context"
 import { useNavigate } from "react-router-dom"
-import { routesConfig } from "../../../../router.config"
+import { routesConfig } from "@/router/router.config"
+import useSWR from "swr"
+import { OrderService } from "@/features/admin/services/order.service"
 
 function AdminOrders()
 {
-    const {token} = useStoreContext()
     const [orders, setOrders] = useState<Order[]>([])
-    const [paginated, setPaginated] = useState<PaginatedResponse<Product>>({})
+    const {data: paginated, isLoading} = useSWR('/api/v1/orders', () => OrderService.fetchAll())
     const navigate = useNavigate()
 
     useEffect(() => {
-        getOrders(token).then((r:AxiosResponse) => {
-            setPaginated(r.data)
-            setOrders(r.data.data)
-        })
-    }, [])
+        if(paginated)
+            setOrders(paginated.data ?? [])
+    }, [paginated])
+
+    if(isLoading)
+        return <p>Loading ...</p>
 
     return (
         <div>
@@ -31,9 +30,9 @@ function AdminOrders()
                 }} />
                 <div className="w-full border-t-2">
                     <Paginate 
-                        pageCount={(paginated.meta?.links.length ?? 0) -2}
+                        pageCount={(paginated?.meta?.links.length ?? 0) -2}
                         onPageChange={({selected}) => {
-                            getOrders(token, {page: selected+1}).then((r: AxiosResponse) => setOrders(r.data.data))
+                            OrderService.fetchAll({page: selected+1}).then(response => setOrders(response.data ?? []))
                         }}/>
                 </div>
             </div>

@@ -1,10 +1,10 @@
 import {NavLink} from "react-router-dom";
-import {Input} from "../../../components/input/Input.js";
+import {Input} from "../../../features/common/components/elements/input/Input.js";
 import cartSvg from "/static.ugoeatonline.com/assets/images/icons/cart-vector.svg"
-import {isUserLoggedIn} from "./../../../core/lib/helpers";
-import {Dropdown, DropdownItem} from "../../../components/dropdown/Dropdown";
-import { useStoreContext } from "../../../features/store/store.context.js";
-import { routesConfig } from "../../../router.config.js";
+import {isUserLoggedIn} from "../../../lib/helpers.js";
+import {Dropdown, DropdownItem} from "../../../features/common/components/elements/dropdown/Dropdown.js";
+import { useStoreContext } from "../../../features/store/hooks/useStoreContext.js";
+import { routesConfig } from "../../../router/router.config.js";
 
 interface NavbarProps
 {
@@ -22,7 +22,7 @@ export default function Navbar({productOrderedCount, onCartClicked, ...props}: N
             <ul className={"lg:flex md:justify-around w-full text-center space-y-3 lg:space-y-0"}>
                 <li><NavLink to={app.home}>Accueil</NavLink></li>
                 <li><NavLink to={app.about}>A Propos</NavLink></li>
-                <li><NavLink to={app.order}>Commandez</NavLink></li>
+                <li><NavLink to={app.products}>Nos Produits</NavLink></li>
                 {isUserLoggedIn() ?
                     (   <>
                             <li>

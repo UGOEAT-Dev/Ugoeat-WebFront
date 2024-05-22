@@ -1,9 +1,9 @@
 import SidebarLinkGroup from "./sidebar/SidebarLinkGroup.js";
 import SidebarLinkItem from "./sidebar/SidebarLinkItem.js";
 import {SidebarContext} from "./sidebar/SidebarContext.js";
-import { useStoreContext } from "../../../features/store/store.context.js";
-import { Icon } from "../../../components/Icon";
-import { routesConfig } from "../../../router.config.js";
+import { useStoreContext } from "../../../features/store/hooks/useStoreContext.js";
+import { Icon } from "../../../features/common/components/elements/Icon.js";
+import { routesConfig } from "../../../router/router.config.js";
 
 
 function Sidebar({mode, className}: {mode: 1| 2, className?: string})

@@ -2,11 +2,11 @@
 import { ContentProps, Dialog } from 'primereact/dialog'
 import { Button } from 'primereact/button'
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import InputWithLabel from "../../../../components/input/InputWithLabel.jsx";
-import InputFile from "../../../../components/input/InputFile.jsx";
+import InputWithLabel from "../../../../features/common/components/elements/input/InputWithLabel.js";
+import InputFile from "../../../../features/common/components/elements/input/InputFile.js";
 import toast from "react-hot-toast";
-import TextArea from "../../../../components/input/TextArea.jsx";
-import { ProductError } from '../../../../core/types/error/ProductError.js';
+import TextArea from "../../../../features/common/components/elements/input/TextArea.js";
+import { ProductError } from '../../../../features/common/types/error/ProductError.js';
 
 export type ProductDialogViewMode = "create" | "edit" | "view";
 

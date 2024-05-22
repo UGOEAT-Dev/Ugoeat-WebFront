@@ -1,22 +1,21 @@
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {DataView} from "primereact/dataview"
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown"
 import {Tag} from "primereact/tag"
-import getCustomerOrders from "../../../core/services/orders/getCustomerOrders";
-import {formatAmount} from "../../../core/lib/helpers";
-import { useStoreContext } from "../../../features/store/store.context";
-import { routesConfig } from "../../../router.config";
-import { Order } from "../../../core/types/Order";
-import { getSeverityFromOrderState } from "../../../core/lib/utils";
+import {formatAmount} from "@/lib/helpers";
+import { routesConfig } from "@/router/router.config";
+import { Order } from "@/features/common/types/Order";
+import { getSeverityFromOrderState } from "@/lib/utils";
+import useSWR from "swr";
+import { OrderService } from "@/features/admin/services/order.service";
 
 function DashboardOrders()
 {
     const {routes} = routesConfig
-    const [orders, setOrders] = useState([])
+    const {data: orders, isLoading} = useSWR('/api/v1/orders', () => OrderService.fetchAll({limit: -1}))
     const [sortField, setSortField] = useState('id')
     const [sortOrder, setSortOrder] = useState<-1|0|1>(-1)
-    const {token} = useStoreContext()
     const navigate = useNavigate()
     const dropdownOptions = [
         {label: "Plus Recent", value: "created_at"},
@@ -24,10 +23,8 @@ function DashboardOrders()
         {label: "Par Prix", value: "amount"},
     ]
 
-    useEffect(() => {
-        getCustomerOrders(token)
-            .then(r => setOrders(r.data.data))
-    }, [])
+    if(isLoading)
+        return <p>Loading ...</p>
 
     const onDropChange = (e: DropdownChangeEvent) => {
         const value = String(e.value).toLowerCase()
@@ -85,7 +82,7 @@ function DashboardOrders()
         <div>
             <DataView
                 header={header("")}
-                value={orders}
+                value={orders?.data}
                 paginator
                 rows={5}
                 sortOrder={sortOrder}

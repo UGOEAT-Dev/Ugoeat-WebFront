@@ -1,4 +1,4 @@
-import {Input} from "../../../components/input/Input.js";
+import {Input} from "../../../features/common/components/elements/input/Input.js";
 
 function NewsLetter({className = ""})
 {

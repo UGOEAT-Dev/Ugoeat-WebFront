@@ -3,8 +3,8 @@ import {Link, Outlet} from "react-router-dom";
 import DashboardHeader from "./components/DashboardHeader";
 import Sidebar from "./components/Sidebar";
 import {useEffect, useState} from "react";
-import { useMiddleware } from "../../core/hooks/useMiddleware";
-import useAuth from "../../core/hooks/useAuth";
+import { useMiddleware } from "@/features/common/hooks";
+import { useAuth } from "@/features/auth/hooks";
 
 function DashboardLayout()
 {

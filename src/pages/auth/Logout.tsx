@@ -1,5 +1,5 @@
-import useAuth from "../../core/hooks/useAuth";
-import { useMiddleware } from "../../core/hooks/useMiddleware";
+import { useAuth } from "@/features/auth/hooks";
+import { useMiddleware } from "@/features/common/hooks/";
 import useSWR from "swr";
 
 function Logout()

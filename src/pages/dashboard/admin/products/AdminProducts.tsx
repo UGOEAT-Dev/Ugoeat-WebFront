@@ -1,41 +1,54 @@
 import {useEffect, useState} from "react";
-import getProducts from "../../../../core/services/products/getProducts";
-import ProductListView from "../../components/products/ProductListView";
-import Paginate from "../../../../components/pagination/Paginate";
-import { useMiddleware } from "../../../../core/hooks/useMiddleware";
+import ProductListView from "@/pages/dashboard/components/products/ProductListView";
+import Paginate from "@/features/common/components/elements/pagination/Paginate";
+import { useMiddleware } from "@/features/common/hooks";
+import { ProductService } from "@/features/common/services/products.service";
+import useSWR from "swr";
+import usePaginationQuery from "@/features/common/hooks/usePaginationQuery";
+import { useNavigate } from "react-router-dom";
 
-function AdminProducts({})
+function AdminProducts()
 {
     useMiddleware('admin')
+    const {limit, page} = usePaginationQuery()
+    const navigate = useNavigate()
+    const [currentPage, setCurrentPage] = useState(page)
+    const {data: paginated, isLoading, mutate } = useSWR('/api/v1/products', () => {
+        return ProductService.fetch({limit, page: currentPage})
+    })
     const [products, setProducts] = useState<Product[]>([])
-    const [paginated, setPaginated] = useState<PaginatedResponse<Product>>({})
 
     useEffect(() => {
-        getProducts({}).then(
-            response => {
-                setPaginated(response.data)
-                setProducts(response.data.data)
-            }
-        )
-    }, [])
+        if(paginated) {
+            setProducts(paginated.data ?? [])
+        }
+    }, [paginated])
 
-    // const handleDeleteProduct = (product: Product) => {
+    const onProductSelected = (e: any) => {
+        const product = e.value as Product
+        navigate(`${product.id}`)
+    }
 
-    // }
-
-    // const handleShowProduct = (product :Product) => {
-
-    // }
+    if(isLoading)
+        return <p>Loading ...</p>
 
     return (
         <div>
             <h1 className="text-2xl font-bold">Produits</h1>
-            <ProductListView products={products ?? []} />
+            <ProductListView products={products ?? []} onSelect={onProductSelected}/>
             <div className="w-full border-t-2">
-                <Paginate 
-                    pageCount={(paginated.meta?.links.length ?? 0) -2}
+                <Paginate
+                    pageCount={paginated?.meta?.last_page ?? 0}
+                    initialPage={page - 1}
+                    hrefBuilder={(pageIndex) => `?&page=${pageIndex}${limit ? `?limit=${limit}`: ''}`}
                     onPageChange={({selected}) => {
-                        getProducts({page: selected+1}).then(r => setProducts(r.data.data))
+                        const nextPage = selected + 1
+                        if(nextPage !== page) {
+                            console.log(nextPage)
+                            setCurrentPage(nextPage)
+                            navigate(`?page=${nextPage}${limit ? `?limit=${limit}` : ''}`)
+                            mutate()
+                        }
                     }}/>
             </div>
         </div>

@@ -1,12 +1,12 @@
-import InputFile from "../../../components/input/InputFile";
-import useUpdateAccount from "../../../core/hooks/useUpdateAccount";
+import InputFile from "../../../features/common/components/elements/input/InputFile";
+import useUpdateAccount from "../../../features/account/hooks/useUpdateAccount";
 import {FormEventHandler, LegacyRef, useRef, useState} from "react";
-import { getScreenWidthScale } from '../../../core/lib/helpers'
+import { getScreenWidthScale } from '../../../lib/helpers'
 import Dropzone from "react-dropzone";
 import AvatarEditor from "react-avatar-editor";
 import toast from "react-hot-toast";
-import { User } from "../../../core/types/User";
-import { Mutator } from "../../../core/types/mutator/Mutator";
+import { User } from "../../../features/common/types/User";
+import { Mutator } from "../../../features/common/types/mutator/Mutator";
 
 function UpdateImageProfile({user, setErrors}: {user:User, setErrors: Mutator<Error>})
 {
