@@ -8,8 +8,6 @@ import { usePaginationQuery } from "@/features/common/hooks";
 import { Icon } from "@/features/common/components/elements/Icon";
 import AddProductDialog from "./components/AddProductDialog";
 import { useNavigate } from "react-router-dom";
-import axios from "@/lib/axios/axios";
-import { globalAxiosHeader as headers } from "@/lib/axios/headers.global"
 import toast from "react-hot-toast";
 
 /**
@@ -32,11 +30,7 @@ function RestaurantProducts()
 
     const deleteMutation = useMutation({
         mutationKey: ['/api/v1/restaurants'],
-        mutationFn: async (id: number) => {
-            return await axios.delete(
-                `/api/v1/restaurants/${user.id}/products/${id}`, { headers }
-            );
-        }
+        mutationFn: async (id: number) => RestaurantService.deleteProduct(user.id, id)
     })
 
     useEffect(() => {

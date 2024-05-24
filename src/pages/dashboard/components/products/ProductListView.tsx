@@ -1,7 +1,7 @@
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
-import RoundedImage from "../../../../features/common/components/elements/RoundedImage";
-import { Icon } from "../../../../features/common/components/elements/Icon";
+import RoundedImage from "@/features/common/components/elements/RoundedImage";
+import { Icon } from "@/features/common/components/elements/Icon";
 
 interface ProductListViewProps
 {
@@ -12,6 +12,17 @@ interface ProductListViewProps
 
 function ProductListView({products, onDelete, onSelect}: ProductListViewProps)
 {
+    const _DeleteActionComponent = ({product}: {product: Product}) => {
+        return (
+            <button 
+                className="bg-error text-white rounded px-2 py-1 hover:bg-red-600" 
+                onClick={() => onDelete(product)} 
+                title="Supprimer le produit">
+                <Icon icon="pi-trash" className="text-sm" color="white"/> Delete
+            </button>
+        )
+    }
+
     return (
         <>
             <div className="bg-white p-3 rounded-lg">
@@ -27,7 +38,7 @@ function ProductListView({products, onDelete, onSelect}: ProductListViewProps)
                         <Column field='price' header="Prix" sortable></Column>
                         <Column header="Categorie" body={(p: Product) => (<span>{p.category?.name}</span>)}></Column>
                         {/* <Column body={(p) => (<button onClick={() => onSelect(p)}><Icon icon="pi-eye" className="text-xl" color="blue"/></button>)} ></Column> */}
-                        <Column body={(p) => (<button onClick={() => onDelete(p)}><Icon icon="pi-trash" className="text-xl" color="red"/></button>)} ></Column>
+                        <Column body={(p) => <_DeleteActionComponent product={p} />} ></Column>
                     </DataTable>
                 </div>
             </div>
