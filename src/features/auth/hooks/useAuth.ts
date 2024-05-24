@@ -6,8 +6,8 @@ import { routesConfig } from "@/router/router.config";
 import useSession from "@/features/session/hooks/useSession";
 import toast from "react-hot-toast";
 import { useStoreContext } from "@/features/store/hooks/useStoreContext";
-import useSWR from "swr";
 import { AccountService } from "@/features/account/services/account.service";
+import { useQuery } from "@tanstack/react-query";
 
 function useAuth(redirectTo?: string, middleware?: 'guest'|'auth')
 {
@@ -16,7 +16,10 @@ function useAuth(redirectTo?: string, middleware?: 'guest'|'auth')
     const {deleteSession, createSession, setUser} = useSession()
     const [token, setToken] = useState(_token)
 
-    const {data: user, isLoading, error, mutate: mutateUser} = useSWR(token, AccountService.get)
+    const { data: user, error, isLoading } = useQuery({
+        queryKey: [token],
+        queryFn: () => AccountService.get(token)
+    })
 
     const login = async (data: LoginProps) => {
 
@@ -85,8 +88,7 @@ function useAuth(redirectTo?: string, middleware?: 'guest'|'auth')
     return {
         login,
         register,
-        logout,
-        mutateUser
+        logout
     }
 }
 

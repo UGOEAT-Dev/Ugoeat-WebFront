@@ -6,7 +6,7 @@ import { globalAxiosHeader as headers } from "@/lib/axios/headers.global";
 export class OrderService 
 {
 
-    static async fetchAll(options: PaginationOptions = {page: 1, limit: 10}) {
+    static async fetch(options: PaginationOptions = {page: 1, limit: 10}) {
         return await axios.get(
             `/api/v1/orders?limit=${options.limit}&page=${options.page}`, { headers }
         ).then(response => response.data as PaginatedResponse<Order> )

@@ -1,11 +1,13 @@
 import Card from "./Card";
-import useSWR from "swr";
 import { StatsService } from "@/features/admin/services/stats.service";
 import { routesConfig } from "@/router/router.config";
+import { useQuery } from "@tanstack/react-query";
 
 function AdminHome()
 {
-    const {data, isLoading} = useSWR('/api/v1/stats', () => StatsService.getStats())
+    const {data, isLoading} = useQuery({
+        queryKey: ['/api/v1/stats'], queryFn: () => StatsService.getStats()
+    })
     const { routes } = routesConfig
 
     if(isLoading)

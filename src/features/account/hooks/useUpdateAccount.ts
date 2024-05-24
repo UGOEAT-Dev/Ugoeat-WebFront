@@ -1,53 +1,28 @@
 import {useStoreContext} from "@/features/store/hooks/useStoreContext";
-import axios from "@/lib/axios/axios";
 import toast from "react-hot-toast";
+import { AccountService } from "../services/account.service";
 
 function useUpdateAccount()
 {
-    const {setUser, token} = useStoreContext()
+    const {setUser} = useStoreContext()
 
     const success = () => toast.success('Mise a jour effectue avec Sucess')
 
     const errors = () => toast.error('Oupps !!! Mise a jour impossible')
 
-    const updateProfile = (setErrors:any, data:any) => {
-        return axios.put('/api/v1/account', data, {
-                            headers: { 'Authorization': `Bearer ${token}`}})
-                    .then( response => {
-                        setUser(response.data.data)
-                        success()
-                        setErrors({})
-                        return response.data
-                    })
-                    .catch(error => {
-                        errors()
-                        setErrors(error.response.data.errors)
-                        throw error
-                    })
+    function update(setErrors:any, data:any, formData: boolean = false){
+        AccountService.update(data, formData).then( user => {
+            success()
+            setUser(user)
+            setErrors({})
+        }).catch(error => {
+            errors()
+            setErrors(error.response.data.errors)
+            throw error
+        })
     }
 
-    const updateImage = ({setErrors, ...props}: {setErrors:any, data:any}) => {
-        return axios.post('/api/v1/account', props.data, {
-                            headers: {
-                                'Authorization': `Bearer ${token}`,
-                                'Content-Type': 'multipart/form-data'
-                            }})
-                    .then( response => {
-                        setUser({...response.data.data})
-                        success()
-                        setErrors({})
-                    })
-                    .catch(error => {
-                        errors()
-                        setErrors(error.response.data.errors)
-                        throw error
-                    })
-    }
-
-    return {
-        updateProfile,
-        updateImage,
-    }
+    return { update }
 }
 
 export default useUpdateAccount

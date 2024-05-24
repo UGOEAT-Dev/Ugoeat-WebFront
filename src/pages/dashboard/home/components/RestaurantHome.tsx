@@ -1,14 +1,17 @@
 import Card from "./Card.js";
-import { useStoreContext } from "../../../../features/store/hooks/useStoreContext.js";
-import { routesConfig } from "../../../../router/router.config.js";
-import useSWR from "swr";
-import { RestaurantService } from "@/features/admin/services/restaurant.service.js";
+import { useStoreContext } from "@/features/store/hooks/useStoreContext";
+import { RestaurantService } from "@/features/admin/services/restaurant.service";
+import { routesConfig } from "@/router/router.config";
+import { useQuery } from "@tanstack/react-query";
 
 function RestaurantHome()
 {
     const {user} = useStoreContext()
     const {routes} = routesConfig
-    const {data: productsPaginated, isLoading} = useSWR('/api/v1/restaurant/{id}/products', () => RestaurantService.getProducts(user.id, {limit:1, page: 1}))
+    const {data: productsPaginated, isLoading} = useQuery({
+        queryKey: ['/api/v1/products', user.id],
+        queryFn: () => RestaurantService.getProducts(user.id, {limit:1, page: 1})
+    })
 
     if(isLoading)
         return <p>Loading ...</p>

@@ -1,14 +1,17 @@
 import ModalCart from "@/pages/app/components/ModalCart";
 import Card from "./Card.js"
 import { routesConfig } from "@/router/router.config.js";
-import useSWR from "swr";
 import { OrderService } from "@/features/admin/services/order.service.js";
+import { useQuery } from "@tanstack/react-query";
 
 function CustomerHome()
 {
-    const {data: paginated, isLoading} = useSWR('/api/v1/orders', () => OrderService.fetchAll())
+    const {data: paginated, isFetching} = useQuery({
+        queryKey: ['/api/v1/orders'], 
+        queryFn: () => OrderService.fetch()
+    })
 
-    if(isLoading)
+    if(isFetching)
         return <p>Loading ...</p>
 
     return (

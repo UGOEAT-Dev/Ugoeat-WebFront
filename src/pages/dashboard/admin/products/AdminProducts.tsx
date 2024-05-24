@@ -3,9 +3,9 @@ import ProductListView from "@/pages/dashboard/components/products/ProductListVi
 import Paginate from "@/features/common/components/elements/pagination/Paginate";
 import { useMiddleware } from "@/features/common/hooks";
 import { ProductService } from "@/features/common/services/products.service";
-import useSWR from "swr";
 import usePaginationQuery from "@/features/common/hooks/usePaginationQuery";
 import { useNavigate } from "react-router-dom";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 
 function AdminProducts()
 {
@@ -13,8 +13,11 @@ function AdminProducts()
     const {limit, page} = usePaginationQuery()
     const navigate = useNavigate()
     const [currentPage, setCurrentPage] = useState(page)
-    const {data: paginated, isLoading, mutate } = useSWR('/api/v1/products', () => {
-        return ProductService.fetch({limit, page: currentPage})
+    const { data: paginated, isFetching } = useQuery({
+        queryKey: ['products', currentPage, limit],
+        queryFn: () => ProductService.fetch({limit, page: currentPage}),
+        placeholderData: keepPreviousData,
+        staleTime: 5000
     })
     const [products, setProducts] = useState<Product[]>([])
 
@@ -24,31 +27,27 @@ function AdminProducts()
         }
     }, [paginated])
 
+    useEffect(() => {
+        navigate(`?page=${currentPage}${limit ? `&limit=${limit}`:''}`)
+    }, [currentPage])
+
     const onProductSelected = (e: any) => {
         const product = e.value as Product
         navigate(`${product.id}`)
     }
 
-    if(isLoading)
-        return <p>Loading ...</p>
-
     return (
         <div>
             <h1 className="text-2xl font-bold">Produits</h1>
-            <ProductListView products={products ?? []} onSelect={onProductSelected}/>
+            {isFetching? 
+                <p>Loading ...</p> :
+                <ProductListView products={products ?? []} onSelect={onProductSelected}/>}
             <div className="w-full border-t-2">
                 <Paginate
                     pageCount={paginated?.meta?.last_page ?? 0}
-                    initialPage={page - 1}
-                    hrefBuilder={(pageIndex) => `?&page=${pageIndex}${limit ? `?limit=${limit}`: ''}`}
+                    initialPage={currentPage - 1}
                     onPageChange={({selected}) => {
-                        const nextPage = selected + 1
-                        if(nextPage !== page) {
-                            console.log(nextPage)
-                            setCurrentPage(nextPage)
-                            navigate(`?page=${nextPage}${limit ? `?limit=${limit}` : ''}`)
-                            mutate()
-                        }
+                        setCurrentPage(selected + 1)
                     }}/>
             </div>
         </div>

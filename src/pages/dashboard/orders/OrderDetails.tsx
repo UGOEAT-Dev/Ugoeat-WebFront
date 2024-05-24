@@ -7,14 +7,17 @@ import RoundedImage from "@/features/common/components/elements/RoundedImage";
 import {formatAmount} from "@/lib/helpers";
 import { useStoreContext } from "@/features/store/hooks/useStoreContext";
 import { getSeverityFromOrderState } from "@/lib/utils";
-import useSWR from "swr";
 import { OrderService } from "@/features/admin/services/order.service";
 import { routesConfig } from "@/router/router.config";
+import { useQuery } from "@tanstack/react-query";
 
 function OrderDetails()
 {
     const { orderId } = useParams()
-    const {data: order, isLoading} = useSWR(orderId, (id:string) => OrderService.get(parseInt(id))) 
+    const {data: order, isLoading} = useQuery({
+        queryKey: ['/api/v1/orders', orderId],
+        queryFn: () => OrderService.get(parseInt(orderId as string))
+    })
     const {setProducts} = useStoreContext()
     const navigate = useNavigate()
 

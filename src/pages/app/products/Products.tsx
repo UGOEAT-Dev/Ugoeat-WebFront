@@ -3,13 +3,23 @@ import {ChangeEvent, useEffect, useMemo, useState} from "react";
 import ProductsView from "./components/ProductsView.js";
 import { useStoreContext } from "@/features/store/hooks/useStoreContext";
 import { ProductService, CategoryService } from "@/features/common/services";
-import useSWR from "swr";
+import { useQueries } from "@tanstack/react-query";
 
 export default function Products()
 {
     const {addProduct} = useStoreContext();
-    const {data: categories} = useSWR('/api/v1/categories', () => CategoryService.fetchFirst())
-    const {data: productsResponse} = useSWR('/api/v1/products', () => ProductService.fetchFirst())
+
+    const {isFetching, data} = useQueries({
+        queries: [
+            { queryKey: ['/api/v1/categories'], queryFn: () => CategoryService.fetchFirst() },
+            { queryKey: ['/api/v1/products'], queryFn: () => ProductService.fetchFirst()}
+        ],
+        combine: results => ({
+            data: { productsResponse: results[1].data, categoryResponse: results[0].data },
+            isFetching: results.some(data => data.isFetching)
+        })
+    })
+    const {productsResponse, categoryResponse: categories} = data
     const [products, setProducts] = useState<Product[]>([])
     const [currentCategory, setCurrentCategory] = useState<Category|undefined>(undefined)
     const productFiltered = useMemo(() => {
@@ -41,7 +51,7 @@ export default function Products()
                         return (<option key={category.name} value={category.id}>{category.name}</option>)
                     })}
                 </select>
-                <ProductsView products={productFiltered} onAdd={(p) => addProduct(p)} />
+                {isFetching ? <p>Loading ...</p> : <ProductsView products={productFiltered} onAdd={addProduct} />}
             </div>
         </div>
     )
