@@ -9,7 +9,7 @@ type ProductsViewProps = {
 export default function ProductsView({products, onClick, onAdd}: ProductsViewProps)
 {
     return (
-        <div className="my-5 gap-5 grid justify-center sm:grid-cols-2 md:grid-cols-3">
+        <div className="my-5 gap-5 grid justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {(products.length === 0) ?
                 <h3>Aucun Produit pour cette categorie.</h3>
                 :
