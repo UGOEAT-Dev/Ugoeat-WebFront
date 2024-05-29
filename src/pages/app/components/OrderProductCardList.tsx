@@ -1,3 +1,4 @@
+import { ProductOrdered } from "@/features/common/types/Product.js";
 import OrderProductCard from "./OrderProductCard.js";
 
 

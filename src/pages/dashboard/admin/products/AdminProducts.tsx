@@ -6,6 +6,7 @@ import { ProductService } from "@/features/common/services/products.service";
 import usePaginationQuery from "@/features/common/hooks/usePaginationQuery";
 import { useNavigate } from "react-router-dom";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { Product } from "@/features/common/types/Product";
 
 function AdminProducts()
 {

@@ -3,6 +3,7 @@ import axios from "@/lib/axios/axios";
 import { globalAxiosHeader as headers } from "@/lib/axios/headers.global"
 import { UserService } from "./users.service";
 import { Restaurant } from "@/features/common/types/Restaurant";
+import { Product } from "@/features/common/types/Product";
 
 export class RestaurantService extends UserService
 {

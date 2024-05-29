@@ -2,6 +2,7 @@ import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 // import RoundedImage from "../../../../components/RoundedImage";
 import { Icon } from "../../../../features/common/components/elements/Icon";
+import { Category } from "@/features/common/types/Category";
 
 interface CategoryListViewProps
 {

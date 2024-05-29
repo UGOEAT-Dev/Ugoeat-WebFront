@@ -1,6 +1,7 @@
 import { RestaurantService } from "@/features/admin/services/restaurant.service";
 import { Icon } from "@/features/common/components/elements/Icon";
 import { ProductService } from "@/features/common/services";
+import { Product } from "@/features/common/types/Product";
 import { keepPreviousData, useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { Dialog } from "primereact/dialog";
 import { PickList } from "primereact/picklist";

@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
 import { useStoreContext } from "../../../features/store/hooks/useStoreContext.js";
 import { Icon } from "../../../features/common/components/elements/Icon.js";
+import { Product } from "@/features/common/types/Product.js";
 
 function ModalCart({onCloseBtnClicked, ...props}: {onCloseBtnClicked?: any, className?: string})
 {

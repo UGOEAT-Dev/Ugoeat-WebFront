@@ -5,6 +5,8 @@ import { useStoreContext } from "@/features/store/hooks/useStoreContext";
 import { ProductService, CategoryService } from "@/features/common/services";
 import { useQueries } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { Category } from "@/features/common/types/Category.js";
+import { Product } from "@/features/common/types/Product.js";
 
 export default function Products()
 {

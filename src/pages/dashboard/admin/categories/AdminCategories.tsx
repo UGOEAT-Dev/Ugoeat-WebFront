@@ -5,6 +5,7 @@ import { useMiddleware, usePaginationQuery } from "@/features/common/hooks"
 import { CategoryService } from "@/features/common/services"
 import { useNavigate } from "react-router-dom"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { Category } from "@/features/common/types/Category"
 
 function AdminCategories()
 {

@@ -2,6 +2,7 @@ import axios from "@/lib/axios/axios";
 import { globalAxiosHeader as headers } from "@/lib/axios/headers.global";
 import { PaginationOptions } from "../types/options/PaginationOption";
 import { Cursor, defaultCursor } from "../types/pagination/Cursor";
+import { Product } from "../types/Product";
 
 export class ProductService
 {

@@ -1,4 +1,5 @@
 import { Customer } from "./Customer"
+import { ProductOrdered } from "./Product"
 
 export type OrderState = "accepted" | "canceled" | "finished" | "rejected" | "sent"
 

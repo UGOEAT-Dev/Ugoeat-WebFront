@@ -10,6 +10,7 @@ import { getSeverityFromOrderState } from "@/lib/utils";
 import { OrderService } from "@/features/admin/services/order.service";
 import { routesConfig } from "@/router/router.config";
 import { useQuery } from "@tanstack/react-query";
+import { ProductOrdered } from "@/features/common/types/Product";
 
 function OrderDetails()
 {

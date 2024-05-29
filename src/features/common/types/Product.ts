@@ -1,5 +1,7 @@
+import { Category } from "./Category"
+import { Image } from "./Image"
 
-interface Product
+export interface Product
 {
     id: number,
     name?: string,
@@ -14,7 +16,7 @@ interface Product
     deleted_at?: Date | null
 }
 
-interface ProductOrdered extends Product
+export interface ProductOrdered extends Product
 {
     quantity: number
 }

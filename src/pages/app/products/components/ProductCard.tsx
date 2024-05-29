@@ -1,3 +1,4 @@
+import { Product } from "@/features/common/types/Product"
 
 type ProductCardProps = {
     className?: string,

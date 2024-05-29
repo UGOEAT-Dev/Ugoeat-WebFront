@@ -1,6 +1,7 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { CartSelector, addProduct, removeAll, removeProduct, setProducts } from "../store/cartSlice"
+import { Product, ProductOrdered } from "@/features/common/types/Product"
 
 function useCart()
 {
