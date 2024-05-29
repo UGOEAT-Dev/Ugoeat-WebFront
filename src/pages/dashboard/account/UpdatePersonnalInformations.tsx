@@ -1,21 +1,21 @@
-import InputWithLabel from "../../../features/common/components/elements/input/InputWithLabel";
+import InputWithLabel from "@/features/common/components/elements/input/InputWithLabel";
 import {FormEventHandler, useState} from "react";
-import useUpdateAccount from "../../../features/account/hooks/useUpdateAccount";
-import { User } from "../../../features/common/types/User";
-import { RegistrationError } from "../../../features/common/types/error/RegistrationError";
-import { Mutator } from "../../../features/common/types/mutator/Mutator";
+import useUpdateAccount from "@/features/account/hooks/useUpdateAccount";
+import { User } from "@/features/common/types/User";
+import { RegistrationError } from "@/features/common/types/error/RegistrationError";
+import { Mutator } from "@/features/common/types/mutator/Mutator";
 
 function UpdatePersonnalInformations({user, errors, setErrors}: {user: User, errors: RegistrationError, setErrors: Mutator<RegistrationError>})
 {
-    const { updateProfile } = useUpdateAccount()
+    const { update } = useUpdateAccount()
     const [ name, setName ] = useState(user.name)
     const [ email ] = useState(user.email)
-    const [ address, setAddress ] = useState(user.address)
-    const [ tel, setTel ] = useState(user.tel)
+    const [ address, setAddress ] = useState(user.address ?? '')
+    const [ tel, setTel ] = useState(user.tel ?? '')
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault()
-        updateProfile(setErrors, {
+        update(setErrors, {
             email,
             name,
             address,

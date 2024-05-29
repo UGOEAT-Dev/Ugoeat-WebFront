@@ -1,9 +1,9 @@
 import InputFile from "../../../features/common/components/elements/input/InputFile";
 import useUpdateAccount from "../../../features/account/hooks/useUpdateAccount";
-import {FormEventHandler, LegacyRef, useRef, useState} from "react";
+import {FormEventHandler, useRef, useState} from "react";
 import { getScreenWidthScale } from '../../../lib/helpers'
 import Dropzone from "react-dropzone";
-import AvatarEditor from "react-avatar-editor";
+import AvatarEditor from "@/features/common/components/elements/editors/AvatarEditor";
 import toast from "react-hot-toast";
 import { User } from "../../../features/common/types/User";
 import { Mutator } from "../../../features/common/types/mutator/Mutator";
@@ -13,8 +13,8 @@ function UpdateImageProfile({user, setErrors}: {user:User, setErrors: Mutator<Er
     const [image, setImage] = useState(user.image_url)
     const [imageToResize, setImageToResize] = useState<string|File|undefined>(image)
     const [showResizer, setShowResizer] = useState(false)
-    const {updateImage} = useUpdateAccount()
-    const editorRef = useRef<AvatarEditor>()
+    const {update} = useUpdateAccount()
+    const editorRef = useRef<any>()
 
 
     const handleFileChanged = (file?: File | null) => {
@@ -26,7 +26,7 @@ function UpdateImageProfile({user, setErrors}: {user:User, setErrors: Mutator<Er
         }
     }
 
-    const onValidBtnClicked = () => {
+    const onImageCropped = () => {
         const editor = editorRef.current
         const canvas = editor?.getImageScaledToCanvas()
 
@@ -46,10 +46,7 @@ function UpdateImageProfile({user, setErrors}: {user:User, setErrors: Mutator<Er
             const blob = await response.blob()
             formData.set('name', user.name ?? '');
             formData.set('image', blob, `${user.role}-${user.id}-profile.png`)
-            updateImage({
-                setErrors,
-                data: formData
-            })
+            update(setErrors, formData, true)
         })
     }
 
@@ -79,33 +76,19 @@ function UpdateImageProfile({user, setErrors}: {user:User, setErrors: Mutator<Er
                     className="bg-green text-white hover:text-black py-2 px-5 rounded-md" type="submit">Sauvegarder</button>
             </form>
             {showResizer ? (
-                <div className='fixed p-5 top-0 right-0 z-10 bg-opacity-50 bg-black w-screen h-screen'>
-                    <div className="flex flex-col w-full items-center justify-center gap-3">
-                        <AvatarEditor
-                            ref={editorRef as LegacyRef<AvatarEditor>}
-                            image={imageToResize ?? ''}
-                            width={460 * getScreenWidthScale(760)}
-                            border={[50, 50]}
-                            height={460 * getScreenWidthScale(760)}
-                            scale={1}
-                            className="w-full m-auto"
-                        />
-                        <div className="relative text-center sm:bottom-10 w-full m-auto space-x-4">
-                            <button
-                                onClick={onValidBtnClicked}
-                                className="py-3 px-5 hover:bg-gray-200 rounded-lg bg-white"
-                            >Valider</button>
 
-                            <button
-                                onClick={() => {
-                                    setImage(user.image_url)
-                                    setShowResizer(false)
-                                }}
-                                className="py-3 px-5 hover:bg-gray-800 rounded-lg text-white bg-black"
-                            >Annuler</button>
-                        </div>
-                    </div>
-                </div>
+                <AvatarEditor
+                    ref={editorRef} 
+                    image={imageToResize ?? ''}
+                    width={460 * getScreenWidthScale(760)}
+                    height={460 * getScreenWidthScale(760)}
+                    onAccept={onImageCropped}
+                    onReject={() => {
+                        setImage(user.image_url)
+                        setShowResizer(false)
+                    }}
+                     />
+                      
             ) : ( <></> ) }
         </div>
     )
