@@ -19,6 +19,7 @@ import AdminCustomers from '@/pages/dashboard/admin/customers/AdminCustomers';
 import AdminRestaurants from '@/pages/dashboard/admin/restaurants/AdminRestaurants';
 import AdminOrders from '@/pages/dashboard/admin/orders/AdminOrders';
 import AdminStats from '@/pages/dashboard/admin/stats/AdminStats';
+import SingleProductView from '@/pages/app/products/components/SingleProductView';
 
 
 const router = createBrowserRouter([
@@ -40,7 +41,17 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'products',
-                        element: <Products />
+                        element: <div className='sm:min-h-screen sm:pt-20 sm:px-5 mb-3'><Outlet /></div>,
+                        children: [
+                            {
+                                path: '',
+                                element: <Products />
+                            },
+                            {
+                                path: ':productId',
+                                element: <SingleProductView />
+                            }
+                        ]
                     }
                 ]
             },
@@ -128,7 +139,14 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'categories',
-                        element: <AdminCategories />
+                        element: null,
+                        children: [
+                            {path: '', element: <AdminCategories />},
+                            {
+                                path: ':categoryId',
+                                element: <p>Single Category View</p>
+                            }
+                        ]
                     },
                     {
                         path: 'customers',

@@ -36,7 +36,7 @@ export class ProductService
             '/api/v1/products', data, {
                 headers: { ...headers, "Content-Type": "multipart/form-data" }
             }
-        ).then( response => response.data as Product )
+        ).then( response => response.data.data as Product )
     }
 
     static async update(id: number, data: any) {

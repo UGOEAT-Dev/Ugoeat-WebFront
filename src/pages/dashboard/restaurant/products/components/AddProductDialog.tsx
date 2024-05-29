@@ -92,6 +92,7 @@ export default function AddProductDialog(props: AddProductDialogProps)
                     targetStyle={{padding: '5px 10px'}}
                     itemTemplate={itemTemplate}
                     filter={true} filterMatchMode="contains"
+                    sourceFilterPlaceholder="Nom du produit"
                     showTargetControls={false} showSourceControls={false}
                     onChange={e => {
                         setSource(e.source)

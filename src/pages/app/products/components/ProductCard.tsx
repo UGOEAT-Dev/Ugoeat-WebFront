@@ -15,10 +15,10 @@ function ProductCard({product, className, onAdd, onClick}: ProductCardProps)
             </div>
             <div className="w-full px-2">
                 <h3 className="text-xl">{product.name}</h3>
-                <p>{product.description}</p>
-                <div className="flex justify-between">
+                <p>{product.category?.name}</p>
+                <div className="flex justify-between items-center">
                     <span className="font-bold text-xl">{product.price} XAF</span>
-                    <button onClick={() => onAdd? onAdd(product) : null} className="card-get bg-secondary text-white font-bold rounded-md p-2"><i className="pi pi-plus"></i></button>
+                    <button onClick={() => onAdd? onAdd(product) : null} className="card-get bg-primary hover:bg-green-800 text-white font-bold rounded-md p-2"><i className="pi pi-plus"></i></button>
                 </div>
             </div>
         </div>

@@ -3,7 +3,8 @@ import ReactPaginate from 'react-paginate'
 import {styled} from 'styled-components'
 
 const Paginate = styled(ReactPaginate).attrs({
-    activeClassName: 'active'
+    activeClassName: 'active',
+    hrefBuilder: (page, limit) => `?&page=${page}${limit ? `?limit=${limit}`: ''}`
 })`
     margin: auto;
     width: fit-content;

@@ -16,4 +16,17 @@ export class RestaurantService extends UserService
             { headers }
         ).then( response => response.data as PaginatedResponse<Product>);
     }
+
+    static async addProducts(id: number, data: any) {
+        return await axios.post(
+            `/api/v1/restaurants/${id}/products`,
+            data, { headers }
+        ).then(response => response.data )
+    }
+
+    static async deleteProduct(restaurant_id: number, product_id: number) {
+        return await axios.delete(
+            `/api/v1/restaurants/${restaurant_id}/products/${product_id}`, { headers }
+        );
+    }
 }
