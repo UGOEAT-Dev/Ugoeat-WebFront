@@ -1,12 +1,12 @@
 
-const modes = {
-    local: 'http://localhost:8000',
-    remote: 'https://api.ugoeatonline.com'
+const apiUrl = {
+    dev: 'http://localhost:8000',
+    prod: 'https://api.ugoeatonline.com'
 }
 
-const config = {
+export const config = {
 
-    LARAVEL_BACKEND_URL: modes.local,
+    LARAVEL_BACKEND_URL: import.meta.env.DEV ? apiUrl.dev : apiUrl.prod,
     axios: {
         headers: {
             'Accept': 'application/json',
@@ -25,5 +25,3 @@ const config = {
         }
     }
 }
-
-export { config }

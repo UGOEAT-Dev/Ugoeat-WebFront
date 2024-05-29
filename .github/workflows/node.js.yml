@@ -1,3 +1,4 @@
+
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
@@ -29,4 +30,41 @@ jobs:
     - name: Install Dependencies
       run: npm install
     - name: Build the app
-      run: npm run build --if-present
+      run: npm run build_prod --if-present
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with: 
+        name: web-release
+        path: ./dist
+
+  deploy:
+    needs: build
+
+    environment:
+      name: github-page
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    permissions: 
+      pages: write
+      id-token: write
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download WebApp
+        id: download-artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-release
+          path: ./dist
+
+      - name: Upload Github Page Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: ./dist
+          
+      - name: Deploy to Github Page
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          preview: true
