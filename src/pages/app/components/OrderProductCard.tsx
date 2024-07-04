@@ -1,9 +1,17 @@
 
-import { Icon } from "../../../features/common/components/elements/Icon";
-import {formatAmount} from "../../../lib/helpers";
+import { ProductOrdered } from "@/features/common/types/Product";
+import { Icon } from "@/features/common/components/elements/Icon";
+import {formatAmount} from "@/lib/helpers";
 
 
-function OrderProductCard({product, onClick, ...props}: {product: ProductOrdered, onClick?:any, className?: string})
+export interface OrderProductCardProps
+{
+    product: ProductOrdered,
+    onClick?: any,
+    className?: string
+}
+
+function OrderProductCard({product, onClick, ...props}: OrderProductCardProps)
 {
     return (
         <div className={"flex gap-2 items-center " + props.className}>

@@ -4,7 +4,7 @@ import { globalAxiosHeader } from "@/lib/axios/headers.global";
 export class ImageService
 {
     static async get() {
-
+        
     }
 
     static async store(data: any) {

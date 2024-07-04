@@ -1,5 +1,6 @@
+import { Image } from "./Image";
 
-interface Category
+export interface Category
 {
     id: number,
     name?: string,

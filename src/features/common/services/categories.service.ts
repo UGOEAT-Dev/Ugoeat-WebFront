@@ -1,6 +1,7 @@
 import axios from "@/lib/axios/axios";
 import { PaginationOptions } from "../types/options/PaginationOption";
 import { Cursor, defaultCursor } from "../types/pagination/Cursor";
+import { Category } from "../types/Category";
 
 export class CategoryService
 {

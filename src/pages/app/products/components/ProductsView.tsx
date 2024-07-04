@@ -1,3 +1,4 @@
+import { Product } from "@/features/common/types/Product.js";
 import ProductCard from "./ProductCard.js";
 
 type ProductsViewProps = {

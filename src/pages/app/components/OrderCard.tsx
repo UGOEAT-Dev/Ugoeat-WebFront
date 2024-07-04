@@ -2,6 +2,7 @@ import {useMemo} from "react";
 import OrderProductCardList from "./OrderProductCardList.js";
 import {formatAmount} from "@/lib/helpers.js"
 import { Cart } from "@/features/cart/types/Cart.js";
+import { ProductOrdered } from "@/features/common/types/Product.js";
 
 interface OrderCardProps
 {

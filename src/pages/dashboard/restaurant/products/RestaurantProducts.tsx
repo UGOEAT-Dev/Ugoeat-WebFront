@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import AddNewProductDialog from "./components/AddNewProductDialog";
 import { Dropdown, DropdownItem } from "@/features/common/components/elements/dropdown/Dropdown";
+import { Product } from "@/features/common/types/Product";
 
 /**
  * TODO: Comprendre pourquoi les requettes de modification et de creation echouent et gerer les problemes

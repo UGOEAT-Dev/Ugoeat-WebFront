@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Cart, ICart } from "@/features/cart/types/Cart";
+import { ProductOrdered } from "@/features/common/types/Product";
 
 const getCartFromStorage = () => {
     const cart = localStorage.getItem('cart')

@@ -1,3 +1,4 @@
+import { Product, ProductOrdered } from "@/features/common/types/Product";
 
 
 export interface ICart
