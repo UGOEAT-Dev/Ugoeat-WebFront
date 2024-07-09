@@ -6,14 +6,14 @@ import {FormEventHandler, useEffect, useState} from "react";
 import {isUserLoggedIn} from "@/lib/helpers.js";
 import {useAuth} from "@/features/auth/hooks";
 import { RegistrationError } from "../../features/common/types/error/RegistrationError.js";
-import { useMiddleware, useUserReducer } from "@/features/common/hooks";
+import { useMiddleware, useQueryUrl, useUserReducer } from "@/features/common/hooks";
 
 export default function Register()
 {
     useMiddleware('guest')
-    // const qParsed = queryString.parseUrl(location.search)
+    const {redirectTo} = useQueryUrl()
     const [errors, setErrors] = useState<RegistrationError>({})
-    const { register } = useAuth(undefined, 'guest')
+    const { register } = useAuth(redirectTo as string ?? undefined, 'guest')
     const {
         state, 
         setEmail,

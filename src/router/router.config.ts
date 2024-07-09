@@ -17,6 +17,11 @@ export const routesConfig = {
             logout: '/logout'
         },
 
+        email: {
+            verify: '/email/verify',
+            notify: '/email/notify'
+        },
+
         dashboard: {
             index: '/dashboard/',
             home: '/dashboard/home',

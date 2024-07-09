@@ -12,3 +12,7 @@ export function getSeverityFromOrderState(state?: OrderState)
             return 'danger'
     }
 }
+
+export function isEmail(email:string) {
+    return email.match("^.*@.*$")
+}

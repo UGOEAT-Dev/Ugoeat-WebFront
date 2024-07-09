@@ -15,7 +15,7 @@ interface NavbarProps
 export default function Navbar({productOrderedCount, onCartClicked, ...props}: NavbarProps)
 {
     const {user} = useStoreContext()
-    const {auth, app, dashboard} = routesConfig.routes
+    const {auth, app, dashboard, email} = routesConfig.routes
 
     return (
         <nav className={props.className + " lg:block"}>
@@ -35,7 +35,7 @@ export default function Navbar({productOrderedCount, onCartClicked, ...props}: N
                     )
                     :(  <>
                             <li><NavLink to={auth.login}>Connexion</NavLink></li>
-                            <li><NavLink to={auth.register}>Inscription</NavLink></li>
+                            <li><NavLink to={`${auth.register}?redirectTo=${encodeURI(email.notify)}`}>Inscription</NavLink></li>
                         </>
                     )
                 }

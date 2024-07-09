@@ -4,14 +4,15 @@ import {Link} from "react-router-dom";
 import { useAuth } from "../../features/auth/hooks/index.js";
 import toast from "react-hot-toast";
 import { isUserLoggedIn } from "@/lib/helpers.js";
-import { useMiddleware, useUserReducer } from "@/features/common/hooks";
+import { useMiddleware, useQueryUrl, useUserReducer } from "@/features/common/hooks";
 
 export default function Login()
 {
     useMiddleware('guest')
+    const {redirectTo} = useQueryUrl()
     const {state, setEmail, setPassword} = useUserReducer()
     const {email, password} = state
-    const { login } = useAuth(undefined, 'guest')
+    const { login } = useAuth(redirectTo as string ?? undefined, 'guest')
 
     useEffect(() => {
         document.title = "Se Connecter | UGOEAT";

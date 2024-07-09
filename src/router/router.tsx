@@ -20,6 +20,7 @@ import AdminRestaurants from '@/pages/dashboard/admin/restaurants/AdminRestauran
 import AdminOrders from '@/pages/dashboard/admin/orders/AdminOrders';
 import AdminStats from '@/pages/dashboard/admin/stats/AdminStats';
 import SingleProductView from '@/pages/app/products/components/SingleProductView';
+import { VerifyEmail, NotifyEmail } from '@/pages/email';
 
 
 const router = createBrowserRouter([
@@ -80,6 +81,15 @@ const router = createBrowserRouter([
             {
                 path: '/logout',
                 element: <Logout />
+            },
+            {
+                'path': '/email/verify',
+                'element': <VerifyEmail />
+
+            },
+            {
+                'path': '/email/notify',
+                'element': <NotifyEmail />
             },
             {
                 path: '/dashboard',
