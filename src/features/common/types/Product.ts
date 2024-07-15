@@ -1,5 +1,6 @@
 import { Category } from "./Category"
 import { Image } from "./Image"
+import { Restaurant } from "./Restaurant"
 
 export interface Product
 {
@@ -13,7 +14,8 @@ export interface Product
     category?: Category,
     created_at?: Date,
     updated_at?: Date,
-    deleted_at?: Date | null
+    deleted_at?: Date | null,
+    restaurant?: Restaurant
 }
 
 export interface ProductOrdered extends Product

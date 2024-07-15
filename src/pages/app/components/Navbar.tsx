@@ -1,10 +1,10 @@
 import {NavLink} from "react-router-dom";
-import {Input} from "../../../features/common/components/elements/input/Input.js";
 import cartSvg from "/static.ugoeatonline.com/assets/images/icons/cart-vector.svg"
 import {isUserLoggedIn} from "../../../lib/helpers.js";
 import {Dropdown, DropdownItem} from "../../../features/common/components/elements/dropdown/Dropdown.js";
 import { useStoreContext } from "../../../features/store/hooks/useStoreContext.js";
 import { routesConfig } from "../../../router/router.config.js";
+import SearchButton from "@/features/search/components/SearchButton.js";
 
 interface NavbarProps
 {
@@ -46,10 +46,7 @@ export default function Navbar({productOrderedCount, onCartClicked, ...props}: N
                     </button>
                 </li>
                 <li>
-                    <Input
-                        placeholder="Search"
-                        className="rounded-xl px-2 mx-auto bg-gray-200"
-                        icon='pi pi-search text-gray-400' />
+                    <SearchButton />
                 </li>
             </ul>
         </nav>

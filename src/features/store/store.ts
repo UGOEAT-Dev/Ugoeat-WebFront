@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
 import sessionReducer from "../session/store/sessionSlice"
 import cartReducer from "@/features/cart/store/cartSlice"
+import showSeachDialog from "@/features/search/store/searchSlice"
 
 const store = configureStore({
     reducer: {
         session: sessionReducer,
-        cart: cartReducer
+        cart: cartReducer,
+        showSearchDialog: showSeachDialog
     }
 })
 

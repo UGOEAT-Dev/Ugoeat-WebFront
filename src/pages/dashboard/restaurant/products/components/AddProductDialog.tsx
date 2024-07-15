@@ -57,7 +57,12 @@ export default function AddProductDialog(props: AddProductDialogProps)
             return;
         }
         mutation.mutate({
-            products: target.map(product => product.id)}, {
+            products: target.map(product => {
+                return {
+                    id: product.id,
+                    name: product.name
+                }
+            } )}, {
             onSuccess: () => {
                 if(props.onSuccess) {
                     props.onSuccess()
