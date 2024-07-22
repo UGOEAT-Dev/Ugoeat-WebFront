@@ -55,7 +55,7 @@ export default function Products()
                         return (<option key={category.name} value={category.id}>{category.name}</option>)
                     })}
                 </select>
-                {isFetching ? <p>Loading ...</p> : <ProductsView products={productFiltered} onClick={p => navigate(`./${p.id}`)} onAdd={addProduct} />}
+                {isFetching ? <p>Loading ...</p> : <ProductsView products={productFiltered} onClick={p => navigate(`./${p.slug}`)} onAdd={addProduct} />}
             </div>
         </div>
     )

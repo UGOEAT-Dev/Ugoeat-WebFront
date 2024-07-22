@@ -26,7 +26,7 @@ export class ProductService
         ).then((res) => res.data as PaginatedResponse<Product>)
     }
 
-    static async get(id: number) {
+    static async get(id: number|string) {
         return await axios.get(
             `/api/v1/products/${id}`
         ).then((res) => res.data.data as Product)

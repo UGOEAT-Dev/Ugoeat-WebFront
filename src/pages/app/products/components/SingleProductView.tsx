@@ -10,13 +10,14 @@ import { useGenerateId } from "@/features/common/hooks"
 import useCart from "@/features/cart/hooks/useCart"
 import toast from "react-hot-toast"
 
+
 function SingleProductView()
 {
     const {productId} = useParams()
     const { addProduct } = useCart()
     const {data: product, isFetching, error} = useQuery({
         queryKey: ['/api/v1/product', productId],
-        queryFn: () => ProductService.get(parseInt(productId ?? ''))
+        queryFn: () => ProductService.get(productId ?? '')
     })
     const [quantity, setQuantity] = useState(1)
     const qteInputId = useGenerateId('single-product')

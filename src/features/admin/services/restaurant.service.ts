@@ -11,7 +11,11 @@ export class RestaurantService extends UserService
         return super.getUsers<Restaurant>("restaurant", options)
     }
 
-    static async getProducts(id: number, options?: PaginationOptions) {
+    static async get(id: number|string) {
+        return await axios.get(`/api/v1/restaurants/${id}`).then(response => response.data.data as Restaurant)
+    }
+
+    static async getProducts(id: number|string, options?: PaginationOptions) {
         return await axios.get(
             `/api/v1/restaurants/${id}/products?limit=${options?.limit ?? 10}&page=${options?.page ?? 1}`,
             { headers }

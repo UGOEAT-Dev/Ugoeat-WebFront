@@ -25,7 +25,7 @@ export class CategoryService
         ).then((res) => res.data as PaginatedResponse<Category>)
     }
 
-    static async get(id: number) {
+    static async get(id: number|string) {
         return await axios.get(
             `/api/v1/categories/${id}`
         ).then((res) => res.data.data as Category)

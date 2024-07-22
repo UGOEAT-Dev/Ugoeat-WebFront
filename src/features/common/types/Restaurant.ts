@@ -2,7 +2,7 @@ import { User, UserImpl } from "./User";
 
 export interface Restaurant extends User 
 {
-    // empty
+    slug?: string
 }
 
 export class RestaurantImpl extends UserImpl implements Restaurant

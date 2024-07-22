@@ -9,6 +9,7 @@ export interface Category
     images?: Image[],
     created_at?: Date,
     updated_at?: Date,
-    deleted_at?: Date | null
+    deleted_at?: Date | null,
+    slug?: string
 }
 

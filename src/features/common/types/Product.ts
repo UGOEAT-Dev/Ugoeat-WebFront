@@ -15,7 +15,8 @@ export interface Product
     created_at?: Date,
     updated_at?: Date,
     deleted_at?: Date | null,
-    restaurant?: Restaurant
+    restaurant?: Restaurant,
+    slug?: string
 }
 
 export interface ProductOrdered extends Product

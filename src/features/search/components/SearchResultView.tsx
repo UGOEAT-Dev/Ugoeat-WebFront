@@ -18,7 +18,7 @@ export default function SearchResultView({searchResult, query}: SearchResultView
     const hasRestaurants = restaurants?.length !== 0
     const isEmptyResult = !hasCategories && !hasProducts && !hasRestaurants
     
-    const itemRenderer = (item, options: MenuItemOptions) => (
+    const itemRenderer = (item: MenuItem & {image?: string}, options: MenuItemOptions) => (
         <a href={item.url} className="flex gap-1 items-center px-3 py-1 cursor-pointer" onClick={options.onClick}>
             <span className={`${item.icon}`} />
             {item.image && <Avatar image={item.image}  shape="circle" />}
@@ -38,7 +38,7 @@ export default function SearchResultView({searchResult, query}: SearchResultView
                 items: products?.map((product) => {
                     return {
                         label: `${product.name} - ${product.restaurant?.name}`,
-                        url: `/products/${product.id}`,
+                        url: `/products/${product.slug}`,
                         image: product.image_url,
                         template: itemRenderer
                     } as MenuItem
@@ -55,7 +55,7 @@ export default function SearchResultView({searchResult, query}: SearchResultView
                 items: categories?.map(category => {
                     return {
                         label: category.name,
-                        url: `/categories/${category.id}`,
+                        url: `/categories/${category.slug}`,
                         image: category.image_url,
                         template: itemRenderer
                     } as MenuItem
@@ -73,7 +73,7 @@ export default function SearchResultView({searchResult, query}: SearchResultView
                     return {
                         label: restaurant.name,
                         image: restaurant.image_url,
-                        url: `/restaurants/${restaurant.id}`,
+                        url: `/restaurants/${restaurant.slug}`,
                         template: itemRenderer
                     } as MenuItem
                 })
