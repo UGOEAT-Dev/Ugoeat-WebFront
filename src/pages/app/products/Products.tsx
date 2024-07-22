@@ -31,7 +31,7 @@ export default function Products()
     }, [currentCategory, products])
 
     useEffect(() => {
-        document.title = "Commandez | UGOEAT"
+        document.title = "Nos Produits | UGOEAT"
         // document.querySelector('meta[property="og:title"]').content = "Commandez";
     }, [])
 

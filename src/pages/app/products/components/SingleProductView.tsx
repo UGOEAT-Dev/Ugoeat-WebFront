@@ -9,6 +9,7 @@ import { Input } from "@/features/common/components/elements/input/Input"
 import { useGenerateId } from "@/features/common/hooks"
 import useCart from "@/features/cart/hooks/useCart"
 import toast from "react-hot-toast"
+import Error404 from "@/pages/errors/Error404"
 
 
 function SingleProductView()
@@ -44,7 +45,7 @@ function SingleProductView()
         return <p>Loading ...</p>
 
     if(error)
-        return <p>Error {error.message}</p>
+        return <Error404 />
 
     return (
         <div className="md:h-screen overflow-hidden">

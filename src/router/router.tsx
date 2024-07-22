@@ -8,7 +8,6 @@ import DashboardHome from '@/pages/dashboard/home/DashboardHome';
 import DashboardIndex from '@/pages/dashboard/DashboardIndex';
 import DashboardSettings from '@/pages/dashboard/settings/DashboardSetting';
 import DashboardAccount from '@/pages/dashboard/account/DashboardAccount';
-import { ErrorBoundary } from '@/features/common/components';
 import DashboardOrders from '@/pages/dashboard/orders/DashboardOrders';
 import DashboardOrdersLayout from '@/pages/dashboard/orders/DashboardOrderLayout';
 import OrderDetails from '@/pages/dashboard/orders/OrderDetails';
@@ -21,6 +20,7 @@ import AdminOrders from '@/pages/dashboard/admin/orders/AdminOrders';
 import AdminStats from '@/pages/dashboard/admin/stats/AdminStats';
 import SingleProductView from '@/pages/app/products/components/SingleProductView';
 import { VerifyEmail, NotifyEmail } from '@/pages/email';
+import Error404 from '@/pages/errors/Error404';
 
 
 const router = createBrowserRouter([
@@ -53,6 +53,10 @@ const router = createBrowserRouter([
                                 element: <SingleProductView />
                             }
                         ]
+                    },
+                    {
+                        path: '*',
+                        element: <Error404 />
                     }
                 ]
             },
@@ -187,8 +191,7 @@ const router = createBrowserRouter([
                 ]
             }
         ],
-        errorElement: <ErrorBoundary />
-    },
+    }
 ])
 
 
