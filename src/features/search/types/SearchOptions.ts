@@ -1,6 +1,7 @@
 
+export type SearchTagType = 'products'|'restaurants'|'categories'
 export interface SearchOptions
 {
     query: string,
-    tag?: 'products'|'restaurants'|'categories'
+    tag?: SearchTagType
 }
